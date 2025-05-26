@@ -1,12 +1,55 @@
-# React + Vite
+# SudaMall Frontend – Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend implementation of **SudaMall**, a Sudanese multi-category online shopping platform. The frontend is built with a **mobile-first** approach using **React**, **Tailwind CSS**, and **Vite**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Key Features
 
-## Expanding the ESLint configuration
+- 🛒 Online mall interface with support for various product categories (fashion, electronics, groceries, more)
+- 📱 Mobile-first responsive design
+- ⚡ Fast dev experience using Vite
+- ♻️ Reusable, modular components for scaling UI
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Folder Structure
+
+```bash
+SudaMall-front/
+├── public/               # Static files (favicon, etc.)
+├── src/
+│   ├── assets/           # Images, icons
+│   ├── app/              # Redux stats control
+│   ├── components/       # Reusable UI components
+│   ├── hooks/            # Custom react hooks
+│   ├── layouts/          # Page layouts (e.g., Navbar, Footer)
+│   ├── pages/            # Route-level pages (Home, about, etc.)
+│   ├── routes/           # React router setup
+│   ├── services/         # API calls and helpers
+│   ├── utils/            # Utility functions and helpers
+│   ├── App.jsx           # Root React component
+│   ├── main.jsx          # Vite entry point
+│   └── index.css          
+├── vite.config.js        # vite configuration file
+├── package.json          # vite configuration file
+├── package-lock.json     # vite configuration file
+├── eslint.config.js      # vite configuration file
+├── vite.config.js        # vite configuration file
+├── index.html            # vite configuration file
+└── README.md             # You are here
+```
+
+---
+
+## Setup Instructions
+
+- if you haven't install vite in your machine run:
+```bash
+npm install vite@5.2.10 --save-dev
+```
+and then Install dependencies and run the development server:
+```bash
+npm install
+npm run dev
+```
