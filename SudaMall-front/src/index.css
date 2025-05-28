@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+/* color variables */
+:root {
+    --primary: #fca311;
+    --dark-bg: #121212;
+    --dark-blue: #14213d;
+    --light-gray: #e5e5e5;
+  }
+
+  /* define theme colors */
+  @theme inline {
+    --color-primary: var(--primary);
+    --color-dark-bg: var(--dark-bg);
+    --color-dark-blue: var(--dark-blue);
+    --color-light-gray: var(--light-gray);
+  }
