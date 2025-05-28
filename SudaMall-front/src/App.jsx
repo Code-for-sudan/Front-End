@@ -1,15 +1,14 @@
 
 import React from 'react'
 import './index.css'
-import './App.css'
 
 function App() {
 
 
   return (
     <>
-      <div className='bg-amber-500'>
-        <h1>akram</h1>  
+      <div>
+        <h1 className='text-4xl font-bold'>اهلا بك في سودا مول</h1>
         </div>
     </>
   )
