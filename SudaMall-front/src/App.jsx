@@ -4,15 +4,17 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import './index.css'
+import {BrowserRouter as Router} from 'react-router-dom';
+import PublicRoutes from './routes/PublicRoutes';
 
 const queryClient = new QueryClient();
 
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <div>
-        <h1 className='text-4xl font-bold text-primary'>اهلا بك في سودا مول</h1>
-        </div>
+      <Router>
+        <PublicRoutes />
+      </Router>
     </QueryClientProvider>
   )
 }
