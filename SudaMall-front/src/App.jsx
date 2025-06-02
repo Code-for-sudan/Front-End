@@ -4,14 +4,17 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import './index.css'
-import PublicLayout from './layouts/PublicLayout';
+import {BrowserRouter as Router} from 'react-router-dom';
+import PublicRoutes from './routes/PublicRoutes';
 
 const queryClient = new QueryClient();
 
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <publicRoutes />
+      <Router>
+        <PublicRoutes />
+      </Router>
     </QueryClientProvider>
   )
 }
