@@ -4,6 +4,7 @@ import Login from "../pages/public/Login";
 import Signup from "../pages/public/Signup";
 import NotFound from "../pages/public/NotFound";
 import PublicLayout from "../layouts/PublicLayout";
+import ResetPassword from "../pages/public/ResetPassword";
 
 /**
  * PublicRoutes
@@ -20,6 +21,7 @@ const PublicRoutes = () => [
     <Route path="/" element={<Home />} />
     <Route path="/login" element={<Login />} />
     <Route path="/signup" element={<Signup />} />
+    <Route path="/reset-password" element={<ResetPassword />} />
     <Route path="*" element={<NotFound />} />
   </Route>
 ];

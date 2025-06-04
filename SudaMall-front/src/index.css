@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap');
 @import "tailwindcss";
 
 /* color variables */
@@ -14,4 +15,9 @@
     --color-dark-bg: var(--dark-bg);
     --color-dark-blue: var(--dark-blue);
     --color-light-gray: var(--light-gray);
+  }
+
+  /* define display font alexandria */
+  @theme {
+    --font-sans: "alexandria", "sans-serif";
   }
