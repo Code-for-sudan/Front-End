@@ -4,8 +4,8 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import './index.css'
-import {BrowserRouter as Router} from 'react-router-dom';
-import PublicRoutes from './routes/PublicRoutes';
+import {BrowserRouter as Router, Routes} from 'react-router-dom';
+import MainRoutes from './routes/MainRoutes';
 
 const queryClient = new QueryClient();
 
@@ -13,7 +13,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
-        <PublicRoutes />
+        <MainRoutes />
       </Router>
     </QueryClientProvider>
   )
