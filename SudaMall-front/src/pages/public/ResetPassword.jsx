@@ -1,6 +1,9 @@
+import { createContext } from "react";
 import Image from "../../assets/reset_password.png";
-import { ComponentsContext } from "../../components/ResetPasswordComponents";
 import useResetPasswordComponent from "../../hooks/useResetPasswordComponent";
+
+// define components context to holds changeable objects
+export const ComponentsContext = createContext();
 
 // main reset password body page
 const ResetPassword = () => {

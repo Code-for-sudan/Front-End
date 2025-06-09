@@ -1,5 +1,6 @@
 import { useReducer } from "react";
-import { EmailMethod, ResetMethod } from "../components/ResetPasswordComponents";
+import ResetMethod from "../components/reset_password/ResetMethod";
+import EmailMethod from "../components/reset_password/EmailMethod";
 
 // create reducers functions to manage components rendering across different functions
 const reducers = (state, action) => {
