@@ -1,6 +1,6 @@
 import { Route } from "react-router-dom";
-import CustomerLayout from "../layouts/CustomerLayout";
 import CustomerDashboard from "../pages/customer/CustomerDashboard";
+import { CustomerLayout } from "../layouts";
 
 /**
  * CustomerRoutes
