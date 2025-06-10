@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 const PublicLayout = () => (
   <div>
-    {/* <nav>Public Navbar</nav> */}  { /* comment this line for consistency */}
+    {/* <nav>Public Navbar</nav> */}
     <Outlet />
   </div>
 );

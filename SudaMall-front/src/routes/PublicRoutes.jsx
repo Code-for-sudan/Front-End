@@ -1,5 +1,6 @@
 import { Route } from "react-router-dom";
 import Home from "../pages/public/Home";
+import Auth from "../pages/public/auth/Auth";
 import Login from "../pages/public/Login";
 import Signup from "../pages/public/Signup";
 import NotFound from "../pages/public/NotFound";
@@ -19,8 +20,9 @@ import ResetPassword from "../pages/public/ResetPassword";
 const PublicRoutes = () => [
   <Route key="public" element={<PublicLayout />}>
     <Route path="/" element={<Home />} />
-    <Route path="/login" element={<Login />} />
-    <Route path="/signup" element={<Signup />} />
+    <Route path="/auth" element={<Auth />} />
+    <Route path="/auth/login" element={<Login />} />
+    <Route path="/auth/signup" element={<Signup />} />
     <Route path="/reset-password" element={<ResetPassword />} />
     <Route path="*" element={<NotFound />} />
   </Route>
