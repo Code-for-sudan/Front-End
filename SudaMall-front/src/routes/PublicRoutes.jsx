@@ -5,6 +5,7 @@ import Login from "../pages/public/Login";
 import Signup from "../pages/public/Signup";
 import NotFound from "../pages/public/NotFound";
 import PublicLayout from "../layouts/PublicLayout";
+import ResetPassword from "../pages/public/ResetPassword";
 
 /**
  * PublicRoutes
@@ -22,6 +23,7 @@ const PublicRoutes = () => [
     <Route path="/auth" element={<Auth />} />
     <Route path="/auth/login" element={<Login />} />
     <Route path="/auth/signup" element={<Signup />} />
+    <Route path="/reset-password" element={<ResetPassword />} />
     <Route path="*" element={<NotFound />} />
   </Route>
 ];
