@@ -1,5 +1,9 @@
 import { useReducer } from "react";
-import { ResetMethod, EmailMethod } from "../components/reset_password/index";
+import {
+	ResetMethod,
+	EmailMethod,
+	TelegramMethod,
+} from "../components/reset_password/index";
 
 // create reducers functions to manage components rendering across different functions
 const reducers = (state, action) => {
@@ -8,16 +12,18 @@ const reducers = (state, action) => {
 			return { component: <ResetMethod /> };
 		case "EmailMethod":
 			return { component: <EmailMethod /> };
+		case "TelegramMethod":
+			return { component: <TelegramMethod /> };
 		default:
 			throw new Error("you dispatched unfound component.");
 	}
 };
 
 const useResetPasswordComponent = () => {
-    const [state, dispatch] = useReducer(reducers, {
-	component: <ResetMethod />,
-});
-    return [ state, dispatch ];
-}
+	const [state, dispatch] = useReducer(reducers, {
+		component: <ResetMethod />,
+	});
+	return [state, dispatch];
+};
 
 export default useResetPasswordComponent;

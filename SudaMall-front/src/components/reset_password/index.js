@@ -1,7 +1,5 @@
-import EmailMethod from './EmailMethod';
-import ResetMethod from './ResetMethod';
+import EmailMethod from "./EmailMethod";
+import ResetMethod from "./ResetMethod";
+import TelegramMethod from "./TelegramMethod";
 
-export { 
-    EmailMethod,
-    ResetMethod,
-};
+export { EmailMethod, ResetMethod, TelegramMethod };
