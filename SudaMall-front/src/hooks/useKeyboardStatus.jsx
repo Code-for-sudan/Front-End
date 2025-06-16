@@ -2,19 +2,19 @@ import { useState, useEffect } from 'react';
 
 function useKeyboardStatus() {
   const [keyboardOpen, setKeyboardOpen] = useState(false);
-  const [visualViewportHeight, setVisualViewportHeight] = useState(window.visualViewport.height);
+  const screenHeight = window.innerHeight;
 
   useEffect(() => {
     const handleResize = () => {
-      const heightDiff = visualViewportHeight - window.visualViewport.height;
+      const heightDiff = screenHeight - window.visualViewport.height;
       setKeyboardOpen(heightDiff > 200); // adjust threshold as needed
       
     };
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [visualViewportHeight]);
-  
+  }, [screenHeight]);
+
   return keyboardOpen;
 }
 export default useKeyboardStatus;
