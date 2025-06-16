@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Image from "../../assets/reset_password.png";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
+import { ComponentsContext } from "../../pages/public/ResetPassword";
 
 const ValidateSentCode = () => {
 	const isKeyboardOpen = useKeyboardStatus();
 	const [code, setCode] = useState(["", "", "", "", "", ""]);
 	const [timer, setTimer] = useState(90); // 90 seconds
+	const context = useContext(ComponentsContext);
 
 	// execute the timer when the component mounts
 	useEffect(() => {
@@ -67,6 +69,7 @@ const ValidateSentCode = () => {
 		// api code here to validate the sent code
 
 		// if successful, navigate to the next step
+		context.dispatch({ render: "SetNewPassword" });
 	};
 
 	return (
