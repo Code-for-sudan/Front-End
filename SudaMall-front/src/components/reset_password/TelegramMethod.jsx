@@ -1,10 +1,12 @@
 import Image from "../../assets/reset_password.png";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
+import { ComponentsContext } from "../../pages/public/ResetPassword";
 
 export const TelegramMethod = () => {
 	const [telegram, setTelegram] = useState("");
 	const isKeyboardOpen = useKeyboardStatus();
+	const context = useContext(ComponentsContext);
 
 	const handleTelegram = (e) => {
 		if (e.target.value.length <= 10) setTelegram(e.target.value);
@@ -12,6 +14,9 @@ export const TelegramMethod = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		// api code here to send telegram number
+		context.dispatch({
+			render: "ValidateSentCode",
+		});
 	};
 	return (
 		<div className="flex flex-col justify-center items-center mt-[10px]">

@@ -3,6 +3,7 @@ import {
 	ResetMethod,
 	EmailMethod,
 	TelegramMethod,
+	ValidateSentCode,
 } from "../components/reset_password/index";
 
 // create reducers functions to manage components rendering across different functions
@@ -14,6 +15,8 @@ const reducers = (state, action) => {
 			return { component: <EmailMethod /> };
 		case "TelegramMethod":
 			return { component: <TelegramMethod /> };
+		case "ValidateSentCode":
+			return { component: <ValidateSentCode /> };
 		default:
 			throw new Error("you dispatched unfound component.");
 	}

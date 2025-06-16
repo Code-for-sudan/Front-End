@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Image from "../../assets/reset_password.png";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
+import { ComponentsContext } from "../../pages/public/ResetPassword";
 
 // defines a part that let enter your email address
 export const EmailMethod = () => {
 	const [email, setEmail] = useState("");
 	const isKeyboardOpen = useKeyboardStatus();
+	const context = useContext(ComponentsContext);
 
 	const handleEmail = (e) => {
 		setEmail(e.target.value);
@@ -14,6 +16,10 @@ export const EmailMethod = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		// api code here to send email
+
+		context.dispatch({
+			render: "ValidateSentCode",
+		});
 	};
 	return (
 		<div className="flex flex-col justify-center items-center mt-[10px]">
