@@ -1,22 +1,19 @@
-import { useContext, useState } from "react";
 import Image from "../../assets/reset_password.png";
+import { useContext, useState } from "react";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
 import { ComponentsContext } from "../../pages/public/ResetPassword";
 
-// defines a part that let enter your email address
-export const EmailMethod = () => {
-	const [email, setEmail] = useState("");
+export const TelegramMethod = () => {
+	const [telegram, setTelegram] = useState("");
 	const isKeyboardOpen = useKeyboardStatus();
 	const context = useContext(ComponentsContext);
 
-	const handleEmail = (e) => {
-		setEmail(e.target.value);
+	const handleTelegram = (e) => {
+		if (e.target.value.length <= 10) setTelegram(e.target.value);
 	};
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// api code here to send email
-
+		// api code here to send telegram number
 		context.dispatch({
 			render: "ValidateSentCode",
 		});
@@ -28,8 +25,8 @@ export const EmailMethod = () => {
 				alt="ايقونة استعادة كلمة المرور"
 				className={
 					isKeyboardOpen
-						? `w-[255px] h-[167px]`
-						: `w-[345px] h-[254px]`
+						? `w-[245px] h-[167px]`
+						: `w-[375px] h-[275px]`
 				}
 			/>
 			<h1 className="text-[24px] mt-[5px] font-normal">
@@ -37,7 +34,7 @@ export const EmailMethod = () => {
 			</h1>
 			<div className="flex flex-col w-screen mt-[15px]">
 				<h2 className="text-[16px] font-normal mr-[32px]">
-					أدخل بريدك الإلكتروني
+					أدخل رقم التلجرام
 				</h2>
 				<form
 					onSubmit={handleSubmit}
@@ -45,17 +42,25 @@ export const EmailMethod = () => {
 				>
 					<input
 						dir="ltr"
-						className="border-2 border-light-gray rounded-[16px] w-[320px] h-[40px] text-left px-[20px] py-[10px]"
-						onChange={handleEmail}
-						type="email"
-						value={email}
-						placeholder="example@gmail.com"
+						id="telegram-number"
+						className="border-2 border-light-gray rounded-[16px] w-[320px] h-[40px] text-left px-[20px] py-[10px] pl-[60px]"
+						onChange={handleTelegram}
+						type="number"
+						value={telegram}
+						placeholder="09 XXXX XXXX"
 					/>
+					<label
+						htmlFor="telegram-number"
+						className="relative -left-[125px] -top-[32px]"
+						dir="ltr"
+					>
+						+249 |
+					</label>
 					<input
 						type="submit"
 						value="إرسال"
 						className={`rounded-[16px] w-[320px] h-[40px] bg-primary text-white text-[12px] ${
-							isKeyboardOpen ? "mt-[16px]" : "absolute bottom-5"
+							isKeyboardOpen ? "-mt-[5px]" : "absolute bottom-5"
 						}`}
 					/>
 				</form>
@@ -64,4 +69,4 @@ export const EmailMethod = () => {
 	);
 };
 
-export default EmailMethod;
+export default TelegramMethod;
