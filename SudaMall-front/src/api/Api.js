@@ -2,7 +2,7 @@ import axios from "axios";
 import { TokenService } from "../auth/tokenService";
 
 const api = axios.create({
-  baseURL: "http://localhost:8000/api/v1/auth",
+  baseURL: "http://localhost:8000/api/v1",
 });
 
 api.interceptors.request.use(
@@ -25,12 +25,12 @@ api.interceptors.response.use(
 
       try {
         const refreshToken = TokenService.getLocalRefreshToken();
-        const res = await axios.post("http://localhost:8000/api/v1/auth/token/refresh", {
+        const res = await api.post("/auth/token/refresh", {
           refreshToken,
         });
 
         const { accessToken } = res.data;
-        TokenService.setTokens(accessToken, refreshToken, true); // Always use localStorage for refresh
+        TokenService.setTokens(accessToken, true);
 
         // Update header and retry original request
         api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;

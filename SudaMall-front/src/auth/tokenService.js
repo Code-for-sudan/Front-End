@@ -1,26 +1,31 @@
-
 const ACCESS_TOKEN_KEY = "accessToken";
-const REFRESH_TOKEN_KEY = "refreshToken";
+
+function removeAccessTokenFromAll() {
+  localStorage.removeItem(ACCESS_TOKEN_KEY);
+  sessionStorage.removeItem(ACCESS_TOKEN_KEY);
+}
 
 export const TokenService = {
-  getLocalAccessToken() {
-    return localStorage.getItem(ACCESS_TOKEN_KEY) || sessionStorage.getItem(ACCESS_TOKEN_KEY);
+  getAccessToken() {
+    return (
+      localStorage.getItem(ACCESS_TOKEN_KEY) ||
+      sessionStorage.getItem(ACCESS_TOKEN_KEY)
+    );
   },
 
-  getLocalRefreshToken() {
-    return localStorage.getItem(REFRESH_TOKEN_KEY) || sessionStorage.getItem(REFRESH_TOKEN_KEY);
-  },
+  /**
+   *  Remember to access the storage token based on the storage option.
+   * - True: Stores it in localStorage (long session)
+   * - False: Stores it in sessionStorage (short session)
+   */
+  setAccessToken(accessToken, remember = false) {
+    removeAccessTokenFromAll();
 
-  setTokens(accessToken, refreshToken, remember) {
     const storage = remember ? localStorage : sessionStorage;
     storage.setItem(ACCESS_TOKEN_KEY, accessToken);
-    storage.setItem(REFRESH_TOKEN_KEY, refreshToken);
   },
 
-  clearTokens() {
-    localStorage.removeItem(ACCESS_TOKEN_KEY);
-    localStorage.removeItem(REFRESH_TOKEN_KEY);
-    sessionStorage.removeItem(ACCESS_TOKEN_KEY);
-    sessionStorage.removeItem(REFRESH_TOKEN_KEY);
+  clearAccessToken() {
+    removeAccessTokenFromAll();
   },
 };

@@ -5,8 +5,11 @@ import ArrowCircleRight from "../../assets/icons/ArrowCircleRight.svg";
 import Divider from "./auth-components/Divider";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { Link } from 'react-router-dom'; 
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate(); 
+  
   const [loginInput, setLoginInput] = useState({
     email: "",
     password: "",
@@ -32,7 +35,7 @@ const Login = () => {
     e.preventDefault();
     login(loginInput, {
       onSuccess: () => {
-        window.location.href = "/dashboard";
+         navigate("/dashboard"); 
       },
     });
   };
@@ -137,7 +140,7 @@ const Login = () => {
               className="w-full text-white font-semibold py-2 rounded-xl transition duration-200 mt-10"
               style={{
                 backgroundColor: "var(--primary)",
-                hoverBackgroundColor: "var(--color-primary)", // إذا كنت تريد لون مختلف عند hover
+                hoverBackgroundColor: "var(--color-primary)", 
               }}
             >
               {isPending ? "جاري تسجيل الدخول..." : "تسجيل دخول"}
