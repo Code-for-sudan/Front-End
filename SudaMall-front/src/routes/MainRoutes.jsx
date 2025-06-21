@@ -3,6 +3,7 @@
 import { Routes } from "react-router-dom";
 import PublicRoutes from "./PublicRoutes";
 import CustomerRoutes from "./CustomerRoutes";
+import StoreOwnerRoutes from "./StoreOwnerRoutes";
 
 /**
  * MainRoutes
@@ -24,6 +25,7 @@ const MainRoutes = () => {
     <Routes>
       {PublicRoutes()}
       {CustomerRoutes()}
+      {StoreOwnerRoutes()}
     </Routes>
   );
 };

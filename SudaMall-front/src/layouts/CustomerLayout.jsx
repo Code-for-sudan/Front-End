@@ -1,8 +1,9 @@
 import { Outlet } from 'react-router-dom';
+import CustomerNav from '../components/customer/CustomerNav';
 
 const CustomerLayout = () => (
   <div>
-    <nav>Customer Navbar</nav>
+    <CustomerNav />
     <Outlet />
   </div>
 );

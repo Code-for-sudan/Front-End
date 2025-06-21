@@ -15,7 +15,7 @@ import { CustomerLayout } from "../layouts";
 
 const CustomerRoutes = () => [
   <Route key="customer" element={<CustomerLayout />}>
-    <Route path="/dashboard" element={<CustomerDashboard />} />
+    <Route path="/customer/:userId/dashboard" element={<CustomerDashboard />} />
   </Route>
 ];
 
