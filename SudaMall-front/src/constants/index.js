@@ -26,13 +26,13 @@ export const welcomeScreens = [
   // store owner side bar data
 
   export const Store_Owner_Sidebar = [
-    { lable: "إدارة الطلبات", icon: ShoppingCart},
-    { lable: "المنتجات", icon: ShoppingBag},
-    { lable: "العملاء", icon: Agents},
-    { lable: "الفواتير", icon: Files},
-    { lable: "الدفع الإلكتروني", icon: CurrencyCircleDollar},
-    { lable: "إدارة المخزن", icon: Store},
-    { lable: "الإعلانات", icon: Adds},
-    { lable: "الإعدادات", icon: Gear},
-    { lable: "المشرف", icon: Admin},
+    { label: "إدارة الطلبات", icon: ShoppingCart, path: "/store-owner/:userId/dashboard" },
+    { label: "المنتجات", icon: ShoppingBag, path: "/store-owner/:userId/dashboard" },
+    { label: "العملاء", icon: Agents, path: "/store-owner/:userId/dashboard" },
+    { label: "الفواتير", icon: Files, path: "/store-owner/:userId/dashboard" },
+    { label: "الدفع الإلكتروني", icon: CurrencyCircleDollar, path: "/store-owner/:userId/dashboard" },
+    { label: "إدارة المخزن", icon: Store, path: "/store-owner/:userId/dashboard" },
+    { label: "الإعلانات", icon: Adds, path: "/store-owner/:userId/dashboard" },
+    { label: "الإعدادات", icon: Gear, path: "/store-owner/:userId/dashboard" },
+    { label: "المشرف", icon: Admin, path: "/store-owner/:userId/dashboard" },
   ]

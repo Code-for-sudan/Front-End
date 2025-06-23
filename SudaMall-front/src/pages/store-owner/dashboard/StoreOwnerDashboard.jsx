@@ -1,5 +1,5 @@
 import React from 'react'
-import { DashboardHead, Menu } from '../../../components/store-owner'
+import { DashboardHead, Menu } from '../../../components/store-owner/dashboard'
 
 const StoreOwnerDashboard = () => {
   return (

@@ -1,16 +1,16 @@
 import React from 'react'
-import { userData } from '../../data/user';
 import { IoNotificationsOutline } from "react-icons/io5";
 import { MdMenu } from "react-icons/md";
 import { useDispatch } from 'react-redux';
-import { toggleMenu } from '../../app/AppStats';
+import { openMenu } from '../../../app/AppStats';
+import { userData } from '../../../data/user';  // this will be deleted after connecting with backend
 
 const DashboardHead = () => {
     const dispatch = useDispatch();
 
     // toggle menu
     const ToggleMenu = () => {
-        dispatch(toggleMenu());
+        dispatch(openMenu());
     }
 
   return (
