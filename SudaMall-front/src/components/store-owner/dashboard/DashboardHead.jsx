@@ -8,8 +8,8 @@ import { userData } from '../../../data/user';  // this will be deleted after co
 const DashboardHead = () => {
     const dispatch = useDispatch();
 
-    // toggle menu
-    const ToggleMenu = () => {
+    // open menu
+    const OpenMenu = () => {
         dispatch(openMenu());
     }
 
@@ -23,7 +23,7 @@ const DashboardHead = () => {
             <IoNotificationsOutline className='w-6 h-6' />
         </button>
         <button 
-            onClick={ToggleMenu}
+            onClick={OpenMenu}
             className='cursor-pointer'>
             <MdMenu className='w-8 h-8' />
         </button>

@@ -6,6 +6,7 @@ import { userData } from '../../data/user';
 import { useDetectOutside } from '../../hooks';
 import { Store_Owner_Sidebar } from '../../constants';
 import { Link } from 'react-router-dom';
+import { MdLogout } from "react-icons/md";
 
 const Menu = () => {
   const dispatch = useDispatch();
@@ -61,8 +62,13 @@ const Menu = () => {
                 </Link>
             </li>)}
         </ul>
-        <div className="flex items-center gap-4 py-6 px-8 bg-white">
-
+        <div className="py-6 px-8 bg-white">
+            <button
+                className='flex items-center gap-4 cursor-pointer'
+                >
+                <MdLogout className="w-6 h-6 text-red-700"/>
+                <p className='font-semibold text-lg text-gray-600'>تسجيل الخروج</p>
+            </button>
         </div>
       </div>
     </div>
