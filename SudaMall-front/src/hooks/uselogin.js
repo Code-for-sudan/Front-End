@@ -6,9 +6,9 @@ import { TokenService } from "../auth/tokenService";
 export const useLogin = () => {
   return useMutation({
     mutationFn: async ({ email, password, rememberMe }) => {
-      const response = await api.post("/login", { email, password });
-      const { accessToken, refreshToken } = response.data;
-      TokenService.setTokens(accessToken, refreshToken, rememberMe);
+      const response = await api.post("/auth/login", { email, password });
+      const { accessToken} = response.data;
+      TokenService.setTokens(accessToken, rememberMe);
       return response.data;
     },
   });

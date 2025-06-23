@@ -1,5 +1,6 @@
 import axios from "axios";
 import { TokenService } from "../auth/tokenService";
+import { goToLogin } from '../hooks/navigateService';
 
 const api = axios.create({
   baseURL: "http://localhost:8000/api/v1",
@@ -38,7 +39,7 @@ api.interceptors.response.use(
         return api(originalConfig);
       } catch (_error) {
         TokenService.clearTokens();
-        window.location.href = "/login";
+        goToLogin();
         return Promise.reject(_error);
       }
     }
