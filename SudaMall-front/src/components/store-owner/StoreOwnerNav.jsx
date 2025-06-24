@@ -19,7 +19,7 @@ const StoreOwnerNav = () => {
   return (
     <nav className="fixed bottom-0 w-full z-20">
   {/* Rounded inward dip in top border */}
-     <img src={bg_nav} alt="curve" className='absolute -top-2 w-full h-full object-cover'/>
+     <img src={bg_nav} alt="curve" className='absolute top-0 w-full h-full object-cover'/>
 
   <ul className="relative w-full flex items-center justify-between p-6">
     <li onClick={() => handleClick({ id: 'home', path: '/store-owner/:userId/dashboard' })}>
@@ -31,7 +31,7 @@ const StoreOwnerNav = () => {
 
     {/* Floating Add Button */}
     <li onClick={() => handleClick({ id: 'add', path: '/store-owner/:userId/add-product' })} className="flex items-center justify-center mr-1">
-      <div className="absolute -top-10 p-3 text-white bg-dark-blue shadow-lg rounded-full cursor-pointer z-50">
+      <div className="absolute -top-8 p-3 text-white bg-dark-blue shadow-lg rounded-full cursor-pointer z-50">
         <MdAdd className={`w-8 h-8`} />
       </div>
     </li>

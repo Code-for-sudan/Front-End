@@ -7,6 +7,9 @@ import Gear from "./menu_icons/Gear.svg";
 import ShoppingBag from "./menu_icons/ShoppingBag.svg";
 import ShoppingCart from "./menu_icons/ShoppingCart.png";
 import Store from "./menu_icons/Store.svg";
+import UserCirclePlus from "./UserCirclePlus.png";
+import CurrencyDollar from "./CurrencyDollar.png";
+import Cart from "./Cart.png"
 
 export {
     Admin,
@@ -18,4 +21,7 @@ export {
     ShoppingBag,
     ShoppingCart,
     Store,
+    UserCirclePlus,
+    CurrencyDollar,
+    Cart,
 }

@@ -2,7 +2,7 @@ import welcome1 from "../assets/welcome1.png"
 import welcome2 from "../assets/welcome2.png"
 import welcome3 from "../assets/welcome3.png"
 
-import { Adds, Admin, Agents, CurrencyCircleDollar, Files, Gear, ShoppingBag, ShoppingCart, Store } from "../assets/icons";
+import { Adds, Admin, Agents, Cart, CurrencyCircleDollar, CurrencyDollar, Files, Gear, ShoppingBag, ShoppingCart, Store, UserCirclePlus } from "../assets/icons";
 
 // welcome screen data
 export const welcomeScreens = [
@@ -36,3 +36,31 @@ export const welcomeScreens = [
     { label: "الإعدادات", icon: Gear, path: "/store-owner/:userId/dashboard" },
     { label: "المشرف", icon: Admin, path: "/store-owner/:userId/dashboard" },
   ]
+
+  // analytics data
+  export const AnalyticsData = [
+  {
+    label: 'العملاء الجدد',
+    value: 45,
+    icon: UserCirclePlus,
+    bgClass: 'gold-gradient'
+  },
+  {
+    label: 'الطلبات الجديدة',
+    value: 30,
+    icon: Cart,
+    bgClass: 'violet-gradient'
+  },
+  {
+    label: 'المبيعات اليوم',
+    value: 10000,
+    icon: CurrencyDollar,
+    bgClass: 'dark-green-gradient'
+  },
+  {
+    label: 'الطلبات المعلقة',
+    value: 30,
+    icon: Cart,
+    bgClass: 'sky-blue-gradient'
+  }
+];
