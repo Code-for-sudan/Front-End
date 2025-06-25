@@ -9,11 +9,13 @@
     --violet: rgba(151, 71, 255, 1);
     --sky-blue: rgba(40, 190, 244, 1);
     --dark-green: rgba(62, 180, 79, 1);
+    --light-gold: rgba(246, 219, 175, 1);
   }
 
   /* define theme colors */
   @theme inline {
     --color-primary: var(--primary);
+    --color-light-gold: var(--light-gold);
     --color-violet: var(--violet);
     --color-sky-blue: var(--sky-blue);
     --color-dark-green: var(--dark-green);
