@@ -3,12 +3,14 @@ import { TokenService } from "../auth/tokenService";
 import { goToLogin } from '../hooks/navigateService';
 
 const api = axios.create({
-  baseURL: "http://localhost:8000/api/v1",
+  baseURL: "https://sudamall.ddns.net/api/v1",
+    withCredentials: true,
+
 });
 
 api.interceptors.request.use(
   (config) => {
-    const token = TokenService.getLocalAccessToken();
+    const token = TokenService.getAccessToken();
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
     }
@@ -25,20 +27,17 @@ api.interceptors.response.use(
       originalConfig._retry = true;
 
       try {
-        const refreshToken = TokenService.getLocalRefreshToken();
-        const res = await api.post("/auth/token/refresh", {
-          refreshToken,
-        });
+       const res = await api.post("/auth/token/refresh"); 
 
         const { accessToken } = res.data;
-        TokenService.setTokens(accessToken, true);
+         TokenService.setAccessToken(accessToken, true); 
 
         // Update header and retry original request
         api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
         originalConfig.headers["Authorization"] = `Bearer ${accessToken}`;
         return api(originalConfig);
       } catch (_error) {
-        TokenService.clearTokens();
+        TokenService.clearAccessToken;
         goToLogin();
         return Promise.reject(_error);
       }

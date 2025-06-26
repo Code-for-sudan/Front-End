@@ -5,7 +5,7 @@ const GoogleButton = () => {
     /* global google */
     if (window.google) {
       google.accounts.id.initialize({
-        client_id: "YOUR_CLIENT_ID", // من Google Console
+        client_id: "YOUR_CLIENT_ID",
         callback: handleCredentialResponse,
       });
 
@@ -14,7 +14,7 @@ const GoogleButton = () => {
         {
           theme: "outline",
           size: "large",
-          text: "signin_with", // أو "continue_with"
+          text: "signin_with", 
           shape: "rectangular",
           width: "100%",
         }
@@ -26,7 +26,7 @@ const GoogleButton = () => {
     const token = response.credential;
     console.log("Google Token:", token);
 
-    fetch("http://localhost:8000/api/auth/google/", {
+    fetch("http://142.93.43.88:8000/api/auth/google/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token }),
@@ -34,7 +34,7 @@ const GoogleButton = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("Login Success:", data);
-        // تخزين التوكن - تحويل المستخدم
+
       })
       .catch((err) => console.error(err));
   };

@@ -18,7 +18,7 @@ const Login = () => {
 
   const { mutate: login, isPending, isError, error } = useLogin();
 
-  const handleGoogleSuccess = (credentialResponse) => {
+ /**  const handleGoogleSuccess = (credentialResponse) => {
     const token = credentialResponse.credential;
     fetch("http://localhost:8000/api/auth/google/", {
       method: "POST",
@@ -30,7 +30,7 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => console.log("Login success:", data));
   };
-
+*/
   const handleSubmit = (e) => {
     e.preventDefault();
     login(loginInput, {
@@ -134,7 +134,7 @@ const Login = () => {
             </div>
             {isError && <p className="text-red-500">{error.message}</p>}
 
-            {/* Login Button */}
+             {/* Login Button */}
             <button
               type="submit"
               className="w-full text-white font-semibold py-2 rounded-xl transition duration-200 mt-10"
@@ -149,7 +149,7 @@ const Login = () => {
 
           {/* Or Divider */}
           <Divider />
-          {/* Google Login */}
+          {/* Google Login 
           {typeof window !== 'undefined' && (
           <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
             <GoogleLogin
@@ -180,7 +180,7 @@ const Login = () => {
             />
           </GoogleOAuthProvider>
           )}
-
+*/}
           {/* Signup */}
           <p className="text-center text-sm mt-8">
             ليس لديك حساب؟
