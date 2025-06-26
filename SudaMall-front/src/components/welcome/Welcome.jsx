@@ -30,7 +30,7 @@ const Welcome = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col justify-center bg-white ">
+    <div className="h-screen fixed inset-0 flex flex-col justify-center bg-white ">
       <WelcomeScreen
         image={welcomeScreens[current].image}
         text={welcomeScreens[current].text}
