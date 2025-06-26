@@ -21,7 +21,7 @@ const AccountChoices = ({ onClickBack }) => {
     {/* back button */}
     <button 
       onClick={onClickBack}
-      className='absolute top-10 left-6'>
+      className='absolute top-10 left-6 z-50'>
       <MdOutlineArrowCircleLeft className='w-8 h-8' />
     </button>
 <div className='w-full flex flex-col justify-end items-center absolute bottom-0'>
@@ -30,7 +30,7 @@ const AccountChoices = ({ onClickBack }) => {
     {/* Gradient and content */}
    <div className="w-[105%] bg-gradient-to-t from-primary via-primary/90 to-primary/10 h-[60vh] p-10 rounded-t-[6rem] flex flex-col justify-center gap-12 z-20">
     <div className='flex flex-col'>
-        <p className="text-3xl font-semibold">يرجى تحديد نوع الحساب الذي ترغب بإنشاءه</p>
+        <p className="text-xl font-semibold">يرجى تحديد نوع الحساب الذي ترغب بإنشاءه</p>
       </div>
       <div className="flex flex-col gap-4 w-full">
         <button

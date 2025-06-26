@@ -17,8 +17,8 @@ const AuthChoices = ({ handleNext }) => {
     {/* Gradient and content */}
    <div className="w-[105%] bg-gradient-to-t from-primary via-primary/90 to-primary/10 h-[60vh] p-10 rounded-t-[6rem] flex flex-col justify-center gap-12 z-20">
     <div className='flex flex-col'>
-        <p className="text-3xl font-semibold">هيا بنا</p>
-        <p className="text-3xl font-semibold">إبدأ تجربتك الآن!</p>
+        <p className="text-xl font-semibold">هيا بنا</p>
+        <p className="text-xl font-semibold">إبدأ تجربتك الآن!</p>
       </div>
       <div className="flex flex-col gap-3 w-full">
         <button
