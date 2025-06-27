@@ -54,11 +54,13 @@ const SetNewPassword = () => {
 					{visible ? (
 						<GrFormView
 							onClick={toggleVisibility}
+       aria-label="إخفاء كلمة المرور"
 							className="text-[40px] absolute mr-2 mt-4.5"
 						/>
 					) : (
 						<GrFormViewHide
 							onClick={toggleVisibility}
+       aria-label="إظهار كلمة المرور"
 							className="text-[40px] text-light-gray absolute mr-2 mt-4.5"
 						/>
 					)}
@@ -80,11 +82,13 @@ const SetNewPassword = () => {
 					{visible ? (
 						<GrFormView
 							onClick={toggleVisibility}
+       aria-label="إخفاء كلمة المرور"
 							className="text-[40px] absolute mr-2 mt-4.5"
 						/>
 					) : (
 						<GrFormViewHide
 							onClick={toggleVisibility}
+       aria-label="إظهار كلمة المرور"
 							className="text-[40px] text-light-gray absolute mr-2 mt-4.5"
 						/>
 					)}
