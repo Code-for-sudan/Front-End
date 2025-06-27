@@ -20,7 +20,7 @@ const AuthChoices = ({ handleNext }) => {
         <p className="text-3xl font-semibold">هيا بنا</p>
         <p className="text-3xl font-semibold">إبدأ تجربتك الآن!</p>
       </div>
-      <div className="flex flex-col gap-3 w-full">
+      <div className="flex flex-col gap-3 w-full text-sm">
         <button
         onClick={handleSignin}
         className="bg-white text-primary font-bold py-2 rounded-xl w-full"

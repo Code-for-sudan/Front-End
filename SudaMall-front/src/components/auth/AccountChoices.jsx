@@ -32,7 +32,7 @@ const AccountChoices = ({ onClickBack }) => {
     <div className='flex flex-col'>
         <p className="text-3xl font-semibold">يرجى تحديد نوع الحساب الذي ترغب بإنشاءه</p>
       </div>
-      <div className="flex flex-col gap-4 w-full">
+      <div className="flex flex-col gap-4 w-full text-sm">
         <button
         onClick={handleCustomer}
         className="bg-white text-primary font-bold py-2 rounded-xl w-full"
