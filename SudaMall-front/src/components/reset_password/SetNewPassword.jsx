@@ -14,6 +14,7 @@ const SetNewPassword = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		// api request here
+		alert("تم حفظ كلمة المرور بنجاح");
 	};
 
 	const handlePassword = (e) => {
@@ -45,7 +46,7 @@ const SetNewPassword = () => {
 			</h1>
 
 			<form
-				action={handleSubmit}
+				onSubmit={handleSubmit}
 				className="flex flex-col items-center gap-0"
 			>
 				<div className="flex flex-col p-5 mt-[20px]">
@@ -53,11 +54,13 @@ const SetNewPassword = () => {
 					{visible ? (
 						<GrFormView
 							onClick={toggleVisibility}
+       aria-label="إخفاء كلمة المرور"
 							className="text-[40px] absolute mr-2 mt-4.5"
 						/>
 					) : (
 						<GrFormViewHide
 							onClick={toggleVisibility}
+       aria-label="إظهار كلمة المرور"
 							className="text-[40px] text-light-gray absolute mr-2 mt-4.5"
 						/>
 					)}
@@ -65,7 +68,7 @@ const SetNewPassword = () => {
 						dir="ltr"
 						className="border-2 border-light-gray rounded-[16px] w-[320px] h-[40px] text-center px-[50px] py-[10px] mt-3 focus:outline-none"
 						onChange={handlePassword}
-						type="password"
+						type={visible ? "text" : "password"}
 						value={password}
 						placeholder="**********"
 					/>
@@ -79,11 +82,13 @@ const SetNewPassword = () => {
 					{visible ? (
 						<GrFormView
 							onClick={toggleVisibility}
+       aria-label="إخفاء كلمة المرور"
 							className="text-[40px] absolute mr-2 mt-4.5"
 						/>
 					) : (
 						<GrFormViewHide
 							onClick={toggleVisibility}
+       aria-label="إظهار كلمة المرور"
 							className="text-[40px] text-light-gray absolute mr-2 mt-4.5"
 						/>
 					)}
@@ -92,7 +97,7 @@ const SetNewPassword = () => {
 						dir="ltr"
 						className="border-2 border-light-gray rounded-[16px] w-[320px] h-[40px] text-center px-[50px] py-[10px] mt-3 focus:outline-none"
 						onChange={handleConfirmPassword}
-						type="password"
+						type={visible ? "text" : "password"}
 						value={confirmPassword}
 						placeholder="**********"
 					/>
