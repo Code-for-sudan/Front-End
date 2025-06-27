@@ -43,24 +43,28 @@ export const welcomeScreens = [
     label: 'العملاء الجدد',
     value: 45,
     icon: UserCirclePlus,
-    bgClass: 'gold-gradient'
+    bgClass: 'gold-gradient',
+    path: '/store-owner/:userId/dashboard/clients'
   },
   {
     label: 'الطلبات الجديدة',
     value: 30,
     icon: Cart,
-    bgClass: 'violet-gradient'
+    bgClass: 'violet-gradient',
+    path: '/store-owner/:userId/dashboard/new-orders'
   },
   {
     label: 'المبيعات اليوم',
     value: 10000,
     icon: CurrencyDollar,
-    bgClass: 'dark-green-gradient'
+    bgClass: 'dark-green-gradient',
+    path: '/store-owner/:userId/dashboard/today-sales'
   },
   {
     label: 'الطلبات المعلقة',
     value: 30,
     icon: Cart,
-    bgClass: 'sky-blue-gradient'
+    bgClass: 'sky-blue-gradient',
+    path: '/store-owner/:userId/dashboard/paused-orders'
   }
 ];

@@ -1,11 +1,18 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import StoreOwnerNav from '../components/store-owner/StoreOwnerNav';
 
-const StoreOwnerLayout = () => (
-  <div>
-    <StoreOwnerNav />
-    <Outlet />
-  </div>
-);
+const StoreOwnerLayout = () => {
+  const location = useLocation();
+
+  // Hide nav only when inside dashboard subroutes (not main dashboard)
+  const hideNav = /^\/store-owner\/[^/]+\/dashboard\/.+/.test(location.pathname);
+
+  return (
+    <>
+      {!hideNav && <StoreOwnerNav />}
+      <Outlet />
+    </>
+  );
+};
 
 export default StoreOwnerLayout;
