@@ -10,7 +10,7 @@ const WelcomeNavigation = ({ onNext, onSkip }) => {
       >
         <MdOutlineArrowCircleRight className="w-8 h-8" />
       </button>
-      <button className="text-xl font-bold text-gray-500 cursor-pointer" onClick={onSkip}>
+      <button className="text-lg font-bold text-gray-500 cursor-pointer" onClick={onSkip}>
         تخطي
       </button>
       
