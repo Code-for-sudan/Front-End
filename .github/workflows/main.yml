@@ -1,0 +1,34 @@
+name: SSH Deploy on Push or Branch Creation
+
+on:
+  push:
+    branches: ['*']  # any push to any branch
+  create:
+    branches: ['*']  # when a new branch is created
+
+jobs:
+  ssh-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up SSH private key
+        # Write the private key from GitHub Secrets to a file
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > deploy_key
+          chmod 600 deploy_key
+
+      - name: Add host to known_hosts
+        # Prevent host authenticity prompt
+        run: |
+          ssh-keyscan -H "$HOST" >> ~/.ssh/known_hosts
+        env:
+          HOST: ${{ secrets.SSH_HOST }}
+
+      - name: Run remote script via SSH
+        run: |
+          ssh -i deploy_key "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "./script ${{ github.ref_name }}"
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
