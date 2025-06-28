@@ -22,6 +22,7 @@ jobs:
       - name: Add host to known_hosts
         # Prevent host authenticity prompt
         run: |
+          mkdir ~/.ssh
           ssh-keyscan -H "$HOST" >> ~/.ssh/known_hosts
         env:
           HOST: ${{ secrets.SSH_HOST }}
