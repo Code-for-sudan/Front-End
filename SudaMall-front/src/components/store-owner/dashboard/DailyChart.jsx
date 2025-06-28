@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
-const SalesChart = ({ SalesAndCosts }) => {
+const DailyChart = ({ DailySalesData }) => {
   const [chartData, setChartData] = useState({
     series: [],
     options: {}
   });
 
   useEffect(() => {
-    const weeklyData = SalesAndCosts.weekly_summary;
+    const daily = DailySalesData.daily_summary;
 
-    const categories = weeklyData.map(item => item.day);
-    const sales = weeklyData.map(item => item.sales);
-    const costs = weeklyData.map(item => item.costs);
+    const categories = daily.map(item => item.hour);
+    const sales = daily.map(item => item.sales);
+    const costs = daily.map(item => item.costs);
 
     setChartData({
       series: [
@@ -38,9 +38,9 @@ const SalesChart = ({ SalesAndCosts }) => {
           curve: 'smooth',
           width: 1
         },
-         markers: {
-          size: 4,       // ✅ Show dots
-          colors: ['#FF928A', '#8979FF'], // optional: match series colors
+        markers: {
+          size: 4,
+          colors: ['#FF928A', '#8979FF'],
           strokeColors: '#fff',
           strokeWidth: 2,
           hover: {
@@ -49,46 +49,46 @@ const SalesChart = ({ SalesAndCosts }) => {
         },
         xaxis: {
           categories: categories,
+        //   tickAmount: 24,
           labels: {
             style: {
-              fontSize: '14px'
+              fontSize: '13px'
+            },
+            rotate: -45,
+            formatter: (value) => {
+              const specialTicks = ['06:00', '12:00', '18:00', '00:00'];
+              return specialTicks.includes(value) ? value : '';
             }
-          }
+          },
         },
         yaxis: {
           min: 0,
-          max: 8000,
+          max: 2000,
           tickAmount: 4,
-          // forceNiceScale: false,
           labels: {
-               formatter: (value) => {
-                  const allowed = [0, 2000, 4000, 6000, 8000];
-                  return allowed.includes(value)
-                    ? value === 0
-                      ? '0'
-                      : `${value / 1000}K`
-                    : '';
-                },
+            formatter: (value) => {
+              return value === 0 ? '0' : `${value / 1000}K`;
+            },
             style: {
               fontSize: '13px'
             }
-          }
+          },
         },
         tooltip: {
           y: {
-            formatter: (val) => `${val.toLocaleString()} ${SalesAndCosts.currency}`
+            formatter: (val) => `${val.toLocaleString()} ${DailySalesData.currency}`
           }
         },
-        colors: ['#FF928A', '#8979FF'],
+        colors: ['#FF928A', '#8979FF']
       }
     });
   }, []);
 
   return (
-    <>
+    <div className="w-full">
       <ReactApexChart options={chartData.options} series={chartData.series} type="area" height={250} />
-    </>
+    </div>
   );
 };
 
-export default SalesChart;
+export default DailyChart

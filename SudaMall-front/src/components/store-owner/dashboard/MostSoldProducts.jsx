@@ -6,7 +6,7 @@ const MostSoldProducts = () => {
    <div className="overflow-x-auto mt-6 mb-32">
       <h2 className='text-xl font-bold mb-4'>أكثر المنتجات مبيعا</h2>
       <div className="overflow-x-auto  rounded-md border border-primary">
-        <table className="w-full border border-primary rounded-md overflow-hidden text-sm">
+        <table className="w-full border border-primary rounded-md overflow-hidden text-[0.68rem]">
             <thead>
                 <tr className="bg-light-gold text-black text-right font-semibold">
                 <th className="px-2 py-1 border-l border-primary">اسم المنتج</th>

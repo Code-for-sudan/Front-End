@@ -58,7 +58,7 @@ export const welcomeScreens = [
     value: 10000,
     icon: CurrencyDollar,
     bgClass: 'dark-green-gradient',
-    path: '/store-owner/:userId/dashboard/today-sales'
+    path: '/store-owner/:userId/dashboard/total-sales'
   },
   {
     label: 'الطلبات المعلقة',

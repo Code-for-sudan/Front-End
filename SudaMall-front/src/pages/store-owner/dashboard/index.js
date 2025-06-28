@@ -1,9 +1,9 @@
 import Clients from "./Clients";
 import NewOrders from "./NewOrders";
-import TodaySales from "./TodaySales";
+import TotalSales from "./TotalSales";
 
 export {
     Clients,
     NewOrders,
-    TodaySales,
+    TotalSales,
 }

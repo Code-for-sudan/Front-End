@@ -1,6 +1,7 @@
 import React from 'react'
 import { DashboardHead, Menu, MostSoldProducts, SalesChart } from '../../../components/store-owner/dashboard'
 import Analytics from '../../../components/store-owner/dashboard/Analytics'
+import { SalesAndCosts } from '../../../data/SalesAndCosts'
 
 const StoreOwnerDashboard = () => {
   return (
@@ -8,7 +9,10 @@ const StoreOwnerDashboard = () => {
       <DashboardHead />
       <Menu />
       <Analytics />
-      <SalesChart />
+      <div className='w-full'>
+        <h2 className='text-xl font-bold mt-10 mb-4'>إجمالي المبيعات / التكلفة</h2>
+        <SalesChart SalesAndCosts={SalesAndCosts} />
+      </div>
       <MostSoldProducts />
     </div>
   )
