@@ -3,14 +3,14 @@ import { MdOutlineArrowCircleRight } from "react-icons/md";
 
 const WelcomeNavigation = ({ onNext, onSkip }) => {
   return (
-    <div className="absolute bottom-0 w-full flex justify-between items-center p-4 pt-12 mt-8 overflow-hidden">
+    <div className="absolute bottom-0 w-full flex justify-between items-center p-4 pt-12 overflow-hidden">
       <button
         onClick={onNext}
         className="p-2 text-white cursor-pointer active:scale-90 z-10"
       >
         <MdOutlineArrowCircleRight className="w-8 h-8" />
       </button>
-      <button className="text-xl font-bold text-gray-500 cursor-pointer" onClick={onSkip}>
+      <button className="text-sm font-bold text-gray-500 cursor-pointer" onClick={onSkip}>
         تخطي
       </button>
       

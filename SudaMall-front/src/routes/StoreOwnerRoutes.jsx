@@ -1,9 +1,10 @@
 import { Route } from "react-router-dom";
 import { StoreOwnerLayout } from "../layouts";
-import { AddProduct, Chats, Profile, Store, StoreOwnerDashboard } from "../pages/store-owner";
+import { Chats, Profile, Store, StoreOwnerDashboard } from "../pages/store-owner";
 import { TotalSales } from "../pages/store-owner/dashboard";
 import { NewClients } from "../pages/store-owner/dashboard/clients";
 import { NewOrders } from "../pages/store-owner/dashboard/orders";
+import { Products } from "../pages/store-owner/products";
 
 
 /**
@@ -34,7 +35,7 @@ const StoreOwnerRoutes = () => [
     <Route path="/store-owner/:userId/chats" element={<Chats />} ></Route>
 
     {/* ------------------------------ Store owner products routes ----------------------------------*/}
-    <Route path="/store-owner/:userId/add-product" element={<AddProduct />} ></Route>
+    <Route path="/store-owner/:userId/products" element={<Products />} ></Route>
 
     {/* ------------------------------ Store owner profile routes ------------------------------------*/}
     <Route path="/store-owner/:userId/profile" element={<Profile />} ></Route>

@@ -7,7 +7,6 @@ import Store from "./store/Store";
 export {
     Chats,
     StoreOwnerDashboard,
-    AddProduct,
     Profile,
     Store,
 }

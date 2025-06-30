@@ -3,7 +3,7 @@ import { formatTime } from '../../utils/utilities';
 
 const NewOrderCard = ({srcImg, order}) => {
   return (
-    <div className='flex items-start gap-2 bg-slate-100 p-4 rounded-lg'>
+    <div className='flex items-start gap-2 bg-slate-100 p-4 rounded-xl'>
         <img src={srcImg} alt="icon-success" className='mt-0.9'/>
         <div className='w-full space-y-3'>
             <div className="flex items-center justify-between">

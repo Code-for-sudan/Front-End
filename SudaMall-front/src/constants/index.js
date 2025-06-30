@@ -27,7 +27,7 @@ export const welcomeScreens = [
 
   export const Store_Owner_Sidebar = [
     { label: "إدارة الطلبات", icon: ShoppingCart, path: "/store-owner/:userId/dashboard" },
-    { label: "المنتجات", icon: ShoppingBag, path: "/store-owner/:userId/dashboard" },
+    { label: "المنتجات", icon: ShoppingBag, path: "/store-owner/:userId/products" },
     { label: "العملاء", icon: Agents, path: "/store-owner/:userId/dashboard" },
     { label: "الفواتير", icon: Files, path: "/store-owner/:userId/dashboard" },
     { label: "الدفع الإلكتروني", icon: CurrencyCircleDollar, path: "/store-owner/:userId/dashboard" },

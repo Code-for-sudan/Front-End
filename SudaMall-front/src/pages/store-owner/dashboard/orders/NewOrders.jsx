@@ -1,26 +1,21 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { MdOutlineArrowCircleRight } from 'react-icons/md';
 import TodayOrders from './TodayOrders';
 import WeeklyOrders from './WeeklyOrders';
 import { TodayOrdersData } from '../../../../data/TodayOrders';
 import { WeeklyOrdersData } from '../../../../data/WeekOrders';
 import { success } from '../../../../assets/icons';
+import { MainTitle } from '../../../../components/reusable';
 
 const NewOrders = () => {
-  const navigate = useNavigate();
   const [view, setView] = useState("daily"); // 'daily' or 'weekly'
 
   return (
      <div className="container">
           {/* Header & Navigation */}
-          <div className="relative flex items-center justify-center w-full mt-8 mb-6">
-            <MdOutlineArrowCircleRight
-              onClick={() => navigate(-1)}
-              className="absolute top-0 right-0 w-8 h-8 cursor-pointer"
+          <MainTitle
+            title={"الطلبات الجديدة"}
+            navigatePath={-1} 
             />
-            <h2 className="text-xl font-bold">الطلبات الجديدة</h2>
-          </div>
     
        {/* Select Filter */}
           <select

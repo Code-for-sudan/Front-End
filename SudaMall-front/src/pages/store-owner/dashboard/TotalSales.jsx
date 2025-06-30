@@ -1,25 +1,21 @@
 import { useState } from "react";
-import { MdOutlineArrowCircleRight } from "react-icons/md";
 import { DailySales, WeeklySales } from "../../../components/store-owner/dashboard";
-import { useNavigate } from "react-router-dom";
+import { MainTitle } from '../../../components/reusable';
+
 import { SalesAndCosts } from "../../../data/SalesAndCosts"; // this will replaced with endpoint /total-sales?period=week
 import { DailySalesData } from "../../../data/DailySales";  // this will replaced with endpoint /total-sales?period=day
 
 const TotalSales = () => {
-  const navigate = useNavigate();
   const [view, setView] = useState("daily"); // 'daily' or 'weekly'
 
 
   return (
     <div className="container">
       {/* Header & Navigation */}
-      <div className="relative flex items-center justify-center w-full mt-8 mb-6">
-          <MdOutlineArrowCircleRight
-            onClick={() => navigate(-1)}
-            className="absolute top-0 right-0 w-8 h-8 cursor-pointer"
+      <MainTitle
+          title={"إجمالي المبيعات / التكلفة"}
+          navigatePath={-1} 
           />
-        <h2 className="text-xl font-bold">إجمالي المبيعات / التكلفة</h2>
-      </div>
 
    {/* Select Filter */}
       <select
