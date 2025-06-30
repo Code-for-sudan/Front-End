@@ -1,7 +1,9 @@
 import { Route } from "react-router-dom";
 import { StoreOwnerLayout } from "../layouts";
 import { AddProduct, Chats, Profile, Store, StoreOwnerDashboard } from "../pages/store-owner";
-import { Clients, NewOrders, TotalSales } from "../pages/store-owner/dashboard";
+import { TotalSales } from "../pages/store-owner/dashboard";
+import { NewClients } from "../pages/store-owner/dashboard/clients";
+import { NewOrders } from "../pages/store-owner/dashboard/orders";
 
 
 /**
@@ -21,7 +23,7 @@ const StoreOwnerRoutes = () => [
     {/* ----------------------- Store owner dashboard routes and subroutes ------------------------ */}
     <Route path="/store-owner/:userId/dashboard" element={<StoreOwnerDashboard />} />
    {/* dashboard sub pages layout */}
-    <Route path="/store-owner/:userId/dashboard/clients" element={<Clients />} />
+    <Route path="/store-owner/:userId/dashboard/new-clients" element={<NewClients />} />
     <Route path="/store-owner/:userId/dashboard/new-orders" element={<NewOrders />} />
     <Route path="/store-owner/:userId/dashboard/total-sales" element={<TotalSales />} />
 

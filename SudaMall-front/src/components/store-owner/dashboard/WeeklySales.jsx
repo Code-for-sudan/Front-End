@@ -1,4 +1,4 @@
-import SalesChart from './SalesChart'
+import WeeklyChart from './WeeklyChart'
 
 const WeeklySales = ({ SalesAndCosts}) => {
   const Stats = SalesAndCosts.over_all_changes;
@@ -6,7 +6,7 @@ const WeeklySales = ({ SalesAndCosts}) => {
   return (
     <div className='flex flex-col gap-8'>
     {/* Sales and cost weekly Chart */}
-      <SalesChart SalesAndCosts={SalesAndCosts} />
+      <WeeklyChart SalesAndCosts={SalesAndCosts} />
 
     {/* analysis */}
       <div className='flex items-center justify-center gap-2 font-semibold'>

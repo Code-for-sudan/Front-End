@@ -9,16 +9,15 @@ const TotalSales = () => {
   const navigate = useNavigate();
   const [view, setView] = useState("daily"); // 'daily' or 'weekly'
 
-  // handle change event
 
   return (
     <div className="container">
       {/* Header & Navigation */}
-      <div className="flex items-center gap-6 mt-8 mb-4">
-        <MdOutlineArrowCircleRight
-          onClick={() => navigate(-1)}
-          className="w-8 h-8 cursor-pointer"
-        />
+      <div className="relative flex items-center justify-center w-full mt-8 mb-6">
+          <MdOutlineArrowCircleRight
+            onClick={() => navigate(-1)}
+            className="absolute top-0 right-0 w-8 h-8 cursor-pointer"
+          />
         <h2 className="text-xl font-bold">إجمالي المبيعات / التكلفة</h2>
       </div>
 

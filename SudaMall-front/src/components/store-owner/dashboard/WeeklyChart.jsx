@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
-const SalesChart = ({ SalesAndCosts }) => {
+const WeeklyChart = ({ SalesAndCosts }) => {
   const [chartData, setChartData] = useState({
     series: [],
     options: {}
@@ -91,4 +91,4 @@ const SalesChart = ({ SalesAndCosts }) => {
   );
 };
 
-export default SalesChart;
+export default WeeklyChart;

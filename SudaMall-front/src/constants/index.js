@@ -44,7 +44,7 @@ export const welcomeScreens = [
     value: 45,
     icon: UserCirclePlus,
     bgClass: 'gold-gradient',
-    path: '/store-owner/:userId/dashboard/clients'
+    path: '/store-owner/:userId/dashboard/new-clients'
   },
   {
     label: 'الطلبات الجديدة',
