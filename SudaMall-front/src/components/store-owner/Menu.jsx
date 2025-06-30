@@ -46,7 +46,7 @@ const Menu = () => {
         >
         <div className="flex items-center gap-4 py-6 px-8 bg-white">
             <img src={userData.profile_pic} alt="profile" className='w-12 h-12 rounded-full' />
-            <p className='font-semibold text-xl'>{userData.name}</p>
+            <p className='font-semibold text-base'>{userData.name}</p>
         </div>
         <ul className="flex flex-col gap-6 py-6 px-8 bg-white">
           { Store_Owner_Sidebar.map((item, i) =>
@@ -58,7 +58,7 @@ const Menu = () => {
                     to={item.path}
                     className='flex items-center gap-4'>
                     <img src={item.icon} alt="icon" />
-                    <p className='font-semibold text-lg text-gray-700'>{item.label}</p>
+                    <p className='font-semibold text-base text-gray-700'>{item.label}</p>
                 </Link>
             </li>)}
         </ul>
@@ -67,7 +67,7 @@ const Menu = () => {
                 className='flex items-center gap-4 cursor-pointer'
                 >
                 <MdLogout className="w-6 h-6 text-red-700"/>
-                <p className='font-semibold text-lg text-gray-600'>تسجيل الخروج</p>
+                <p className='font-semibold text-base text-gray-600'>تسجيل الخروج</p>
             </button>
         </div>
       </div>

@@ -10,7 +10,7 @@ const MainTitle = ({ title, navigatePath }) => {
             onClick={() => navigate(navigatePath)}
             className="absolute top-0 right-0 w-8 h-8 cursor-pointer"
         />
-        <h2 className="text-xl font-bold">{title}</h2>
+        <h2 className="text-base font-bold">{title}</h2>
         </div>
     )
 }
