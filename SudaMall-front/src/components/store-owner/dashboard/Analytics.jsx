@@ -13,7 +13,11 @@ const Analytics = () => {
             className={`${item.bgClass} relative text-white flex flex-col gap-2 items-start p-4 rounded-xl cursor-pointer active:scale-95`}
         >
             <p className="text-[1rem] font-semibold">{item.label}</p>
+<<<<<<< HEAD
             <p className="text-2xl font-semibold z-50">{item.value >= 1000 ? `${item.value / 1000}k`: item.value}</p>
+=======
+            <p className="text-xl font-semibold z-50">{item.value >= 1000 ? `${item.value / 1000}k`: item.value}</p>
+>>>>>>> main
             <img
             src={item.icon}
             alt="icon"

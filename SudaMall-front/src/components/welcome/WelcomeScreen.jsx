@@ -1,5 +1,3 @@
-import React from "react";
-
 const WelcomeScreen = ({ image, text }) => {
   return (
     <div className="flex flex-col items-center justify-center text-center px-16">

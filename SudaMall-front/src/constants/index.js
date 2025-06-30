@@ -9,7 +9,7 @@ export const welcomeScreens = [
     {
       id: 1,
       image: welcome1,
-      text: "مرحباً بك في سودا مول, حيث التسوق السهل والمُمتع",
+      text: "مرحباً بك في سودامول, حيث التسوق السهل والمُمتع",
     },
     {
       id: 2,
@@ -19,7 +19,7 @@ export const welcomeScreens = [
     {
       id: 3,
       image: welcome3,
-      text: "سودا مول معك في كل خطوة - تسوق وإنت  مُطمّن!",
+      text: "سودامول معك في كل خطوة - تسوق وإنت  مُطمّن!",
     },
   ];
 

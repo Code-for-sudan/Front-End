@@ -8,7 +8,7 @@ export const Most_Sold_Products = [
     },
     {
       "product_id": 88,
-      "product_name": "باور بانك 20000mAh",
+      "product_name": "باور بانك  20000mAh",
       "orders_count": 90,
       "status": "out_of_stock",
       "price": 10500
