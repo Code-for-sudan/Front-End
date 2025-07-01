@@ -8,26 +8,19 @@ jobs:
   ssh-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Set up SSH private key
-        # Write the private key from GitHub Secrets to a file
-        run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > deploy_key
-          chmod 600 deploy_key
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # or 20 or whatever version your project uses
 
-      - name: Add host to known_hosts
-        # Prevent host authenticity prompt
-        run: |
-          mkdir ~/.ssh
-          ssh-keyscan -H "$HOST" >> ~/.ssh/known_hosts
-        env:
-          HOST: ${{ secrets.SSH_HOST }}
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
 
-      - name: Run remote script via SSH
-        run: |
-          ssh -i deploy_key "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "~/Front-dev/publish.sh ${{ github.ref_name }}"
-        env:
-          SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_HOST: ${{ secrets.SSH_HOST }}
+      # Step 4: Build the project
+      - name: Build React App
+        run: npm run build
