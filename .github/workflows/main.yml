@@ -19,8 +19,12 @@ jobs:
 
       # Step 3: Install dependencies
       - name: Install dependencies
-        run: npm install
+        run: |
+          cd SudaMall-front
+          npm install
 
       # Step 4: Build the project
       - name: Build React App
-        run: npm run build
+        run: |
+          cd SudaMall-front
+          npm run build
