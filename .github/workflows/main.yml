@@ -1,8 +1,9 @@
-name: SSH Deploy on Push or Branch Creation
+name: SSH Test and Deploy on Push or Branch Creation
 
 on:
   push:
-    branches: ['*']  # any push to any branch
+    branches: ['main']  # any push to any branch
+  workflow_dispatch:
 
 jobs:
   ssh-deploy:
