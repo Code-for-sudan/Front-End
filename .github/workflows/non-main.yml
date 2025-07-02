@@ -1,0 +1,32 @@
+# .github/workflows/manual-ssh-deploy.yml
+name: Manual SSH Deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout (needed to set GITHUB_REF)
+        uses: actions/checkout@v4
+
+      - name: Determine branch name
+        id: branch
+        run: |
+          # Strip the "refs/heads/" prefix
+          branch_name="${GITHUB_REF#refs/heads/}"
+          echo "branch_name=$branch_name" >> $GITHUB_OUTPUT
+
+      - name: Write SSH key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key
+          chmod 600 ssh_key
+
+      - name: SSH & run remote script
+        run: |
+          ssh -o StrictHostKeyChecking=no \
+              -i ssh_key \
+              ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+              "~/deploy.sh ${{ steps.branch.outputs.branch_name }}"
