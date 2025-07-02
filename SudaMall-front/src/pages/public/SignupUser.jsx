@@ -18,10 +18,11 @@ const SignupForm = () => {
   const [errors, setErrors] = useState({});
   const { mutate, isLoading } = useMutation({
     mutationFn: signupUser,
+    
     onSuccess: () => {
-      setShowSuccessPopup(true);
+     setShowSuccessPopup(true);
       setTimeout(() => {
-        setShowSuccessPopup(false);
+      setShowSuccessPopup(false);
         goToLogin(); // go to login page after success
       }, 3000);
     },
@@ -75,7 +76,7 @@ const SignupForm = () => {
       }));
       return;
     }
-    const formattedPhone = `00249${cleanedPhone}`;
+    const formattedPhone = `+249${cleanedPhone}`;
 
     const [first1, first2, last1, last2] = nameParts;
     const first_name = `${first1} ${first2}`;
@@ -125,7 +126,7 @@ const SignupForm = () => {
               </label>
               <input
                 type="text"
-                placeholder="محمد أحمد علي حسن"
+                placeholder=""
                 className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
                 style={{ "--tw-ring-color": "var(--primary)" }}
                 value={signupInput.name}

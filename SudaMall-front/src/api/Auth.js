@@ -1,20 +1,20 @@
-import axios from "axios";
 import api from "./Api";
 import { TokenService } from "../auth/tokenService";
+import axios from "axios";
 
 
 export const signupUser = async (formData) => {
-  const response = await api.post("/auth/signup/user", formData);
+  const response = await axios.post("https://sudamall.ddns.net/api/v1/accounts/signup/user/", formData);
   return response.data;
 };
 
-export const registerBusiness = async (data) => {
-  const response = await axios.post('/auth/signup/business', data);
+export const registerBusiness = async (formData2) => {
+  const response = await axios.post('https://sudamall.ddns.net/api/v1//accounts/signup/business/', formData2);
   return response.data;
 };
 
 export const login =  async ({ email, password, rememberMe }) => {
-      const response = await api.post("/auth/login", { email, password });
+      const response = await api.post("/auth/login/", { email, password });
       const { accessToken} = response.data;
       TokenService.setAccessToken(accessToken, rememberMe);
       return response.data;

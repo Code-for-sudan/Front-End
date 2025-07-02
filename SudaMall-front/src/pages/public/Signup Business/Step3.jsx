@@ -1,7 +1,14 @@
 // src/components/RegisterSteps/StepThree.jsx
 import React from "react";
 
-const StepThree = ({ formData, onBack, handleSubmit, isSubmitting }) => {
+const StepThree = ({
+  signupInput,
+  onBack,
+  handleSubmit,
+  isSubmitting,
+  errorMessage,
+  showSuccessPopup,
+}) => {
   return (
     <div
       className="min-h-screen flex items-start justify-center pt-20"
@@ -20,7 +27,7 @@ const StepThree = ({ formData, onBack, handleSubmit, isSubmitting }) => {
             انشاء حساب جديد
           </h1>
 
-          <form className="space-y-4" onSubmit={handleSubmit}>
+          <form className="space-y-4"  onSubmit={handleSubmit}>
             {/* Full Name */}
             <div>
               <label className="block text-right font-medium mb-2">
@@ -31,7 +38,7 @@ const StepThree = ({ formData, onBack, handleSubmit, isSubmitting }) => {
                 placeholder="محمد علي"
                 className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
                 style={{ "--tw-ring-color": "var(--primary)" }}
-                value={formData.fullName}
+                value={signupInput.name}
                 readOnly
               />
             </div>
@@ -46,7 +53,7 @@ const StepThree = ({ formData, onBack, handleSubmit, isSubmitting }) => {
                 placeholder="example@gmail.com"
                 className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
                 style={{ "--tw-ring-color": "var(--primary)" }}
-                value={formData.email}
+                value={signupInput.email}
                 readOnly
               />
             </div>
@@ -61,7 +68,7 @@ const StepThree = ({ formData, onBack, handleSubmit, isSubmitting }) => {
                 placeholder="********"
                 className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
                 style={{ "--tw-ring-color": "var(--primary)" }}
-                value={formData.password}
+                value={signupInput.password}
                 readOnly
               />
             </div>
@@ -76,7 +83,7 @@ const StepThree = ({ formData, onBack, handleSubmit, isSubmitting }) => {
                 placeholder="********"
                 className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
                 style={{ "--tw-ring-color": "var(--primary)" }}
-                value={formData.ConfirmPassword}
+                value={signupInput.confirmPassword}
                 readOnly
               />
             </div>
@@ -92,7 +99,7 @@ const StepThree = ({ formData, onBack, handleSubmit, isSubmitting }) => {
                   type="tel"
                   className="flex-1 px-4 py-2 focus:outline-none text-right"
                   placeholder="XXX XXX XXXX"
-                  value={formData.phoneNumber}
+                  value={signupInput.phoneNumber}
                   readOnly
                 />
               </div>
@@ -106,7 +113,7 @@ const StepThree = ({ formData, onBack, handleSubmit, isSubmitting }) => {
                 placeholder=""
                 className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
                 style={{ "--tw-ring-color": "var(--primary)" }}
-                value={formData.storeName}
+                value={signupInput.storeName}
                 readOnly
               />
             </div>
@@ -121,7 +128,7 @@ const StepThree = ({ formData, onBack, handleSubmit, isSubmitting }) => {
                 placeholder="الخرطوم - السودان"
                 className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
                 style={{ "--tw-ring-color": "var(--primary)" }}
-                value={formData.storeLocation}
+                value={signupInput.storeLocation}
                 readOnly
               />
             </div>
@@ -136,7 +143,7 @@ const StepThree = ({ formData, onBack, handleSubmit, isSubmitting }) => {
                 placeholder="مثال: ملابس، إلكترونيات"
                 className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
                 style={{ "--tw-ring-color": "var(--primary)" }}
-                value={formData.storeType}
+                value={signupInput.storeType}
                 readOnly
               />
             </div>
@@ -152,7 +159,7 @@ const StepThree = ({ formData, onBack, handleSubmit, isSubmitting }) => {
                 placeholder="مثال: متجر يقدم أفضل الملابس الرجالية والنسائية"
                 className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
                 style={{ "--tw-ring-color": "var(--primary)" }}
-                value={formData.storeDesc}
+                value={signupInput.storeDesc}
                 readOnly
               />
             </div>
@@ -201,6 +208,21 @@ const StepThree = ({ formData, onBack, handleSubmit, isSubmitting }) => {
           </form>
         </div>
       </div>
+      {/* Popup للنجاح */}
+      {showSuccessPopup && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="bg-green-500 text-white text-center px-8 py-4 rounded-xl shadow-xl">
+            تم إنشاء الحساب بنجاح
+          </div>
+        </div>
+      )}
+
+      {/* Toast للخطأ */}
+      {errorMessage && (
+        <div className="fixed bottom-4 right-4 z-50 bg-red-500 text-white px-4 py-2 rounded shadow-lg">
+          {errorMessage}
+        </div>
+      )}
     </div>
   );
 };

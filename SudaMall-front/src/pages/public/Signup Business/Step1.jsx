@@ -1,15 +1,18 @@
 // src/components/RegisterSteps/StepOne.jsx
 import React from "react";
-import { Link } from 'react-router-dom'; 
+import { Link } from "react-router-dom";
 import ArrowCircleRight from "../../../assets/icons/ArrowCircleRight.svg";
 
-const StepOne = ({ formData, setFormData, onNext }) => {
+const StepOne = ({ signupInput, setSignupInput, onNext, errors ,setErrors }) => {
   return (
     <div
       className="min-h-screen flex items-start justify-center pt-20"
       style={{ backgroundColor: "var(--primary)" }}
     >
-      <Link to="/auth" className="absolute top-10 left-6 text-white hover:text-gray-200">
+      <Link
+        to="/auth"
+        className="absolute top-10 left-6 text-white hover:text-gray-200"
+      >
         <img src={ArrowCircleRight} alt="رجوع" className="h-8 w-8" />
       </Link>
       <div
@@ -33,14 +36,20 @@ const StepOne = ({ formData, setFormData, onNext }) => {
               </label>
               <input
                 type="text"
-                placeholder="محمد علي"
+                placeholder=""
                 className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
                 style={{ "--tw-ring-color": "var(--primary)" }}
-                value={formData.fullName}
-                onChange={(e) =>
-                  setFormData({ ...formData, fullName: e.target.value })
-                }
+                value={signupInput.name}
+                onChange={(e) => {
+                  setSignupInput({ ...signupInput, name: e.target.value });
+                  setErrors({ ...errors, name: null });
+                }}
               />
+              {errors.name && (
+                <p className="text-sm text-red-500 mt-1 text-right">
+                  {errors.name}
+                </p>
+              )}
             </div>
 
             {/* Email */}
@@ -53,9 +62,9 @@ const StepOne = ({ formData, setFormData, onNext }) => {
                 placeholder="example@gmail.com"
                 className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
                 style={{ "--tw-ring-color": "var(--primary)" }}
-                value={formData.email}
+                value={signupInput.email}
                 onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
+                  setSignupInput({ ...signupInput, email: e.target.value })
                 }
               />
             </div>
@@ -70,11 +79,17 @@ const StepOne = ({ formData, setFormData, onNext }) => {
                 placeholder="********"
                 className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
                 style={{ "--tw-ring-color": "var(--primary)" }}
-                value={formData.password}
-                onChange={(e) =>
-                  setFormData({ ...formData, password: e.target.value })
-                }
+                value={signupInput.password}
+                onChange={(e) => {
+                  setSignupInput({ ...signupInput, password: e.target.value });
+                  setErrors({ ...errors, password: null });
+                }}
               />
+              {errors.password && (
+                <p className="text-sm text-red-500 mt-1 text-right">
+                  {errors.password}
+                </p>
+              )}
             </div>
 
             {/* Confirm Password */}
@@ -87,11 +102,20 @@ const StepOne = ({ formData, setFormData, onNext }) => {
                 placeholder="********"
                 className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
                 style={{ "--tw-ring-color": "var(--primary)" }}
-                value={formData.ConfirmPassword}
-                onChange={(e) =>
-                  setFormData({ ...formData, ConfirmPassword: e.target.value })
-                }
+                value={signupInput.confirmPassword}
+                onChange={(e) => {
+                  setSignupInput({
+                    ...signupInput,
+                    confirmPassword: e.target.value,
+                  });
+                  setErrors({ ...errors, confirmPassword: null });
+                }}
               />
+              {errors.confirmPassword && (
+                <p className="text-sm text-red-500 mt-1 text-right">
+                  {errors.confirmPassword}
+                </p>
+              )}
             </div>
 
             {/* Phone Number */}
@@ -105,11 +129,20 @@ const StepOne = ({ formData, setFormData, onNext }) => {
                   type="tel"
                   className="flex-1 px-4 py-2 focus:outline-none text-right"
                   placeholder="XXX XXX XXXX"
-                  value={formData.phoneNumber}
-                  onChange={(e) =>
-                    setFormData({ ...formData, phoneNumber: e.target.value })
-                  }
+                  value={signupInput.phoneNumber}
+                 onChange={(e) => {
+                    const onlyNums = e.target.value.replace(/\D/g, "");
+                    if (onlyNums.length <= 10) {
+                      setSignupInput({ ...signupInput, phoneNumber: onlyNums });
+                      setErrors({ ...errors, phoneNumber: null });
+                    }
+                  }}
                 />
+                {errors.phoneNumber && (
+                  <p className="text-red-500 text-sm mt-1 text-right">
+                    {errors.phoneNumber}
+                  </p>
+                )}
               </div>
             </div>
             {/* المؤشر وزر المتابعة */}
@@ -131,8 +164,9 @@ const StepOne = ({ formData, setFormData, onNext }) => {
                 className=" w-full text-white font-semibold py-2 rounded-xl transition duration-200 mt-6"
                 style={{
                   backgroundColor: "var(--primary)",
-                  hoverBackgroundColor: "var(--color-primary)", // إذا كنت تريد لون مختلف عند hover
+                  hoverBackgroundColor: "var(--color-primary)",
                 }}
+                type="button"
                 onClick={onNext}
               >
                 متابعة

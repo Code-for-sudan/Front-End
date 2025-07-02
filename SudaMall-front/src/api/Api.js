@@ -4,7 +4,7 @@ import { goToLogin } from '../hooks/navigateService';
 
 const api = axios.create({
   baseURL: "https://sudamall.ddns.net/api/v1",
-    withCredentials: true,
+    withCredentials: true, // Enable cookies to be sent with requests
 
 });
 
@@ -27,7 +27,10 @@ api.interceptors.response.use(
       originalConfig._retry = true;
 
       try {
-       const res = await api.post("/auth/token/refresh"); 
+      const refreshToken = TokenService.getRefreshToken();
+const res = await api.post("/token/refresh/", {
+  refresh: refreshToken
+});
 
         const { accessToken } = res.data;
          TokenService.setAccessToken(accessToken, true); 
@@ -37,7 +40,7 @@ api.interceptors.response.use(
         originalConfig.headers["Authorization"] = `Bearer ${accessToken}`;
         return api(originalConfig);
       } catch (_error) {
-        TokenService.clearAccessToken;
+        TokenService.clearAccessToken();
         goToLogin();
         return Promise.reject(_error);
       }

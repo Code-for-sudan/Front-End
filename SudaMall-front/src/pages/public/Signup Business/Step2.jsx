@@ -1,8 +1,7 @@
 // src/components/RegisterSteps/StepTwo.jsx
-import React from 'react';
+import React from "react";
 
-
-const StepTwo = ({ formData, setFormData, onNext, onBack }) => {
+const StepTwo = ({ signupInput, setsignupInput, onNext, onBack }) => {
   return (
     <div
       className="min-h-screen flex items-start justify-center pt-20"
@@ -32,9 +31,10 @@ const StepTwo = ({ formData, setFormData, onNext, onBack }) => {
                 placeholder=""
                 className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
                 style={{ "--tw-ring-color": "var(--primary)" }}
-        value={formData.storeName}
-        onChange={(e) => setFormData({ ...formData, storeName: e.target.value })}
-                
+                value={signupInput.storeName}
+                onChange={(e) =>
+                  setsignupInput({ ...signupInput, storeName: e.target.value })
+                }
               />
             </div>
 
@@ -48,31 +48,37 @@ const StepTwo = ({ formData, setFormData, onNext, onBack }) => {
                 placeholder="الخرطوم - السودان"
                 className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
                 style={{ "--tw-ring-color": "var(--primary)" }}
-        value={formData.storeLocation}
-        onChange={(e) => setFormData({ ...formData, storeLocation: e.target.value })}
-                
+                value={signupInput.storeLocation}
+                onChange={(e) =>
+                  setsignupInput({
+                    ...signupInput,
+                    storeLocation: e.target.value,
+                  })
+                }
               />
             </div>
 
             {/* Store Type*/}
             <div>
               <label className="block text-right font-medium mb-2">
-         نوع النشاط التجاري
+                نوع النشاط التجاري
               </label>
               <input
                 type="text"
                 placeholder="مثال: ملابس، إلكترونيات"
                 className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
                 style={{ "--tw-ring-color": "var(--primary)" }}
-        value={formData.storeType}
-        onChange={(e) => setFormData({ ...formData, storeType: e.target.value })}
+                value={signupInput.storeType}
+                onChange={(e) =>
+                  setsignupInput({ ...signupInput, storeType: e.target.value })
+                }
               />
             </div>
 
             {/* Description Store */}
             <div>
               <label className="block text-right font-medium mb-2">
-             وصف مختصر عن المتجر
+                وصف مختصر عن المتجر
               </label>
               <textarea
                 rows="3"
@@ -80,8 +86,10 @@ const StepTwo = ({ formData, setFormData, onNext, onBack }) => {
                 placeholder="مثال: متجر يقدم أفضل الملابس الرجالية والنسائية"
                 className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
                 style={{ "--tw-ring-color": "var(--primary)" }}
-        value={formData.storeDesc}
-        onChange={(e) => setFormData({ ...formData, storeDesc: e.target.value })}
+                value={signupInput.storeDesc}
+                onChange={(e) =>
+                  setsignupInput({ ...signupInput, storeDesc: e.target.value })
+                }
               />
             </div>
 
@@ -100,29 +108,29 @@ const StepTwo = ({ formData, setFormData, onNext, onBack }) => {
                   1
                 </span>
               </div>
-              <div  className="grid grid-cols-2 gap-4 w-full ">
-              <button
-                className=" w-full text-white font-semibold py-2 rounded-xl transition duration-200 mt-6"
-                style={{
-                  backgroundColor: "var(--primary)",
-                  hoverBackgroundColor: "var(--color-primary)", 
-                }}
-                onClick={onNext}
-              >
-                متابعة
-              </button>
-
-              <button             
-                              style={{
-                  backgroundColor: "var(--primary)",
-                  hoverBackgroundColor: "var(--color-primary)", 
-                }}
+              <div className="grid grid-cols-2 gap-4 w-full ">
+                <button
                   className=" w-full text-white font-semibold py-2 rounded-xl transition duration-200 mt-6"
-                onClick={onBack}>
+                  style={{
+                    backgroundColor: "var(--primary)",
+                    hoverBackgroundColor: "var(--color-primary)",
+                  }} 
+                  type="button"
+                  onClick={onNext}
+                >
+                  متابعة
+                </button>
 
-رجوع
-
-              </button>
+                <button
+                  style={{
+                    backgroundColor: "var(--primary)",
+                    hoverBackgroundColor: "var(--color-primary)",
+                  }}
+                  className=" w-full text-white font-semibold py-2 rounded-xl transition duration-200 mt-6"
+                  onClick={onBack}
+                >
+                  رجوع
+                </button>
               </div>
             </div>
           </form>
