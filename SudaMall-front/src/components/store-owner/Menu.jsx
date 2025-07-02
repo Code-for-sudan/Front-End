@@ -31,10 +31,10 @@ const Menu = () => {
 
   return (
     <div 
-      className={`fixed inset-0 bg-black/50 duration-500 w-full h-screen opacity-100 z-[250] ${
+      className={`fixed inset-0 bg-black/50 w-full h-screen opacity-100 z-[250] ${
             MenuOpened
-            ? "opacity-100 visible translate-x-0"
-            : "opacity-0 invisible translate-x-100"
+            ? "opacity-100 visible"
+            : "opacity-0 invisible"
         }`}>
        <div
           ref={ref}

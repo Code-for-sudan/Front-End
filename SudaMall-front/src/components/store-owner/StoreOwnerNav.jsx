@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { GoHome } from "react-icons/go";
 import { MdOutlineMarkUnreadChatAlt } from "react-icons/md";
 import { PiShoppingCartBold } from "react-icons/pi";
-import { BsPersonFill } from "react-icons/bs";
+import { BsPerson } from "react-icons/bs";
 import { MdAdd } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import { bg_nav } from '../../assets';
@@ -40,7 +40,7 @@ const StoreOwnerNav = () => {
       <MdOutlineMarkUnreadChatAlt className={`${active === 'chats' ? 'text-primary' : ''} w-8 h-8 cursor-pointer`} />
     </li>
     <li onClick={() => handleClick({ id: 'profile', path: '/store-owner/:userId/profile' })}>
-      <BsPersonFill className={`${active === 'profile' ? 'text-primary' : ''} w-8 h-8 cursor-pointer`} />
+      <BsPerson className={`${active === 'profile' ? 'text-primary' : ''} w-8 h-8 cursor-pointer`} />
     </li>
   </ul>
 </nav>

@@ -25,3 +25,52 @@ export const formatTime = (createdAt) => {
 
   return created.format("DD/MM/YYYY");
 };
+
+// *************************** format timestamp **************************//
+export const formatChatTimestamp = (isoString) => {
+  const date = new Date(isoString);
+  const now = new Date();
+
+  const isToday =
+    date.toDateString() === now.toDateString();
+
+  const yesterday = new Date(now);
+  yesterday.setDate(now.getDate() - 1);
+  const isYesterday =
+    date.toDateString() === yesterday.toDateString();
+
+  const msInDay = 24 * 60 * 60 * 1000;
+  const daysDiff = Math.floor((now - date) / msInDay);
+
+  const weekdaysArabic = [
+    "الأحد",
+    "الاثنين",
+    "الثلاثاء",
+    "الأربعاء",
+    "الخميس",
+    "الجمعة",
+    "السبت"
+  ];
+
+  if (isToday) {
+    let hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    const isPM = hours >= 12;
+    const suffix = isPM ? "م" : "ص";
+    hours = hours % 12 || 12;
+    return `${hours}:${minutes} ${suffix}`;
+  }
+
+  if (isYesterday) {
+    return "أمس";
+  }
+
+  if (daysDiff < 7) {
+    return weekdaysArabic[date.getDay()];
+  }
+
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+}

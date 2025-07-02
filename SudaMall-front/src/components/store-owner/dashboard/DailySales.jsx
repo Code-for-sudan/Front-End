@@ -8,13 +8,13 @@ const DailySales = ({ DailySalesData }) => {
       <DailyChart DailySalesData={DailySalesData} />
 
     {/* analysis */}
-      <div className='flex items-center justify-center gap-2 font-semibold'>
+      <div className='flex items-center justify-center gap-2 font-semibold text-xs'>
         <p className='text-gray-600'>نسبة التغيير عن امس </p>
         <span className={`${Stats.change_ratio.status === 'increased'? 'text-dark-green': 'text-red-500'}`}>
             {Stats.change_ratio.value}{Stats.change_ratio.status === 'increased' ? '+' : '-'}
         </span>
       </div>
-      <div className='flex items-center gap-8'>
+      <div className='flex items-center gap-8 text-xs'>
         <div className='flex flex-col gap-3 font-semibold'>
             <p>إجمالي المبيعات</p>
             <p>عدد الطلبات</p>

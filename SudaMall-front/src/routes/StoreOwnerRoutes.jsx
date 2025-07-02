@@ -1,6 +1,6 @@
 import { Route } from "react-router-dom";
 import { StoreOwnerLayout } from "../layouts";
-import { Chats, Profile, Store, StoreOwnerDashboard } from "../pages/store-owner";
+import { Chats, ChatArea, Profile, Store, StoreOwnerDashboard } from "../pages/store-owner";
 import { TotalSales } from "../pages/store-owner/dashboard";
 import { NewClients } from "../pages/store-owner/dashboard/clients";
 import { NewOrders } from "../pages/store-owner/dashboard/orders";
@@ -33,6 +33,7 @@ const StoreOwnerRoutes = () => [
 
     {/* --------------------------- Store owner chats routes ----------------------------------------*/}
     <Route path="/store-owner/:userId/chats" element={<Chats />} ></Route>
+    <Route path="/store-owner/:userId/chats/:contactId" element={<ChatArea />} ></Route>
 
     {/* ------------------------------ Store owner products routes ----------------------------------*/}
     <Route path="/store-owner/:userId/products" element={<Products />} ></Route>

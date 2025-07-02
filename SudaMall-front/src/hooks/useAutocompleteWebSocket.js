@@ -6,7 +6,7 @@ export const useAutocompleteWebSocket = (
   const wsRef = useRef(null);
 
   useEffect(() => {
-    const ws = new WebSocket("https://sudamall.ddns.net/ws/autocomplete/");
+    const ws = new WebSocket("wss://sudamall.ddns.net/ws/autocomplete/");
     wsRef.current = ws;
 
     ws.onopen = () => console.log("WebSocket connected");

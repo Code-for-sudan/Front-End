@@ -19,7 +19,7 @@ const TodayClients = ({ TodayClientsData }) => {
 
       {/* Table */}
       <div className="overflow-x-auto mt-4">
-        <table className="min-w-full border border-primary rounded-lg overflow-hidden text-[0.6rem] mb-10">
+        <table className="min-w-full border border-gray-400 overflow-hidden text-[0.6rem] mb-10">
           <thead>
             <tr className="bg-light-gold text-black text-right border border-primary rounded-t-lg">
               <th className="p-3">الاسم</th>
@@ -31,7 +31,7 @@ const TodayClients = ({ TodayClientsData }) => {
             {TodayClientsData.clients.map((client, index) => (
               <tr
                 key={index}
-                className="text-right border-l border-b border-gray-400 hover:bg-gray-50 transition"
+                className="text-right border-gray-400 hover:bg-gray-50 transition"
               >
                 <td className="p-3">{client.client_name}</td>
                 <td className="p-3">

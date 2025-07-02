@@ -8,7 +8,7 @@ const MainTitle = ({ title, navigatePath }) => {
         <div className="relative flex items-center justify-center w-full mt-8 mb-6">
         <MdOutlineArrowCircleRight
             onClick={() => navigate(navigatePath)}
-            className="absolute top-0 right-0 w-8 h-8 cursor-pointer"
+            className="absolute -top-1 right-0 w-8 h-8 cursor-pointer"
         />
         <h2 className="text-base font-bold">{title}</h2>
         </div>
