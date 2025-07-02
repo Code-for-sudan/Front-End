@@ -39,6 +39,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: ~/deploy.sh
 
+# ------------------------------------------------------------------------
   deploy-non-main:
     if: github.ref != 'refs/heads/main'
     runs-on: ubuntu-latest
