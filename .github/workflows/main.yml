@@ -2,12 +2,11 @@ name: SSH Test and Deploy on Push or Branch Creation
 
 on:
   push:
-    branches: ['*']  # any push to any branch
+    branches: ['main']  # any push to any branch
   workflow_dispatch:
 
 jobs:
   deploy-main:
-    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -39,36 +38,3 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: ~/deploy.sh
 
-# ------------------------------------------------------------------------
-  deploy-non-main:
-    if: github.ref != 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout current branch
-        uses: actions/checkout@v4
-        with:
-          # automatically checks out the pushed branch
-          fetch-depth: 0
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install & Build (non‑main)
-        run: |
-          cd SudaMall-front
-          npm install
-          npm run build
-
-      - name: Upload build to VPS via SCP (branch-specific)
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "SudaMall-front/dist/*"
-          # send to e.g. /var/www/html/previews/feature-xyz
-          target: "~/Front-dev/"
-    
-    
