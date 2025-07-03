@@ -1,7 +1,8 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { MdOutlineArrowCircleRight } from "react-icons/md";
 import { VscSend } from "react-icons/vsc";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { formatMessageTime } from "../../../utils/utilities.js";
 import { ChatHistory } from "../../../data/ChatHistory.js"; // Temporary
 
 const ChatArea = () => {
@@ -62,6 +63,8 @@ const ChatArea = () => {
                 {!showAvatar && <div className="w-6" />} {/* Keeps alignment */}
                 <div className="p-2 text-xs bg-light-gold rounded-xl max-w-[220px]">
                     <p>{msg.message}</p>
+                    <p className="text-[10px] text-gray-500 text-end">{formatMessageTime(msg.timestamp)}</p>
+
                 </div>
                 </div>
             ) : (
@@ -77,7 +80,8 @@ const ChatArea = () => {
                     <div className="w-6" />
                 )}
                 <div className="p-2 text-xs bg-light-gray rounded-xl max-w-[220px]">
-                    <p>{msg.message}</p>
+                    <p className="mb-1">{msg.message}</p>
+                    <p className="text-[10px] text-gray-500 text-end">{formatMessageTime(msg.timestamp)}</p>
                 </div>
                 </div>
             );

@@ -74,3 +74,16 @@ export const formatChatTimestamp = (isoString) => {
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 }
+
+// format message time
+export const formatMessageTime = (timestamp) => {
+  const date = new Date(timestamp);
+  let hours = date.getHours();
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const isAm = hours < 12;
+  const suffix = isAm ? "ص" : "م";
+
+  hours = hours % 12 || 12;
+
+  return `${hours}:${minutes} ${suffix}`;
+};

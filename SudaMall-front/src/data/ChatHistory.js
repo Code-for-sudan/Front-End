@@ -59,7 +59,7 @@ export const ChatHistory = {
     "sender_id": 2,
     "receiver_id": 1,
     "message": "المنتج هو الهاتف الذكي موديل X100،",
-    "timestamp": "2025-06-07T10:03:15Z",
+    "timestamp": "2025-06-07T06:03:15Z",
     "is_received": true,
     "is_read": false
   },
