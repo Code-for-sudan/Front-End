@@ -5,12 +5,16 @@ export const ChatHistory = {
     "owner": {
       "id": 1,
       "name": "مالك المتجر",
-      "image_url": user1
+      "image_url": user1,
+      "online": true,
+      "last_seen": "2025-06-07T10:00:00Z",
     },
     "customer": {
       "id": 2,
       "name": "أحمد يوسف",
-      "image_url": user3
+      "image_url": user3,
+      "online": true,
+      "last_seen": "2025-06-07T10:00:00Z",
     }
   },
  "messages": [
@@ -54,7 +58,16 @@ export const ChatHistory = {
     "message_id": 1004,
     "sender_id": 2,
     "receiver_id": 1,
-    "message": "المنتج هو الهاتف الذكي موديل X100، هل هو متوفر حالياً؟",
+    "message": "المنتج هو الهاتف الذكي موديل X100،",
+    "timestamp": "2025-06-07T10:03:15Z",
+    "is_received": true,
+    "is_read": false
+  },
+  {
+    "message_id": 1004,
+    "sender_id": 2,
+    "receiver_id": 1,
+    "message": " هل هو متوفر حالياً؟",
     "timestamp": "2025-06-07T10:03:15Z",
     "is_received": true,
     "is_read": false
