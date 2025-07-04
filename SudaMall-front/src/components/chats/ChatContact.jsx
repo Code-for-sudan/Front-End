@@ -9,7 +9,10 @@ const ChatContact = ({ contact }) => {
       onClick={() => navigate(`/store-owner/:userId/chats/${contact.contact_id}`)}
       className='flex justify-between border-b border-gray-300 px-6 py-4 cursor-pointer'>
       <div className='flex items-center gap-3'>
-        <img src={contact.contact_img} alt="profile_pic" className='size-16 rounded-full' />
+        <div className="relative">
+          <img src={contact.contact_img} alt="profile_pic" className='size-16 rounded-full object-cover' />
+          {contact.online && <div className='absolute bottom-0 left-2 size-3 bg-dark-green rounded-full border-2 border-white' />}
+        </div>
         <div className='flex flex-col gap-2'>
             <h4 className='text-base font-semibold'>{contact.contact_name}</h4>
             <p className="text-xs text-gray-500 truncate max-w-[180px]">{contact.last_message}</p>

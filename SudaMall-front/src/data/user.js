@@ -15,5 +15,7 @@ export const userData = {
         store_location: "الخرطوم، شارع الحرية",
         activity_type: "أحذية",
         store_license: "pic",
+        products: 54,
+        orders: 129,
     }
 }

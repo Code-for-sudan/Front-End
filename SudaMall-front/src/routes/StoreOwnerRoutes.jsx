@@ -29,7 +29,7 @@ const StoreOwnerRoutes = () => [
     <Route path="/store-owner/:userId/dashboard/total-sales" element={<TotalSales />} />
 
     {/* ------------------------------ Store owner store routes ------------------------------------ */}
-    <Route path="/store-owner/:userId/store" element={<Store />} ></Route>
+    <Route path="/store-owner/:userId/my-store" element={<Store />} ></Route>
 
     {/* --------------------------- Store owner chats routes ----------------------------------------*/}
     <Route path="/store-owner/:userId/chats" element={<Chats />} ></Route>
