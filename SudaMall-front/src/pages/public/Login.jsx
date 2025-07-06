@@ -34,9 +34,14 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     login(loginInput, {
-      onSuccess: () => {
-         navigate("/dashboard"); 
-      },
+      onSuccess: (data) => {
+         const userId = data?.user?.id || data?.user?._id;
+          if (userId) {
+        navigate(`/store-owner/${userId}/dashboard`); // Redirect to the dashboard after successful login
+      } else {
+        console.error("User ID not found in login response");
+      }
+    },
     });
   };
 
@@ -45,7 +50,7 @@ const Login = () => {
       className="min-h-screen flex items-start justify-center pt-20"
       style={{ backgroundColor: "var(--primary)" }}
     >
-      <Link to="/your-target-route" className="absolute top-10 left-6 text-white hover:text-gray-200">
+      <Link to="/auth" className="absolute top-10 left-6 text-white hover:text-gray-200">
         <img src={ArrowCircleRight} alt="رجوع" className="h-8 w-8" />
       </Link>
       <div
