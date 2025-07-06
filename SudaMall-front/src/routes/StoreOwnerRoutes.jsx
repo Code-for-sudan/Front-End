@@ -1,6 +1,10 @@
 import { Route } from "react-router-dom";
 import { StoreOwnerLayout } from "../layouts";
-import { AddProduct, Chats, Profile, Store, StoreOwnerDashboard } from "../pages/store-owner";
+import { Chats, ChatArea, Profile, Store, StoreOwnerDashboard } from "../pages/store-owner";
+import { TotalSales } from "../pages/store-owner/dashboard";
+import { NewClients } from "../pages/store-owner/dashboard/clients";
+import { NewOrders } from "../pages/store-owner/dashboard/orders";
+import { Products } from "../pages/store-owner/products";
 
 
 /**
@@ -16,10 +20,25 @@ import { AddProduct, Chats, Profile, Store, StoreOwnerDashboard } from "../pages
 
 const StoreOwnerRoutes = () => [
   <Route key="store-owner" element={<StoreOwnerLayout />}>
-    <Route path="/store-owner/:userId/dashboard" element={<StoreOwnerDashboard />} ></Route>
-    <Route path="/store-owner/:userId/store" element={<Store />} ></Route>
+
+    {/* ----------------------- Store owner dashboard routes and subroutes ------------------------ */}
+    <Route path="/store-owner/:userId/dashboard" element={<StoreOwnerDashboard />} />
+   {/* dashboard sub pages layout */}
+    <Route path="/store-owner/:userId/dashboard/new-clients" element={<NewClients />} />
+    <Route path="/store-owner/:userId/dashboard/new-orders" element={<NewOrders />} />
+    <Route path="/store-owner/:userId/dashboard/total-sales" element={<TotalSales />} />
+
+    {/* ------------------------------ Store owner store routes ------------------------------------ */}
+    <Route path="/store-owner/:userId/my-store" element={<Store />} ></Route>
+
+    {/* --------------------------- Store owner chats routes ----------------------------------------*/}
     <Route path="/store-owner/:userId/chats" element={<Chats />} ></Route>
-    <Route path="/store-owner/:userId/add-product" element={<AddProduct />} ></Route>
+    <Route path="/store-owner/:userId/chats/:contactId" element={<ChatArea />} ></Route>
+
+    {/* ------------------------------ Store owner products routes ----------------------------------*/}
+    <Route path="/store-owner/:userId/products" element={<Products />} ></Route>
+
+    {/* ------------------------------ Store owner profile routes ------------------------------------*/}
     <Route path="/store-owner/:userId/profile" element={<Profile />} ></Route>
   </Route>
 ];

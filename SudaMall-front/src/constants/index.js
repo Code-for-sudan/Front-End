@@ -27,7 +27,7 @@ export const welcomeScreens = [
 
   export const Store_Owner_Sidebar = [
     { label: "إدارة الطلبات", icon: ShoppingCart, path: "/store-owner/:userId/dashboard" },
-    { label: "المنتجات", icon: ShoppingBag, path: "/store-owner/:userId/dashboard" },
+    { label: "المنتجات", icon: ShoppingBag, path: "/store-owner/:userId/products" },
     { label: "العملاء", icon: Agents, path: "/store-owner/:userId/dashboard" },
     { label: "الفواتير", icon: Files, path: "/store-owner/:userId/dashboard" },
     { label: "الدفع الإلكتروني", icon: CurrencyCircleDollar, path: "/store-owner/:userId/dashboard" },
@@ -43,24 +43,28 @@ export const welcomeScreens = [
     label: 'العملاء الجدد',
     value: 45,
     icon: UserCirclePlus,
-    bgClass: 'gold-gradient'
+    bgClass: 'gold-gradient',
+    path: '/store-owner/:userId/dashboard/new-clients'
   },
   {
     label: 'الطلبات الجديدة',
     value: 30,
     icon: Cart,
-    bgClass: 'violet-gradient'
+    bgClass: 'violet-gradient',
+    path: '/store-owner/:userId/dashboard/new-orders'
   },
   {
     label: 'المبيعات اليوم',
     value: 10000,
     icon: CurrencyDollar,
-    bgClass: 'dark-green-gradient'
+    bgClass: 'dark-green-gradient',
+    path: '/store-owner/:userId/dashboard/total-sales'
   },
   {
     label: 'الطلبات المعلقة',
     value: 30,
     icon: Cart,
-    bgClass: 'sky-blue-gradient'
+    bgClass: 'sky-blue-gradient',
+    path: '/store-owner/:userId/dashboard/paused-orders'
   }
 ];

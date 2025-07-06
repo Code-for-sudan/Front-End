@@ -1,9 +1,15 @@
 export const SalesAndCosts = {
   "currency": "SDG",
-  "week_range": {
-    "start_date": "2025-06-07",
-    "end_date": "2025-06-13"
-  },
+  "over_all_changes": 
+    {
+      "change_ratio": {  // from yesterday
+        "value": "12%",
+        "status": "increased"  // decreased or increased
+    },
+      "total_orders": 120,
+      "total_sales": 8400,
+      "avg_orders_cost": 6620  //per week
+    },
   "weekly_summary": [
     {
       "day": "السبت",

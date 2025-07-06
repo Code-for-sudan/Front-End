@@ -31,7 +31,7 @@
   }
   /* main container */
   .container {
-    @apply px-6 w-full mx-auto
+    @apply px-4 w-full mx-auto
   }
 
   /* Blur-Effect */

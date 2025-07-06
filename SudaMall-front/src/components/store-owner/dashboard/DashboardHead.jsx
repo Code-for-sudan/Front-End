@@ -19,8 +19,9 @@ const DashboardHead = () => {
         <img src={userData.profile_pic} alt="profile" className='w-12 h-12 rounded-full' />
       </div>
       <div className='flex flex-row-reverse items-center gap-4'>
-        <button className='cursor-pointer'>
+        <button className='relative cursor-pointer'>
             <IoNotificationsOutline className='w-6 h-6' />
+            <div className='absolute top-0 right-1 border border-white w-2 h-2 bg-red-600 rounded-full' />
         </button>
         <button 
             onClick={OpenMenu}

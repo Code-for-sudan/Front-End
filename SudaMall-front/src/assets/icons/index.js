@@ -9,7 +9,8 @@ import ShoppingCart from "./menu_icons/ShoppingCart.png";
 import Store from "./menu_icons/Store.svg";
 import UserCirclePlus from "./UserCirclePlus.png";
 import CurrencyDollar from "./CurrencyDollar.png";
-import Cart from "./Cart.png"
+import Cart from "./Cart.png";
+import success from "./success.svg";
 
 export {
     Admin,
@@ -24,4 +25,5 @@ export {
     UserCirclePlus,
     CurrencyDollar,
     Cart,
+    success,
 }
