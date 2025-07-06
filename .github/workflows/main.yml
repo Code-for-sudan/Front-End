@@ -1,0 +1,40 @@
+name: SSH Test and Deploy on Push or Branch Creation
+
+on:
+  push:
+    branches: ['main']  # any push to any branch
+  workflow_dispatch:
+
+jobs:
+  deploy-main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # or 20 or whatever version your project uses
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: |
+          cd SudaMall-front
+          npm install
+
+      # Step 4: Build the project
+      - name: Build React App
+        run: |
+          cd SudaMall-front
+          npm run build
+
+      - name: Trigger VPS Deploy Script
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: ~/deploy.sh
+

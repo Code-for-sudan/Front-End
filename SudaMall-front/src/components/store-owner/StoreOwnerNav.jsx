@@ -1,0 +1,88 @@
+import React, { useEffect, useState } from 'react';
+import { GoHome } from "react-icons/go";
+import { MdOutlineMarkUnreadChatAlt } from "react-icons/md";
+import { PiShoppingCartBold } from "react-icons/pi";
+import { BsPerson } from "react-icons/bs";
+import { MdAdd } from "react-icons/md";
+import { useNavigate, useLocation } from 'react-router-dom';
+import { bg_nav } from '../../assets';
+
+const StoreOwnerNav = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [active, setActive] = useState('');
+
+  // Extracts the current route segment and sets the active tab
+  useEffect(() => {
+    const path = location.pathname;
+
+    if (path.includes('/dashboard')) {
+      setActive('home');
+    } else if (path.includes('/my-store')) {
+      setActive('mystore');
+    } else if (path.includes('/add-product')) {
+      setActive('add');
+    } else if (path.includes('/chats')) {
+      setActive('chats');
+    } else if (path.includes('/profile')) {
+      setActive('profile');
+    }
+  }, [location]);
+
+  const handleClick = ({ id, path }) => {
+    setActive(id);
+    navigate(path);
+  };
+
+  return (
+    <nav className="fixed bottom-0 w-full z-20">
+      {/* Background curve */}
+      <img src={bg_nav} alt="curve" className='absolute top-0 w-full h-full object-cover' />
+
+      <ul className="relative w-full flex items-center justify-between p-4 text-xs">
+
+        {/* home page button */}
+        <li 
+          className={`flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ease-in-out ${active === 'home' ? 'text-primary' : ''}`}
+          onClick={() => handleClick({ id: 'home', path: '/store-owner/:userId/dashboard' })}
+          >
+          <GoHome className="size-6" />
+          <p>الرئيسية</p>
+        </li>
+
+          {/* store page button */}
+        <li 
+          className={`flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ease-in-out ${active === 'mystore' ? 'text-primary' : ''}`}
+          onClick={() => handleClick({ id: 'mystore', path: '/store-owner/:userId/my-store' })}>
+          <PiShoppingCartBold className="size-6" />
+          <p>المنتجات</p>
+        </li>
+
+        {/* Floating Add Button */}
+        <li onClick={() => handleClick({ id: 'add', path: '/store-owner/:userId/dashboard' })} className="flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out">
+          <div className="absolute -top-6 p-2 text-white bg-dark-blue shadow-lg rounded-full z-50">
+            <MdAdd className="size-8" />
+          </div>
+        </li>
+
+        {/* navigate to chat page button */}
+        <li 
+          className={`flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ease-in-out ${active === 'chats' ? 'text-primary' : ''}`}
+          onClick={() => handleClick({ id: 'chats', path: '/store-owner/:userId/chats' })}>
+          <MdOutlineMarkUnreadChatAlt className="size-6" />
+          <p>الدردشة</p>
+        </li>
+
+        {/* navigate to profile page button */}
+        <li 
+          className={`flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ease-in-out ${active === 'profile' ? 'text-primary' : ''}`}
+          onClick={() => handleClick({ id: 'profile', path: '/store-owner/:userId/profile' })}>
+          <BsPerson className="size-6" />
+          <p>صفحتي</p>
+        </li>
+      </ul>
+    </nav>
+  );
+};
+
+export default StoreOwnerNav;

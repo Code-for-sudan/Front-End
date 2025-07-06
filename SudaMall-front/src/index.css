@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap');
 @import "tailwindcss";
 
 /* color variables */
@@ -6,12 +7,54 @@
     --dark-bg: #121212;
     --dark-blue: #14213d;
     --light-gray: #e5e5e5;
+    --violet: rgba(151, 71, 255, 1);
+    --sky-blue: rgba(40, 190, 244, 1);
+    --dark-green: rgba(62, 180, 79, 1);
+    --light-gold: rgba(246, 219, 175, 1);
   }
 
   /* define theme colors */
   @theme inline {
     --color-primary: var(--primary);
+    --color-light-gold: var(--light-gold);
+    --color-violet: var(--violet);
+    --color-sky-blue: var(--sky-blue);
+    --color-dark-green: var(--dark-green);
     --color-dark-bg: var(--dark-bg);
     --color-dark-blue: var(--dark-blue);
     --color-light-gray: var(--light-gray);
+  }
+
+  /* define display font alexandria */
+  @theme {
+    --font-sans: "alexandria", "sans-serif";
+  }
+  /* main container */
+  .container {
+    @apply px-4 w-full mx-auto
+  }
+
+  /* Blur-Effect */
+  .blur-effect-theme {
+    @apply bg-white/50 bg-clip-padding backdrop-filter backdrop-blur opacity-100 z-50 shadow-sm transition-all duration-300;
+    --tw-shadow-color: #f1f5f9;
+    box-shadow: 0 1px 2px 0 var(--tw-shadow-color);
+  }
+
+  /* gold gradient */
+  .gold-gradient {
+    @apply bg-gradient-to-bl from-primary/90 via-primary to-transparent p-4 rounded-xl w-full
+  }
+
+  /* sky blue gradient */
+  .sky-blue-gradient {
+    @apply bg-gradient-to-bl from-sky-blue/90 via-sky-blue to-transparent p-4 rounded-xl w-full
+  }
+  /* violet gradient */
+  .violet-gradient {
+    @apply bg-gradient-to-bl from-violet/90 via-violet to-transparent p-4 rounded-xl w-full
+  }
+  /* dark-green gradient */
+  .dark-green-gradient {
+    @apply bg-gradient-to-bl from-dark-green/90 via-dark-green to-transparent p-4 rounded-xl w-full
   }
