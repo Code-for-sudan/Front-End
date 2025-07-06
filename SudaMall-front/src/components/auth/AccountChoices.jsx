@@ -8,12 +8,12 @@ const AccountChoices = ({ onClickBack }) => {
 
   // go to customer sign up
   const handleCustomer = () => {
-    navigate("/auth/signup");
+    navigate("/auth/signup-user");
   }
 
   // go to store owner sign up
   const handleStoreOwner = () => {
-    navigate("/auth/signup");
+    navigate("/auth/signup-business");
   }
   return (
     <div className="h-screen justify-between bg-white relative overflow-x-hidden">
