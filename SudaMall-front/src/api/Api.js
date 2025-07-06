@@ -27,17 +27,14 @@ api.interceptors.response.use(
       originalConfig._retry = true;
 
       try {
-      const refreshToken = TokenService.getRefreshToken();
-const res = await api.post("/token/refresh/", {
-  refresh: refreshToken
-});
+        const res = await api.post("/token/refresh/");  
 
-        const { accessToken } = res.data;
-         TokenService.setAccessToken(accessToken, true); 
+        const { access } = res.data;
+         TokenService.setAccessToken(access, true); 
 
         // Update header and retry original request
-        api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-        originalConfig.headers["Authorization"] = `Bearer ${accessToken}`;
+        api.defaults.headers.common["Authorization"] = `Bearer ${access}`;
+        originalConfig.headers["Authorization"] = `Bearer ${access}`;
         return api(originalConfig);
       } catch (_error) {
         TokenService.clearAccessToken();
