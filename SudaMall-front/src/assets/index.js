@@ -3,11 +3,13 @@ import welcome2 from "./welcome2.png"
 import welcome3 from "./welcome3.png"
 import people from "./people.png"
 import bg_nav from "./bg-nav.svg"
+import upload from "./upload.png"
 
 export {
     welcome1,
     welcome2,
     welcome3,
     people,
-    bg_nav
+    bg_nav,
+    upload,
 }
