@@ -17,20 +17,16 @@ import ResetPassword from "../pages/public/ResetPassword";
  * - Wraps all public pages inside the PublicLayout.
  * - Uses nested routing to render child routes via <Outlet /> in the PublicLayout.
  */
-const PublicRoutes = () => {
-  return (
-    <Routes>
-      <Route element={<PublicLayout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/auth" element={<Auth />} />
-        <Route path="/auth/login" element={<Login />} />
-        <Route path="/auth/signup-user" element={<SignupUser />} />
-        <Route path="/auth/signup-business" element={<SignupBusiness />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
-  );
-};
+const PublicRoutes = () => [
+  <Route key="public" element={<PublicLayout />}>
+    <Route path="/" element={<Home />} />
+    <Route path="/auth" element={<Auth />} />
+    <Route path="/auth/login" element={<Login />} />
+    <Route path="/auth/signup-user" element={<SignupUser />} />
+    <Route path="/auth/signup-business" element={<SignupBusiness />} />
+    <Route path="/reset-password" element={<ResetPassword />} />
+    <Route path="*" element={<NotFound />} />
+  </Route>
+];
 
 export default PublicRoutes;
