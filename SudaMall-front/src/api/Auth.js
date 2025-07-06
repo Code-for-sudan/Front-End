@@ -15,7 +15,7 @@ export const registerBusiness = async (formData2) => {
 
 export const login =  async ({ email, password, rememberMe }) => {
       const response = await api.post("/auth/login/", { email, password });
-      const { accessToken} = response.data;
-      TokenService.setAccessToken(accessToken, rememberMe);
+      const { access} = response.data;
+      TokenService.setAccessToken(access, rememberMe);
       return response.data;
 };
