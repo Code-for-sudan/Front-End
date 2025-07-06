@@ -100,7 +100,7 @@ const SignupForm = () => {
       dir="rtl"
     >
       <Link
-        to="/signup-user"
+        to="/auth"
         className="absolute top-10 left-6 text-white hover:text-gray-200"
       >
         <img src={ArrowCircleRight} alt="رجوع" className="h-8 w-8" />
@@ -249,7 +249,7 @@ const SignupForm = () => {
             <p className="text-center text-sm mt-4">
               هل لديك حساب بالفعل؟
               <Link
-                to="/login"
+                to="/auth/login"
                 className="font-semibold ml-1 mr-2.5"
                 style={{ color: "var(--primary)" }}
               >
