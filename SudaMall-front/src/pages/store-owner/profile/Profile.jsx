@@ -2,7 +2,7 @@ import { userData } from "../../../data/user.js"; // this will be replace by the
 const Profile = () => {
   const storeInfo = userData.store_info;
   return (
-    <div className="container mt-8 flex flex-col gap-6">
+    <div className="container mt-8 flex flex-col gap-4">
       <div className="flex items-center gap-4 p-2.5 border-2 border-light-gray rounded-md">
         <img src={userData.profile_pic} alt="profile-pic" className="size-18 rounded-full object-cover" />
         <div className="flex flex-col gap-1 text-xs text-gray-500">
@@ -12,7 +12,7 @@ const Profile = () => {
           <p>{userData.location}</p>
         </div>
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-2">
         <div className="flex flex-col justify-center items-center gap-1 text-xs w-40 py-2 border border-primary rounded-md">
           <p>{storeInfo.products}</p>
           <p className="text-gray-500">المنتجات</p>
