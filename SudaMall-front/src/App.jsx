@@ -1,22 +1,19 @@
-import React from 'react'
-
-import './index.css'
-import {BrowserRouter as Router} from 'react-router-dom';
-import PublicRoutes from './routes/PublicRoutes';
-
+import React, { useEffect } from 'react';
+import './index.css';
+import MainRoutes from './routes/MainRoutes';
+import { useNavigate } from 'react-router-dom';
+import { setNavigate } from '../src/hooks/navigateService';
 
 const App = () => {
-    const navigate = useNavigate();
-      useEffect(() => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
     setNavigate(navigate);
   }, [navigate]);
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Router>
-        <PublicRoutes />
-      </Router>
-    </QueryClientProvider>
-  )
-}
 
-export default App
+  return <MainRoutes />;
+};
+
+export default App;
+// This file serves as the main entry point for the React application.
+// It initializes the application, sets up navigation, and renders the main routes. 
