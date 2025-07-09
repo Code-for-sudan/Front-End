@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   openMenu: false,
+  openMap: false,
 };
 
 const AppStatsSlice = createSlice({
@@ -20,11 +21,20 @@ const AppStatsSlice = createSlice({
       state.openMenu = !state.openMenu;
     },
 
+    // open and close google map
+    openMap: (state) => {
+      state.openMap = true;
+    },
+    closeMap: (state) => {
+      state.openMap = false;
+    }
+
   },
 });
 
 export const SelectOpenMenu = (state) => state.appStats.openMenu;
+export const SelectMap = (state) => state.appStats.openMap;
 
-export const { openMenu, closeMenu, toggleMenu } = AppStatsSlice.actions;
+export const { openMenu, closeMenu, toggleMenu, openMap, closeMap } = AppStatsSlice.actions;
 
 export default AppStatsSlice.reducer;

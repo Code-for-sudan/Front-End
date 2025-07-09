@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { userData } from "../../../data/user.js";
+import { useSelector } from 'react-redux';
+import { userData } from "../../../data/user.js"; // this will be replaced with the database data
 
-import { ProfileHeader, ProfileStats, EditableField, LocationField, FileUploader } from "../../../components/store-owner/profile";
+import { ProfileHeader, ProfileStats, EditableField, LocationField, FileUploader, Map } from "../../../components/store-owner/profile";
 import { useFileUpload } from "../../../hooks/useFileUpload.js";
+import { SelectMap } from "../../../app/AppStats"
 
 const Profile = () => {
   const storeInfo = userData.store_info;
+  const mapStat = useSelector(SelectMap);
 
   const [edit, setEdit] = useState({
     store_name: false,
@@ -39,6 +42,15 @@ const Profile = () => {
 
   return (
     <div className="container mt-8 flex flex-col gap-4 text-gray-700">
+   {mapStat && <Map 
+      value={formData.store_location}
+      onChange={(value) => handleChange("store_location", value)}
+      onSave={(locationData) => {
+        handleChange("store_location", locationData.areaName);
+      }}
+    />}
+      {/* show google map */}
+
       {/* store owner details */}
       <ProfileHeader user={userData} />
 
@@ -48,7 +60,7 @@ const Profile = () => {
       {/* edit store information */}
       <h4 className="text-base font-medium mt-2">بيانات المتجر</h4>
 
-      <form className="flex flex-col gap-2 mb-32">
+      <form className="flex flex-col gap-4 mb-32">
         <EditableField
           label="اسم المتجر"
           value={formData.store_name}
@@ -74,7 +86,9 @@ const Profile = () => {
         />
 
         {/* edit store location field */}
-        <LocationField value={formData.store_location} />
+        <LocationField 
+          value={formData.store_location}
+           />
 
         {/* upload store license section */}
         <FileUploader
@@ -85,6 +99,11 @@ const Profile = () => {
           handleFileChange={handleFileChange}
           handleDrop={handleDrop}
         />
+        <button
+          type="submit"
+          className="px-4 py-2 bg-primary text-white rounded-md text-xs cursor-pointer">
+          حفظ التعديلات
+        </button>
       </form>
     </div>
   );

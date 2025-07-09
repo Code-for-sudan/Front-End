@@ -34,7 +34,7 @@ const FileUploader = ({ inputRef, handleFileChange, handleDrop, dragActive, setD
       {selectedFile ? (
         <p className="text-xs text-green-600">تم اختيار الملف: {selectedFile.name}</p>
       ) : (
-        <p className="text-[8px] text-gray-500">المستندات المسموح بها: pdf, png</p>
+        <p className="text-[10px] text-gray-500">المستندات المسموح بها: pdf, png</p>
       )}
     </div>
   </div>
