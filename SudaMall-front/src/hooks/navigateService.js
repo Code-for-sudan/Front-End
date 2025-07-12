@@ -6,6 +6,6 @@ export const setNavigate = (navigate) => {
 
 export const goToLogin = () => {
   if (navigateFunction) {
-    navigateFunction('/login');
+    navigateFunction('/auth/login');
   }
 };

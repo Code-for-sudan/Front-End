@@ -9,7 +9,7 @@ export const signupUser = async (formData) => {
 };
 
 export const registerBusiness = async (formData2) => {
-  const response = await axios.post('https://sudamall.ddns.net/api/v1//accounts/signup/business/', formData2);
+  const response = await axios.post('https://sudamall.ddns.net/api/v1/accounts/signup/business/', formData2);
   return response.data;
 };
 
