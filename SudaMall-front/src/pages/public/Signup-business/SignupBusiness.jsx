@@ -14,6 +14,7 @@ const SignupBusiness = () => {
   const [signupInput, setSignupInput] = useState({
     name: "",
     email: "",
+    gender:"M",
     password: "",
     confirmPassword: "",
     phoneNumber: "",
@@ -45,7 +46,7 @@ const SignupBusiness = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // تقسيم الاسم الكامل إلى first_name و last_name
+ // Split the full name into first_name and last_name
     const nameParts = signupInput.name.trim().split(/\s+/);
     if (nameParts.length !== 4) {
       setErrors((prev) => ({ ...prev, name: "يرجى إدخال الاسم رباعي " }));
@@ -93,12 +94,13 @@ const SignupBusiness = () => {
       email: signupInput.email,
       first_name,
       last_name,
+      gender: signupInput.gender,
       password: signupInput.password,
       phone_number: formattedPhone,
       store_name: signupInput.storeName,
       store_location: signupInput.storeLocation,
       store_type: signupInput.storeType,
-      store_desc: signupInput.storeDesc,
+      description: signupInput.storeDesc,
     };
 
     mutation.mutate(formData2);

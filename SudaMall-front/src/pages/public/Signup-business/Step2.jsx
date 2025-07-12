@@ -1,7 +1,7 @@
 // src/components/RegisterSteps/StepTwo.jsx
 import React from "react";
 
-const StepTwo = ({ signupInput, setsignupInput, onNext, onBack }) => {
+const StepTwo = ({ signupInput, setSignupInput, onNext, onBack }) => {
   return (
     <div
       className="min-h-screen flex items-start justify-center pt-20"
@@ -33,7 +33,7 @@ const StepTwo = ({ signupInput, setsignupInput, onNext, onBack }) => {
                 style={{ "--tw-ring-color": "var(--primary)" }}
                 value={signupInput.storeName}
                 onChange={(e) =>
-                  setsignupInput({ ...signupInput, storeName: e.target.value })
+                  setSignupInput({ ...signupInput, storeName: e.target.value })
                 }
               />
             </div>
@@ -50,7 +50,7 @@ const StepTwo = ({ signupInput, setsignupInput, onNext, onBack }) => {
                 style={{ "--tw-ring-color": "var(--primary)" }}
                 value={signupInput.storeLocation}
                 onChange={(e) =>
-                  setsignupInput({
+                  setSignupInput({
                     ...signupInput,
                     storeLocation: e.target.value,
                   })
@@ -70,7 +70,7 @@ const StepTwo = ({ signupInput, setsignupInput, onNext, onBack }) => {
                 style={{ "--tw-ring-color": "var(--primary)" }}
                 value={signupInput.storeType}
                 onChange={(e) =>
-                  setsignupInput({ ...signupInput, storeType: e.target.value })
+                  setSignupInput({ ...signupInput, storeType: e.target.value })
                 }
               />
             </div>
@@ -88,7 +88,7 @@ const StepTwo = ({ signupInput, setsignupInput, onNext, onBack }) => {
                 style={{ "--tw-ring-color": "var(--primary)" }}
                 value={signupInput.storeDesc}
                 onChange={(e) =>
-                  setsignupInput({ ...signupInput, storeDesc: e.target.value })
+                  setSignupInput({ ...signupInput, storeDesc: e.target.value })
                 }
               />
             </div>

@@ -37,7 +37,7 @@ const SignupForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // تقسيم الاسم الكامل إلى first_name و last_name
+// Split the full name into first_name and last_name
     const nameParts = signupInput.name.trim().split(/\s+/);
     if (nameParts.length !== 4) {
       setErrors((prev) => ({ ...prev, name: "يرجى إدخال الاسم رباعي " }));

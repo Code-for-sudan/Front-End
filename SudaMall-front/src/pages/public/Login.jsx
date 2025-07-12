@@ -128,13 +128,13 @@ const Login = () => {
                     تذكرني
                   </label>
                 </div>
-                <a
-                  href="#"
+                <Link
+                  to="/auth/reset-password"
                   className="text-sm"
                   style={{ color: "var(--primary)" }}
                 >
                   هل نسيت كلمة المرور؟
-                </a>
+                </Link>
               </div>
             </div>
             {isError && <p className="text-red-500">{error.message}</p>}
@@ -189,13 +189,11 @@ const Login = () => {
           {/* Signup */}
           <p className="text-center text-sm mt-8">
             ليس لديك حساب؟
-            <a
-              href="/signup-user"
+            <Link
+              to="/auth"
               className="font-semibold ml-1 mr-2.5"
               style={{ color: "var(--primary)" }}
-            >
-              إنشاء حساب جديد
-            </a>
+            >انشاء حساب جديد</Link>
           </p>
         </div>
       </div>

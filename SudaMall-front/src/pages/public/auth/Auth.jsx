@@ -1,4 +1,4 @@
-import react, { useState } from "react"
+import  { useState } from "react"
 import { AccountChoices, AuthChoices } from "../../../components"
 
 const Auth = () => {
