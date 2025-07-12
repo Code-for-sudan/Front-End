@@ -11,7 +11,12 @@ import UserCirclePlus from "./UserCirclePlus.png";
 import CurrencyDollar from "./CurrencyDollar.png";
 import Cart from "./Cart.png";
 import success from "./success.svg";
-
+import Calendar from "./order_icons/Calendar.svg";
+import MapPin from "./order_icons/MapPin.svg";
+import CreditCard from "./order_icons/CreditCard.svg";
+import Phone from "./order_icons/Phone.svg";
+import User from "./order_icons/User.svg";
+import VectorSend from "./order_icons/VectorSend.svg"
 export {
     Admin,
     Adds,
@@ -26,4 +31,10 @@ export {
     CurrencyDollar,
     Cart,
     success,
+    Calendar,
+    MapPin,
+    CreditCard,
+    Phone,
+    User,
+    VectorSend
 }
