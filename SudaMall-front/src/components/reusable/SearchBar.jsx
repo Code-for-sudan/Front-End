@@ -17,7 +17,7 @@ const SearchBar = () => {
     if (value.trim().length > 1) {
       sendQuery({
         query: value,
-        size: 5,
+        size: 10,
         type: "product",
       });
     }

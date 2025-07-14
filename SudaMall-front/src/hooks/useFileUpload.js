@@ -7,7 +7,7 @@ export const useFileUpload = (allowedTypes = ["application/pdf", "image/png"]) =
 
   const validateFile = (file) => {
     if (!file || !allowedTypes.includes(file.type)) {
-      alert("يرجى اختيار ملف بصيغة PDF أو PNG فقط");
+      alert("يرجى اختيار ملف بصيغة مدعومة فقط");
       return false;
     }
     return true;
@@ -24,6 +24,7 @@ export const useFileUpload = (allowedTypes = ["application/pdf", "image/png"]) =
 
   return {
     selectedFile,
+    setSelectedFile,
     dragActive,
     setDragActive,
     inputRef,

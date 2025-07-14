@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   openMenu: false,
   openMap: false,
+  addProduct: false,
 };
 
 const AppStatsSlice = createSlice({
@@ -27,14 +28,23 @@ const AppStatsSlice = createSlice({
     },
     closeMap: (state) => {
       state.openMap = false;
-    }
+    },
 
+    // open modal for adding product
+    openAddProduct: (state) => {
+      state.addProduct = true;
+    },
+    closeAddProduct: (state) => {
+      state.addProduct = false;
+    },
   },
 });
 
 export const SelectOpenMenu = (state) => state.appStats.openMenu;
 export const SelectMap = (state) => state.appStats.openMap;
+export const SelectAddProduct = (state) => state.appStats.addProduct;
 
-export const { openMenu, closeMenu, toggleMenu, openMap, closeMap } = AppStatsSlice.actions;
+export const { openMenu, closeMenu, toggleMenu, openMap,
+               closeMap, openAddProduct, closeAddProduct, } = AppStatsSlice.actions;
 
 export default AppStatsSlice.reducer;

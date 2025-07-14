@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { closeMap } from '../../../app/AppStats';
-import { ImCancelCircle } from "react-icons/im";
+import { MdOutlineArrowCircleRight } from 'react-icons/md';
 
 // Fix for default marker icons
 delete L.Icon.Default.prototype._getIconUrl;
@@ -175,7 +175,7 @@ const Map = ({ value, onChange, onSave }) => {
       <div className='fixed inset-0 w-full z-50 bg-white transition-all duration-300 overflow-y-scroll'>
         <div className="relative container py-4 px-6">
           <button onClick={handleCloseMap} className='absolute top-5 right-6'>
-            <ImCancelCircle className='size-5' />
+            <MdOutlineArrowCircleRight className='size-6' />
           </button>
           <h4 className='text-center'>حدد موقعك من الخريطة</h4>
         </div>
@@ -189,7 +189,7 @@ const Map = ({ value, onChange, onSave }) => {
           >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              attribution='<a href="https://www.openstreetmap.org/copyright"></a>'
             />
             {selectedLocation && <Marker position={selectedLocation} />}
             <LocationMarker 
@@ -234,7 +234,7 @@ const Map = ({ value, onChange, onSave }) => {
           <div className="flex space-x-2">
             <button
               onClick={handleSaveLocation}
-              className="bg-primary text-white py-1 px-6 rounded-md cursor-pointer"
+              className="bg-primary text-white text-sm py-2 px-4 rounded-md cursor-pointer"
               disabled={isGeocoding}
             >
               {isGeocoding ? 'جاري الحفظ...' : 'حفظ الموقع'}

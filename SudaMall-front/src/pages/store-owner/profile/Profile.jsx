@@ -16,21 +16,24 @@ const Profile = () => {
     store_description: false,
   });
 
-  const [formData, setFormData] = useState({
-    store_name: storeInfo.store_name,
-    activity_type: storeInfo.activity_type,
-    store_description: storeInfo.store_description,
-    store_location: storeInfo.store_location,
-  });
-
   const {
     selectedFile,
+    setSelectedFile,
     dragActive,
     setDragActive,
     inputRef,
     handleFileChange,
     handleDrop,
   } = useFileUpload();
+
+  const [formData, setFormData] = useState({
+    store_name: storeInfo.store_name,
+    activity_type: storeInfo.activity_type,
+    store_description: storeInfo.store_description,
+    store_location: storeInfo.store_location,
+    store_license: selectedFile,
+  });
+
 
   const toggleEdit = (field) => {
     setEdit((prev) => ({ ...prev, [field]: true }));
@@ -39,6 +42,18 @@ const Profile = () => {
   const handleChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
+
+  // handle submit form changes
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+
+    if (selectedFile) {
+      formData.append("store_license", selectedFile);
+      formData.append("store_name", formData.store_name);
+    }
+    console.log("form data:", selectedFile)
+  }
 
   return (
     <div className="container mt-8 flex flex-col gap-4 text-gray-700">
@@ -60,7 +75,10 @@ const Profile = () => {
       {/* edit store information */}
       <h4 className="text-base font-medium mt-2">بيانات المتجر</h4>
 
-      <form className="flex flex-col gap-4 mb-32">
+      <form 
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 mb-32"
+        >
         <EditableField
           label="اسم المتجر"
           value={formData.store_name}
@@ -92,12 +110,15 @@ const Profile = () => {
 
         {/* upload store license section */}
         <FileUploader
+          label="مستندات توثيق المتجر"
+          hint="الملفات المسموح بها: pdf, png"
           inputRef={inputRef}
-          selectedFile={selectedFile}
-          dragActive={dragActive}
-          setDragActive={setDragActive}
           handleFileChange={handleFileChange}
           handleDrop={handleDrop}
+          dragActive={dragActive}
+          setDragActive={setDragActive}
+          selectedFile={selectedFile}
+          setSelectedFile={setSelectedFile}
         />
         <button
           type="submit"
