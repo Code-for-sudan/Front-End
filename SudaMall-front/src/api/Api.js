@@ -29,12 +29,14 @@ api.interceptors.response.use(
       try {
         const res = await api.post("/token/refresh/");  
 
-        const { access } = res.data;
-         TokenService.setAccessToken(access, true); 
+        const { access_token } = res.data;
+
+        const isRemembered = localStorage.getItem("access_token") !== null;
+        TokenService.setAccessToken(access_token, isRemembered);
 
         // Update header and retry original request
-        api.defaults.headers.common["Authorization"] = `Bearer ${access}`;
-        originalConfig.headers["Authorization"] = `Bearer ${access}`;
+        api.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
+        originalConfig.headers["Authorization"] = `Bearer ${access_token}`;
         return api(originalConfig);
       } catch (_error) {
         TokenService.clearAccessToken();

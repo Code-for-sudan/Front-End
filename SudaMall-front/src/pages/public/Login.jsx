@@ -11,8 +11,8 @@ const Login = () => {
   const navigate = useNavigate(); 
   
   const [loginInput, setLoginInput] = useState({
-    email: "",
-    password: "",
+    email: "awqws@gmail.com",
+    password: "Akram123456789",
     rememberMe: false,
   });
 
@@ -36,9 +36,16 @@ const Login = () => {
     login(loginInput, {
       onSuccess: (data) => {
          const userId = data?.user?.id || data?.user?._id;
-          if (userId) {
-        navigate(`/store-owner/${userId}/dashboard`); // Redirect to the dashboard after successful login
-      } else {
+         const accountType = data?.user?.accountType ;
+          if (userId && accountType === "seller") {
+        navigate(`/store-owner/${userId}/dashboard`); 
+       
+        // Redirect to the dashboard after successful login
+      } else if (userId && accountType === "buyer") {
+        navigate(`/customer/${userId}/dashboard`);
+        }
+      
+      else {
         console.error("User ID not found in login response");
       }
     },

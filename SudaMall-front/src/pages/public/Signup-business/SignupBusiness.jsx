@@ -12,15 +12,16 @@ const SignupBusiness = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [signupInput, setSignupInput] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    phoneNumber: "",
-    storeName: "",
-    storeLocation: "",
-    storeType: "",
-    storeDesc: "",
+    name: "Akram Adam Hassan Ali",
+    email: "akram@gmail.com",
+    gender: "M",
+    password: "Akram12345",
+    confirmPassword: "Akram12345",
+    phoneNumber: "0128581946",
+    storeName: "Sudamall Store",
+    storeLocation: "khartoum - Sudan",
+    storeType: "ملابس",
+    storeDesc: "اقوم ببيع ملابس رجالية",
   });
 
   const mutation = useMutation({
@@ -93,12 +94,13 @@ const SignupBusiness = () => {
       email: signupInput.email,
       first_name,
       last_name,
+      gender: signupInput.gender,
       password: signupInput.password,
       phone_number: formattedPhone,
       store_name: signupInput.storeName,
       store_location: signupInput.storeLocation,
       store_type: signupInput.storeType,
-      store_desc: signupInput.storeDesc,
+      description: signupInput.storeDesc,
     };
 
     mutation.mutate(formData2);
