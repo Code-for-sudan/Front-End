@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from "react-redux";
 import { GoHome } from "react-icons/go";
 import { MdOutlineMarkUnreadChatAlt } from "react-icons/md";
 import { PiShoppingCartBold } from "react-icons/pi";
@@ -6,11 +7,14 @@ import { BsPerson } from "react-icons/bs";
 import { MdAdd } from "react-icons/md";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { bg_nav } from '../../assets';
+import { openAddProduct } from '../../app/AppStats';
 
 const StoreOwnerNav = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [active, setActive] = useState('');
+
+  const dispatch = useDispatch()
 
   // Extracts the current route segment and sets the active tab
   useEffect(() => {
@@ -29,10 +33,16 @@ const StoreOwnerNav = () => {
     }
   }, [location]);
 
+  // handle nav button click and navigate to the specific path
   const handleClick = ({ id, path }) => {
     setActive(id);
     navigate(path);
   };
+
+  // handle add product state to set is to true
+  const handleAddProduct = () => {
+    dispatch(openAddProduct())
+  }
 
   return (
     <nav className="fixed bottom-0 w-full z-20">
@@ -55,11 +65,11 @@ const StoreOwnerNav = () => {
           className={`flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ease-in-out ${active === 'mystore' ? 'text-primary' : ''}`}
           onClick={() => handleClick({ id: 'mystore', path: '/store-owner/:userId/my-store' })}>
           <PiShoppingCartBold className="size-6" />
-          <p>المنتجات</p>
+          <p>الطلبات</p>
         </li>
 
         {/* Floating Add Button */}
-        <li onClick={() => handleClick({ id: 'add', path: '/store-owner/:userId/dashboard' })} className="flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out">
+        <li onClick={handleAddProduct} className="flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out">
           <div className="absolute -top-6 p-2 text-white bg-dark-blue shadow-lg rounded-full z-50">
             <MdAdd className="size-8" />
           </div>
@@ -78,7 +88,7 @@ const StoreOwnerNav = () => {
           className={`flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ease-in-out ${active === 'profile' ? 'text-primary' : ''}`}
           onClick={() => handleClick({ id: 'profile', path: '/store-owner/:userId/profile' })}>
           <BsPerson className="size-6" />
-          <p>صفحتي</p>
+          <p>حسابي</p>
         </li>
       </ul>
     </nav>

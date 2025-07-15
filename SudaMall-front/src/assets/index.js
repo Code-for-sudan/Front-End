@@ -9,5 +9,5 @@ export {
     welcome2,
     welcome3,
     people,
-    bg_nav
+    bg_nav,
 }
