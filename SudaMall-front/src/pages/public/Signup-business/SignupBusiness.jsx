@@ -12,16 +12,16 @@ const SignupBusiness = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [signupInput, setSignupInput] = useState({
-    name: "Akram Adam Hassan Ali",
-    email: "akram@gmail.com",
-    gender: "M",
-    password: "Akram12345",
-    confirmPassword: "Akram12345",
-    phoneNumber: "0128581946",
-    storeName: "Sudamall Store",
-    storeLocation: "khartoum - Sudan",
-    storeType: "ملابس",
-    storeDesc: "اقوم ببيع ملابس رجالية",
+    name: "",
+    email: "",
+    gender: "",
+    password: "",
+    confirmPassword: "",
+    phoneNumber: "",
+    storeName: "",
+    storeLocation: "",
+    storeType: "",
+    storeDesc: "",
   });
 
   const mutation = useMutation({
