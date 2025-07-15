@@ -1,15 +1,15 @@
-
+const ACCESS_TOKEN_KEY = "access_token";
 
 function removeAccessTokenFromAll() {
-  localStorage.removeItem("access_token");
-  sessionStorage.removeItem("access_token");
+  localStorage.removeItem(ACCESS_TOKEN_KEY);
+  sessionStorage.removeItem(ACCESS_TOKEN_KEY);
 }
 
 export const TokenService = {
   getAccessToken() {
     return (
-      localStorage.getItem("access_token") ||
-      sessionStorage.getItem("access_token")
+      localStorage.getItem(ACCESS_TOKEN_KEY) ||
+      sessionStorage.getItem(ACCESS_TOKEN_KEY)
     );
   },
 
@@ -22,7 +22,7 @@ export const TokenService = {
     removeAccessTokenFromAll();
 
     const storage = remember ? localStorage : sessionStorage;
-    storage.setItem("access_token", access_token);
+    storage.setItem(ACCESS_TOKEN_KEY, access_token);
   },
 
   clearAccessToken() {
