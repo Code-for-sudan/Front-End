@@ -17,6 +17,9 @@ import CreditCard from "./order_icons/CreditCard.svg";
 import Phone from "./order_icons/Phone.svg";
 import User from "./order_icons/User.svg";
 import VectorSend from "./order_icons/VectorSend.svg"
+import notfound1 from "./notFound/notfound1.svg";
+import notfound2 from "./notFound/notfound2.svg";
+import notfound3 from "./notFound/notfound3.svg";
 export {
     Admin,
     Adds,
@@ -36,5 +39,8 @@ export {
     CreditCard,
     Phone,
     User,
-    VectorSend
+    VectorSend,
+    notfound1,
+    notfound2,
+    notfound3
 }
