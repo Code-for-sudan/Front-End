@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { closeAddProduct } from '../../../app/AppStats';
 import { MdOutlineArrowCircleRight } from 'react-icons/md';
 import { useState } from 'react';
-import FileUploader from '../../../components/store-owner/profile/FileUploader';
+import FileUploader from '../profile/FileUploader';
 import { useFileUpload } from '../../../hooks';
 
 const productTypes = ['ملابس', 'أحذية', 'أجهزة', 'شنط', 'إكسسوارات', 'أخرى'];

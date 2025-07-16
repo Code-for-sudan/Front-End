@@ -29,7 +29,7 @@ const SearchBar = () => {
 
   return (
     <div className="">
-      <div className="flex items-center justify-between text-sm border border-gray-400 bg-gray-50 rounded-md p-2 w-full">
+      <div className="flex items-center justify-between text-sm border border-gray-300 bg-gray-50 rounded-md p-2 w-full">
         <input
           type="text"
           value={input}
