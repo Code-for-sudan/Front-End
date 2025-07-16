@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { MdOutlineArrowCircleRight } from "react-icons/md";
 import { VscSend } from "react-icons/vsc";
 import { formatMessageTime } from "../../../utils/utilities.js";
-import { ChatHistory } from "../../../data/ChatHistory.js"; // Temporary
+import { ChatHistory } from "../../../data/ChatHistory.js"; // this will be deleted after connecting to the back
 
 const ChatArea = () => {
   const [message, setMessage] = useState("");
@@ -12,7 +12,7 @@ const ChatArea = () => {
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
-  const owner = ChatHistory.chat_between.owner;
+  const owner = ChatHistory.chat_between.owne
   const user = ChatHistory.chat_between.customer;
   const messages = ChatHistory.messages;
 

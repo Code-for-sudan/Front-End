@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useLogin } from "../../hooks/uselogin";
 import ArrowCircleRight from "../../assets/icons/ArrowCircleRight.svg";
 import Divider from "./auth-components/Divider";
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+// import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { Link } from 'react-router-dom'; 
 import { useNavigate } from "react-router-dom";
 
