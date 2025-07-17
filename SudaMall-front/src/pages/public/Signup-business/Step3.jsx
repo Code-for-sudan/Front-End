@@ -1,11 +1,13 @@
 // src/components/RegisterSteps/StepThree.jsx
 import React from "react";
+import { CheckCircle} from "../../../assets/icons/index";
+import PopupMessage from "../auth-components/PopupMessage";
 
 const StepThree = ({
   signupInput,
   onBack,
   handleSubmit,
-  isSubmitting,
+  isPending,
   errorMessage,
   showSuccessPopup,
 }) => {
@@ -181,16 +183,14 @@ const StepThree = ({
               <div className="grid grid-cols-2 gap-4 w-full ">
                 <button
                   type="submit"
-                  className={`w-full text-white font-semibold py-2 rounded-xl transition duration-200 mt-6 ${
-                    isSubmitting ? "opacity-50 cursor-not-allowed" : ""
-                  }`}
+                  className={`w-full text-white font-semibold py-2 rounded-xl transition duration-200 mt-6`}
                   style={{
                     backgroundColor: "var(--primary)",
                     hoverBackgroundColor: "var(--color-primary)",
                   }}
-                  disabled={isSubmitting}
+                  disabled={isPending}
                 >
-                  انشاء حساب
+                   {isPending? "جاري الإرسال..." : "انشاء حساب"}
                 </button>
 
                 <button
@@ -209,13 +209,16 @@ const StepThree = ({
         </div>
       </div>
       {/* Popup للنجاح */}
-      {showSuccessPopup && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-green-500 text-white text-center px-8 py-4 rounded-xl shadow-xl">
-            تم إنشاء الحساب بنجاح
-          </div>
-        </div>
-      )}
+ {showSuccessPopup && (
+  <PopupMessage
+    show={showSuccessPopup}
+    icon={CheckCircle}
+    title="تم إنشاء الحساب بنجاح"
+    message="يرجى التحقق من البريد الإلكتروني لتفعيل الحساب."
+   
+  />
+)}
+
 
       {/* Toast للخطأ */}
       {errorMessage && (

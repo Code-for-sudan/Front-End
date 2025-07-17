@@ -6,7 +6,7 @@ import { goToLogin } from '../hooks/navigateService';
  * Axios instance configured for API communication with auth token and cookie support.
  */
 const api = axios.create({
-  baseURL: "https://sudamall.me/api/v1",
+  baseURL: "https://sudamall.ddns.net/api/v1",
   withCredentials: true, // Allow cookies to be sent with cross-origin requests
 });
 

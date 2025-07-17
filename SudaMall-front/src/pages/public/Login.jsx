@@ -37,6 +37,22 @@ const Login = () => {
 */
   const handleSubmit = (e) => {
     e.preventDefault();
+      
+  const { email, password } = loginInput;
+
+// Check that the fields are filled in
+  if (!email.trim() || !password.trim()) {
+    toast.error("يرجى ملء جميع الحقول");
+    return;
+  }
+
+// Email verification
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    toast.error("يرجى إدخال بريد إلكتروني صحيح");
+    return;
+  }
+
     login(loginInput, {
       onSuccess: (data) => {
         const userId = data?.user?.id || data?.user?._id;
@@ -45,8 +61,6 @@ const Login = () => {
           navigate(`/store-owner/${userId}/dashboard`);
         } else if (userId && accountType === "buyer") {
           navigate(`/customer/${userId}/dashboard`);
-        } else {
-          console.error("User ID not found in login response");
         }
       },
       onError: (error) => {
@@ -60,6 +74,7 @@ const Login = () => {
           setResendEmail(loginInput.email);
         }
       },
+     
     });
   };
 
@@ -163,7 +178,7 @@ const Login = () => {
             {/* Login Button */}
             <button
               type="submit"
-              className="w-full text-white font-semibold py-2 rounded-xl transition duration-200 mt-10"
+              className="w-full text-white font-semibold py-2 rounded-xl transition duration-200 mt-5"
               style={{
                 backgroundColor: "var(--primary)",
                 hoverBackgroundColor: "var(--color-primary)",
@@ -171,7 +186,9 @@ const Login = () => {
             >
               {isPending ? "جاري تسجيل الدخول..." : "تسجيل دخول"}
             </button>
-            {showResend && (
+           
+          </form>
+           {showResend && (
               <div className="text-center mt-4">
                 <p className="text-red-500 mb-2">
                   لم يتم تفعيل حسابك. يمكنك إعادة إرسال رابط التفعيل.
@@ -184,7 +201,6 @@ const Login = () => {
                 </button>
               </div>
             )}
-          </form>
 
           {/* Or Divider */}
           <Divider />

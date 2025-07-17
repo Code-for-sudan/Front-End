@@ -20,6 +20,7 @@ import VectorSend from "./order_icons/VectorSend.svg"
 import notfound1 from "./notFound/notfound1.svg";
 import notfound2 from "./notFound/notfound2.svg";
 import notfound3 from "./notFound/notfound3.svg";
+import CheckCircle from "./CheckCircle.svg";
 export {
     Admin,
     Adds,
@@ -42,5 +43,6 @@ export {
     VectorSend,
     notfound1,
     notfound2,
-    notfound3
+    notfound3,
+    CheckCircle
 }

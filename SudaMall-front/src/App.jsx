@@ -3,6 +3,8 @@ import './index.css';
 import MainRoutes from './routes/MainRoutes';
 import { useNavigate } from 'react-router-dom';
 import { setNavigate } from '../src/hooks/navigateService';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const navigate = useNavigate();
@@ -11,7 +13,22 @@ const App = () => {
     setNavigate(navigate);
   }, [navigate]);
 
-  return <MainRoutes />;
+  return <>
+  <MainRoutes />
+  
+    <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
+  </>;
 };
 
 export default App;
