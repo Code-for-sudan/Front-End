@@ -7,7 +7,7 @@ import SignupBusiness from "../pages/public/Signup-business/SignupBusiness";
 import NotFound from "../pages/public/NotFound";
 import PublicLayout from "../layouts/PublicLayout";
 import ResetPassword from "../pages/public/ResetPassword";
-
+import VerifyEmail from "../pages/public/auth-components/VerifyEmail";
 /**
  * PublicRoutes
  * ---------------
@@ -24,7 +24,9 @@ const PublicRoutes = () => [
     <Route path="/auth/login" element={<Login />} />
     <Route path="/auth/signup-user" element={<SignupUser />} />
     <Route path="/auth/signup-business" element={<SignupBusiness />} />
-    <Route path="/reset-password" element={<ResetPassword />} />
+    <Route path="/auth/reset-password" element={<ResetPassword />} />
+    <Route path="/auth/verify" element={<VerifyEmail />} />
+
     <Route path="*" element={<NotFound />} />
   </Route>
 ];

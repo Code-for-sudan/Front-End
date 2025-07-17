@@ -11,7 +11,7 @@ export const WeeklyOrdersData = {
     { "weekday": "Thursday", "count": 43 },
     { "weekday": "Friday",   "count": 0 }
   ],
-  "total": 48,
+  
   "orders": [
     {
       "client_name": "احمد موسى",

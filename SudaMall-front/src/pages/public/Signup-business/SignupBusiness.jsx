@@ -5,6 +5,7 @@ import StepThree from "./Step3";
 import { registerBusiness } from "../../../api/Auth";
 import { useMutation } from "@tanstack/react-query";
 import { goToLogin } from "../../../hooks/navigateService";
+import { toast } from "react-toastify";
 
 const SignupBusiness = () => {
   const [step, setStep] = useState(1);
@@ -14,7 +15,7 @@ const SignupBusiness = () => {
   const [signupInput, setSignupInput] = useState({
     name: "",
     email: "",
-    gender:"M",
+    gender: "M",
     password: "",
     confirmPassword: "",
     phoneNumber: "",
@@ -32,7 +33,7 @@ const SignupBusiness = () => {
       setTimeout(() => {
         setShowSuccessPopup(false);
         goToLogin(); // go to login page after success
-      }, 3000);
+      }, 8000);
     },
     onError: (error) => {
       console.error("Signup Error:", error.response || error.message);
@@ -45,6 +46,11 @@ const SignupBusiness = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+      const { email, password } = signupInput;
+  if (!email.trim() || !password.trim()) {
+    toast.error("يرجى ملء جميع الحقول");
+    return;
+  }
 
  // Split the full name into first_name and last_name
     const nameParts = signupInput.name.trim().split(/\s+/);
@@ -137,7 +143,7 @@ const SignupBusiness = () => {
           onBack={() => setStep(2)}
           onSubmit={() => alert("تم إنشاء الحساب!")}
           handleSubmit={handleSubmit}
-          isSubmitting={mutation.isPending}
+          isPending={mutation.isPending}
         />
       )}
     </>
