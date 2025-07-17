@@ -10,12 +10,12 @@ import PopupMessage from "../public/auth-components/PopupMessage";
 
 const SignupForm = () => {
   const [signupInput, setSignupInput] = useState({
-    name: "s",
-    email: "s@gmail.com",
+    name: "",
+    email: "",
     gender:"M",
-    password: "Akram12345",
-    ConfirmPassword: "Akram12345",
-    phoneNumber: "0128581946",
+    password: "",
+    ConfirmPassword: "",
+    phoneNumber: "",
   });
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);

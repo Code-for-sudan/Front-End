@@ -13,16 +13,16 @@ const SignupBusiness = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [signupInput, setSignupInput] = useState({
-    name: "s s d w",
-    email: "d@gmail.com",
+    name: "",
+    email: "",
     gender: "M",
-    password: "Akram12345",
-    confirmPassword: "Akram12345",
-    phoneNumber: "0129638213",
-    storeName: "d",
-    storeLocation: "s",
-    storeType: "f",
-    storeDesc: "s",
+    password: "",
+    confirmPassword: "",
+    phoneNumber: "",
+    storeName: "",
+    storeLocation: "",
+    storeType: "",
+    storeDesc: "",
   });
 
   const mutation = useMutation({
