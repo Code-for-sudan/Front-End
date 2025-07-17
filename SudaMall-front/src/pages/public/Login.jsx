@@ -40,13 +40,13 @@ const Login = () => {
       
   const { email, password } = loginInput;
 
-  // تحقق من ملء الحقول
+// Check that the fields are filled in
   if (!email.trim() || !password.trim()) {
     toast.error("يرجى ملء جميع الحقول");
     return;
   }
 
-  // تحقق من صحة البريد الإلكتروني
+// Email verification
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     toast.error("يرجى إدخال بريد إلكتروني صحيح");

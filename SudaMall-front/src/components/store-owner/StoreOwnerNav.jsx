@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-//import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { GoHome } from "react-icons/go";
 import { MdOutlineMarkUnreadChatAlt } from "react-icons/md";
@@ -7,13 +7,13 @@ import { PiShoppingCartBold } from "react-icons/pi";
 import { BsPerson } from "react-icons/bs";
 import { MdAdd } from "react-icons/md";
 import { bg_nav } from '../../assets';
-//import { openAddProduct } from '../../app/AppStats';
+import { openAddProduct } from '../../app/AppStats';
 
 const StoreOwnerNav = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [active, setActive] = useState("");
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const path = location.pathname;
@@ -44,10 +44,10 @@ const StoreOwnerNav = () => {
     navigate(path);
   };
 
- /* const handleAddProduct = () => {
+  const handleAddProduct = () => {
     dispatch(openAddProduct());
   };
-*/
+
   return (
     <nav className="fixed bottom-0 w-full z-20">
       {/* Background curve */}
@@ -88,13 +88,13 @@ const StoreOwnerNav = () => {
           <p>الطلبات</p>
         </li>
 
-        {/* Floating Add Button 
+        {/* Floating Add Button   */}
         <li onClick={handleAddProduct} className="flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out">
           <div className="absolute -top-6 p-2 text-white bg-dark-blue shadow-lg rounded-full z-50">
             <MdAdd className="size-8" />
           </div>
         </li>
-        */}
+      
         {/* navigate to chat page button */}
         <li
           className={`flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ease-in-out ${
