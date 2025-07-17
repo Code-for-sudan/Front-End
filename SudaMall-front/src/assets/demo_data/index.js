@@ -13,6 +13,8 @@ import product5 from "./product5.png";
 import product6 from "./product6.png";
 import product7 from "./product7.png";
 
+import TelImage from "./TelImage.jpg";
+import accsoar from "./accsoar.jpg";
 export {
     profile_pic,
     user1,
@@ -27,4 +29,6 @@ export {
     product5,
     product6,
     product7,
+    TelImage,
+    accsoar
 }

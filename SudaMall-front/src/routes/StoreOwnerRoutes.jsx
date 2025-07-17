@@ -5,6 +5,8 @@ import { TotalSales } from "../pages/store-owner/dashboard";
 import { NewClients } from "../pages/store-owner/dashboard/clients";
 import { NewOrders } from "../pages/store-owner/dashboard/orders";
 import { Products } from "../pages/store-owner/products";
+import OrdersPage from "../pages/store-owner/orders/OrdersPage";
+import OrderDetailsPage from "../pages/store-owner/orders/OrderDetailsPage";
 
 
 /**
@@ -37,6 +39,10 @@ const StoreOwnerRoutes = () => [
 
     {/* ------------------------------ Store owner products routes ----------------------------------*/}
     <Route path="/store-owner/:userId/products" element={<Products />} ></Route>
+    
+        {/* ------------------------------ Store owner orders routes ----------------------------------*/}
+    <Route path="/store-owner/:userId/orders" element={<OrdersPage />} ></Route>
+    <Route path="/store-owner/:userId/orders/:orderId" element={<OrderDetailsPage/>} ></Route>
 
     {/* ------------------------------ Store owner profile routes ------------------------------------*/}
     <Route path="/store-owner/:userId/profile" element={<Profile />} ></Route>

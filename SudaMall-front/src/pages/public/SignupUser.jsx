@@ -4,11 +4,15 @@ import { useMutation } from "@tanstack/react-query";
 import { signupUser } from "../../api/Auth";
 import { Link } from "react-router-dom";
 import { goToLogin } from "../../hooks/navigateService";
+import { toast } from "react-toastify";
+import { CheckCircle} from "../../assets/icons/index";
+import PopupMessage from "../public/auth-components/PopupMessage";
 
 const SignupForm = () => {
   const [signupInput, setSignupInput] = useState({
     name: "",
     email: "",
+    gender:"M",
     password: "",
     ConfirmPassword: "",
     phoneNumber: "",
@@ -16,7 +20,7 @@ const SignupForm = () => {
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [errors, setErrors] = useState({});
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: signupUser,
     
     onSuccess: () => {
@@ -24,7 +28,7 @@ const SignupForm = () => {
       setTimeout(() => {
       setShowSuccessPopup(false);
         goToLogin(); // go to login page after success
-      }, 3000);
+      }, 8000);
     },
     onError: (error) => {
       console.error("Signup Error:", error.response || error.message);
@@ -37,6 +41,12 @@ const SignupForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+          const { email, password } = signupInput;
+      if (!email.trim() || !password.trim()) {
+        toast.error("يرجى ملء جميع الحقول");
+        return;
+      }
     // تقسيم الاسم الكامل إلى first_name و last_name
     const nameParts = signupInput.name.trim().split(/\s+/);
     if (nameParts.length !== 4) {
@@ -85,6 +95,7 @@ const SignupForm = () => {
     const formData = {
       first_name,
       last_name,
+      gender: signupInput.gender,
       email: signupInput.email,
       password: signupInput.password,
       phone_number: formattedPhone,
@@ -239,11 +250,11 @@ const SignupForm = () => {
 
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={isPending}
               className="w-full text-white font-semibold py-2 rounded-xl transition duration-200"
               style={{ backgroundColor: "var(--primary)" }}
             >
-              {isLoading ? "جاري الإرسال..." : "انشاء حساب"}
+              {isPending? "جاري الإرسال..." : "انشاء حساب"}
             </button>
 
             <p className="text-center text-sm mt-4">
@@ -259,14 +270,16 @@ const SignupForm = () => {
           </form>
         </div>
       </div>
-      {/* Popup للنجاح */}
-      {showSuccessPopup && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-green-500 text-white text-center px-8 py-4 rounded-xl shadow-xl">
-            تم إنشاء الحساب بنجاح
-          </div>
-        </div>
-      )}
+       {/* Popup للنجاح */}
+ {showSuccessPopup && (
+  <PopupMessage
+    show={showSuccessPopup}
+    icon={CheckCircle}
+    title="تم إنشاء الحساب بنجاح"
+    message="يرجى التحقق من البريد الإلكتروني لتفعيل الحساب."
+   
+  />
+)}
 
       {/* Toast للخطأ */}
       {errorMessage && (

@@ -3,22 +3,31 @@ import { useState } from "react";
 import { useLogin } from "../../hooks/uselogin";
 import ArrowCircleRight from "../../assets/icons/ArrowCircleRight.svg";
 import Divider from "./auth-components/Divider";
+<<<<<<< HEAD
 // import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { Link } from 'react-router-dom'; 
+=======
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { Link } from "react-router-dom";
+>>>>>>> main
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { resendVerification } from "../../api/Auth";
 
 const Login = () => {
-  const navigate = useNavigate(); 
-  
+  const navigate = useNavigate();
+
   const [loginInput, setLoginInput] = useState({
     email: "",
     password: "",
     rememberMe: false,
   });
+  const [showResend, setShowResend] = useState(false);
+  const [resendEmail, setResendEmail] = useState("");
 
   const { mutate: login, isPending, isError, error } = useLogin();
 
- /**  const handleGoogleSuccess = (credentialResponse) => {
+  /**  const handleGoogleSuccess = (credentialResponse) => {
     const token = credentialResponse.credential;
     fetch("http://localhost:8000/api/auth/google/", {
       method: "POST",
@@ -33,15 +42,44 @@ const Login = () => {
 */
   const handleSubmit = (e) => {
     e.preventDefault();
+      
+  const { email, password } = loginInput;
+
+// Check that the fields are filled in
+  if (!email.trim() || !password.trim()) {
+    toast.error("يرجى ملء جميع الحقول");
+    return;
+  }
+
+// Email verification
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    toast.error("يرجى إدخال بريد إلكتروني صحيح");
+    return;
+  }
+
     login(loginInput, {
       onSuccess: (data) => {
-         const userId = data?.user?.id || data?.user?._id;
-          if (userId) {
-        navigate(`/store-owner/${userId}/dashboard`); // Redirect to the dashboard after successful login
-      } else {
-        console.error("User ID not found in login response");
-      }
-    },
+        const userId = data?.user?.id || data?.user?._id;
+        const accountType = data?.user?.account_type;
+        if (userId && accountType === "seller") {
+          navigate(`/store-owner/${userId}/dashboard`);
+        } else if (userId && accountType === "buyer") {
+          navigate(`/customer/${userId}/dashboard`);
+        }
+      },
+      onError: (error) => {
+        const message = error.response?.data?.message;
+        const allowResend = error.response?.data?.resend_verification_link;
+
+        toast.error(message || "فشل تسجيل الدخول");
+
+        if (allowResend) {
+          setShowResend(true);
+          setResendEmail(loginInput.email);
+        }
+      },
+     
     });
   };
 
@@ -50,7 +88,10 @@ const Login = () => {
       className="min-h-screen flex items-start justify-center pt-20"
       style={{ backgroundColor: "var(--primary)" }}
     >
-      <Link to="/auth" className="absolute top-10 left-6 text-white hover:text-gray-200">
+      <Link
+        to="/auth"
+        className="absolute top-10 left-6 text-white hover:text-gray-200"
+      >
         <img src={ArrowCircleRight} alt="رجوع" className="h-8 w-8" />
       </Link>
       <div
@@ -128,29 +169,43 @@ const Login = () => {
                     تذكرني
                   </label>
                 </div>
-                <a
-                  href="#"
+                <Link
+                  to="/auth/reset-password"
                   className="text-sm"
                   style={{ color: "var(--primary)" }}
                 >
                   هل نسيت كلمة المرور؟
-                </a>
+                </Link>
               </div>
             </div>
             {isError && <p className="text-red-500">{error.message}</p>}
 
-             {/* Login Button */}
+            {/* Login Button */}
             <button
               type="submit"
-              className="w-full text-white font-semibold py-2 rounded-xl transition duration-200 mt-10"
+              className="w-full text-white font-semibold py-2 rounded-xl transition duration-200 mt-5"
               style={{
                 backgroundColor: "var(--primary)",
-                hoverBackgroundColor: "var(--color-primary)", 
+                hoverBackgroundColor: "var(--color-primary)",
               }}
             >
               {isPending ? "جاري تسجيل الدخول..." : "تسجيل دخول"}
             </button>
+           
           </form>
+           {showResend && (
+              <div className="text-center mt-4">
+                <p className="text-red-500 mb-2">
+                  لم يتم تفعيل حسابك. يمكنك إعادة إرسال رابط التفعيل.
+                </p>
+                <button
+                  onClick={() => resendVerification(resendEmail)}
+                  className="text-sm underline text-blue-600 hover:text-blue-800"
+                >
+                  إعادة إرسال رابط التفعيل
+                </button>
+              </div>
+            )}
 
           {/* Or Divider */}
           <Divider />
@@ -189,13 +244,13 @@ const Login = () => {
           {/* Signup */}
           <p className="text-center text-sm mt-8">
             ليس لديك حساب؟
-            <a
-              href="/signup-user"
+            <Link
+              to="/auth"
               className="font-semibold ml-1 mr-2.5"
               style={{ color: "var(--primary)" }}
             >
               إنشاء حساب جديد
-            </a>
+            </Link>
           </p>
         </div>
       </div>
