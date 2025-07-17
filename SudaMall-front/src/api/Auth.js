@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
  * @returns {Promise<Object>} - API response data.
  */
 export const signupUser = async (formData) => {
-  const response = await axios.post("https://sudamall.me/api/v1/accounts/signup/user/", formData);
+  const response = await axios.post("https://sudamall.ddns.net/api/v1/accounts/signup/user/", formData);
   return response.data;
 };
 
@@ -21,7 +21,7 @@ export const signupUser = async (formData) => {
  * @returns {Promise<Object>} - API response data.
  */
 export const registerBusiness = async (formData2) => {
-  const response = await axios.post('https://sudamall.me/api/v1/accounts/signup/business/', formData2);
+  const response = await axios.post('https://sudamall.ddns.net/api/v1/accounts/signup/business/', formData2);
   return response.data;
 };
 
@@ -65,6 +65,6 @@ export const resendVerification = async (email) => {
  * @returns {Promise<Object>} - API response confirming activation.
  */
 export const verifyAccount = async (token) => {
-  const response = await axios.post("https://sudamall.me/api/v1/activate-account/", { token });
+  const response = await axios.post("https://sudamall.ddns.net/api/v1/activate-account/", { token });
   return response.data;
 };
