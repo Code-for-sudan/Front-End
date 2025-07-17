@@ -9,6 +9,7 @@ const SignupForm = () => {
   const [signupInput, setSignupInput] = useState({
     name: "",
     email: "",
+    gender:"M",
     password: "",
     ConfirmPassword: "",
     phoneNumber: "",
@@ -85,6 +86,7 @@ const SignupForm = () => {
     const formData = {
       first_name,
       last_name,
+      gender: signupInput.gender,
       email: signupInput.email,
       password: signupInput.password,
       phone_number: formattedPhone,

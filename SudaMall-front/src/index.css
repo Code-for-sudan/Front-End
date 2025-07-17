@@ -4,6 +4,7 @@
 /* color variables */
 :root {
     --primary: #fca311;
+    --beige-soft: #F6DBAF;
     --dark-bg: #121212;
     --dark-blue: #14213d;
     --light-gray: #e5e5e5;
@@ -23,6 +24,8 @@
     --color-dark-bg: var(--dark-bg);
     --color-dark-blue: var(--dark-blue);
     --color-light-gray: var(--light-gray);
+
+
   }
 
   /* define display font alexandria */

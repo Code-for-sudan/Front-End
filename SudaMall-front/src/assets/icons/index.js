@@ -11,7 +11,15 @@ import UserCirclePlus from "./UserCirclePlus.png";
 import CurrencyDollar from "./CurrencyDollar.png";
 import Cart from "./Cart.png";
 import success from "./success.svg";
-
+import Calendar from "./order_icons/Calendar.svg";
+import MapPin from "./order_icons/MapPin.svg";
+import CreditCard from "./order_icons/CreditCard.svg";
+import Phone from "./order_icons/Phone.svg";
+import User from "./order_icons/User.svg";
+import VectorSend from "./order_icons/VectorSend.svg"
+import notfound1 from "./notFound/notfound1.svg";
+import notfound2 from "./notFound/notfound2.svg";
+import notfound3 from "./notFound/notfound3.svg";
 export {
     Admin,
     Adds,
@@ -26,4 +34,13 @@ export {
     CurrencyDollar,
     Cart,
     success,
+    Calendar,
+    MapPin,
+    CreditCard,
+    Phone,
+    User,
+    VectorSend,
+    notfound1,
+    notfound2,
+    notfound3
 }
