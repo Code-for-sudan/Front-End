@@ -1,5 +1,5 @@
 import React from 'react'
-import { SingleWeeklyChart } from '../../../../components/reusable';
+import { SingleWeeklyChart } from '../../../../components/store-owner/reusable';
 
 const WeeklyClients = ({ WeeklyClientsData }) => {
   return (

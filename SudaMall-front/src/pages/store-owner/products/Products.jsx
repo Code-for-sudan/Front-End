@@ -1,5 +1,5 @@
-import { MainTitle } from '../../../components/reusable';
-import { SearchBar } from '../../../components/reusable';
+import { MainTitle } from '../../../components/store-owner/reusable';
+import { SearchBar } from '../../../components/store-owner/reusable';
 import { AddProductBtn, ProductFilters } from '../../../components/store-owner/products';
 
 import { StoreProductsData } from '../../../data/StoreProductsData';

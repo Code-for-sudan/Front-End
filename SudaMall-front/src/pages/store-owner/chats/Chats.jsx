@@ -1,5 +1,4 @@
 import { ChatContact } from '../../../components/chats';
-import { MainTitle } from '../../../components/reusable'
 import { ChatContactsData } from '../../../data/ChatContacts' // will be deleted after connecting the endpoint
 
 const Chats = () => {

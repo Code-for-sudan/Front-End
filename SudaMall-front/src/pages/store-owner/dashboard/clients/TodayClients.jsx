@@ -1,4 +1,4 @@
-import { SingleDailyChart } from "../../../../components/reusable";
+import { SingleDailyChart } from "../../../../components/store-owner/reusable";
 
 const TodayClients = ({ TodayClientsData }) => {
   return (

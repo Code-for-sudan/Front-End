@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { formatTime } from '../../utils/utilities';
+import { formatTime } from '../../../utils/utilities';
 
 const NewOrderCard = ({srcImg, order}) => {
   return (

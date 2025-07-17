@@ -1,6 +1,6 @@
 // components/SearchBar.tsx
 import React, { useState } from "react";
-import { useAutocompleteWebSocket } from "../../hooks";
+import { useAutocompleteWebSocket } from "../../../hooks";
 import { IoSearch } from "react-icons/io5";
 
 const SearchBar = () => {

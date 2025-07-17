@@ -1,4 +1,4 @@
-import { NewOrderCard, SingleDailyChart } from "../../../../components/reusable";
+import { NewOrderCard, SingleDailyChart } from "../../../../components/store-owner/reusable";
 
 const TodayOrders = ({ TodayOrdersData, srcImg }) => {
   return (
