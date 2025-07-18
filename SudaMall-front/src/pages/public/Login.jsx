@@ -3,13 +3,7 @@ import { useState } from "react";
 import { useLogin } from "../../hooks/uselogin";
 import ArrowCircleRight from "../../assets/icons/ArrowCircleRight.svg";
 import Divider from "./auth-components/Divider";
-<<<<<<< HEAD
-// import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import { Link } from 'react-router-dom'; 
-=======
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { Link } from "react-router-dom";
->>>>>>> main
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { resendVerification } from "../../api/Auth";
