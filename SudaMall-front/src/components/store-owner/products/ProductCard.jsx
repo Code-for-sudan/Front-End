@@ -6,7 +6,7 @@ const ProductCard = ({product}) => {
     <div
         className="border border-gray-300 bg-gray-50 p-3 rounded-md flex items-center justify-between gap-6 text-xs"
         >
-        <div className="flex flex-1 items-center gap-2">
+        <div className="flex items-center gap-2">
             <img src={product.picture} alt="product" width={60} height={60} className="rounded" />
             <div className="flex flex-col gap-2">
                 <p>{product.product_name}</p>
@@ -19,7 +19,7 @@ const ProductCard = ({product}) => {
             </p>
             <p>{product.product_type}</p>
         </div>
-        <div className="flex items-center gap-1 text-sm">
+        <div className="flex flex-col items-center justify-between gap-3 text-lg">
             <button className="cursor-pointer">
                 <PiPencilLineBold />
             </button>

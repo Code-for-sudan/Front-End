@@ -3,8 +3,11 @@ import { closeAddProduct } from '../../../app/AppStats';
 import { MdOutlineArrowCircleRight } from 'react-icons/md';
 import { useState } from 'react';
 import FileUploader from '../profile/FileUploader';
-import { useFileUpload } from '../../../hooks';
+import { useFileUpload } from '../../../hooks'
+import { FaPlus } from "react-icons/fa";;
 
+// Define 5 pre-defined colors
+const presetColors = ['#ff0000', '#00ff00', '#0000ff', '#000', '#fff']; // red, green, blue, orange, purple
 const productTypes = ['ملابس', 'أحذية', 'أجهزة', 'شنط', 'إكسسوارات', 'أخرى'];
 const productCategories = ['رجال', 'نساء', 'أطفال بنات', 'أطفال أولاد'];
 
@@ -19,7 +22,9 @@ const AddProduct = () => {
     quantity: '',
     price: '',
     type: '',
-    category: ''
+    category: '',
+    color: [],
+    size: '',
   });
 
   // file upload functions from useFileUpload hook
@@ -170,13 +175,77 @@ const AddProduct = () => {
             selectedFile={selectedFile}
             setSelectedFile={setSelectedFile}
           />
+
+          {/* select product color */}
+          <div>
+            <label className="block text-sm font-medium mb-2">اللون</label>
+            <div className="flex items-center justify-between">
+              {/* Circles */}
+              <div className="flex gap-2">
+                {presetColors.map((color) => (
+                  <button
+                    key={color}
+                    type="button"
+                    onClick={() =>
+                      setFormData((prev) => {
+                        const updatedColors = prev.color?.includes(color)
+                          ? prev.color.filter((c) => c !== color)
+                          : [...(prev.color || []), color];
+                        return { ...prev, color: updatedColors };
+                      })
+                    }
+                    className={`w-6 h-6 rounded-full border-2 ${
+                      formData.color?.includes(color) ? 'ring-2 ring-black' : 'border-gray-300'
+                    }`}
+                    style={{ backgroundColor: color }}
+                  />
+                ))}
+              </div>
+
+              {/* Add custom color button */}
+              <button
+                type="button"
+                onClick={() => {
+                  const newColor = prompt('أدخل كود اللون (Hex مثل #abcdef):');
+                  if (newColor && /^#[0-9A-Fa-f]{6}$/.test(newColor)) {
+                    setFormData((prev) => ({
+                      ...prev,
+                      color: [...(prev.color || []), newColor],
+                    }));
+                  } else if (newColor) {
+                    alert('الرجاء إدخال كود لون صحيح.');
+                  }
+                }}
+                className="flex items-center gap-1 text-sm text-primary border border-primary px-2 py-1 rounded"
+              >
+                <FaPlus className="text-xs" />
+                إضافة لون
+              </button>
+            </div>
+            <p className='text-xs text-gray-600 mt-2'>* يمكنك اختيار اكثر من لون</p>
+          </div>
+          
+        {/* size */}
+        <div>
+          <label htmlFor="size" className="block text-sm font-medium mb-1">المقاس</label>
+          <input
+            type="text"
+            name="size"
+            id="size"
+            className="w-full text-xs border border-gray-300 rounded-md p-2 focus:outline-none focus:ring"
+            value={formData.size}
+            onChange={handleChange}
+          />
+          <p className='text-xs mt-2 text-gray-600'>* اكتب المقاس المرفق بواسطة بيانات المصنع</p>
+        </div>
+
         {/* add and cancel addition buttons  */}
         <div className="pt-4">
           <button
             type="submit"
             className="w-full bg-primary text-white py-2 rounded-md hover:bg-opacity-90 cursor-pointer mb-4"
           >
-            إضافة المنتج
+            حفظ المنتج
           </button>
           <button
             type="button"
