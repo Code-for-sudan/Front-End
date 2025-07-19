@@ -53,13 +53,14 @@ const SignupForm = () => {
       setErrors((prev) => ({ ...prev, name: "يرجى إدخال الاسم رباعي " }));
       return;
     }
-    const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+    const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[a-zA-Z\d@$!%*?&]{8,}$/
+;
 
     if (!passwordPattern.test(signupInput.password)) {
       setErrors((prev) => ({
         ...prev,
         password:
-          "كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل وتشمل حروف وأرقام",
+          "  كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل وتشمل حروف وأرقام ورموز",
       }));
       return;
     }
