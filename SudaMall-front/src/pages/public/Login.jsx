@@ -47,7 +47,7 @@ const Login = () => {
   }
 
 // Email verification
-  const emailRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[a-zA-Z\d@$!%*?&]{8,}$/
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 ;
   if (!emailRegex.test(email)) {
     toast.error("يرجى إدخال بريد إلكتروني صحيح");
