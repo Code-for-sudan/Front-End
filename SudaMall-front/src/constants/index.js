@@ -3,6 +3,10 @@ import welcome2 from "../assets/welcome2.png"
 import welcome3 from "../assets/welcome3.png"
 
 import { Adds, Admin, Agents, Cart, CurrencyCircleDollar, CurrencyDollar, Files, Gear, ShoppingBag, ShoppingCart, Store, UserCirclePlus } from "../assets/icons";
+import { GoHome } from "react-icons/go";
+import { PiShoppingCartBold } from "react-icons/pi";
+import { MdAdd, MdOutlineMarkUnreadChatAlt } from "react-icons/md";
+import { BsPerson } from "react-icons/bs";
 
 // welcome screen data
 export const welcomeScreens = [
@@ -68,3 +72,13 @@ export const welcomeScreens = [
     path: '/store-owner/:userId/dashboard/paused-orders'
   }
 ];
+
+
+// customer navbar data
+
+export const customer_navbar_data = [
+  { id: "home", title: "الرئيسية", path: "/customer/:userId/home", icon: GoHome },
+  { id: "orders", title: "الطلبات", path: "/customer/:userId/orders", icon: PiShoppingCartBold },
+  { id: "chats", title: "الدردشة", path: "/customer/:userId/chats", icon: MdOutlineMarkUnreadChatAlt },
+  { id: "profile", title: "حسابي", path: "/customer/:userId/profile", icon: BsPerson },
+]
