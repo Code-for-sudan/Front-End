@@ -48,7 +48,7 @@ const CustomerNav = () => {
       <img 
         src={bg_nav}
         alt='curve'
-        className='absolute top-0 w-full h-full object-cover'
+        className='absolute top-0 max-sm:top-[-20px] w-full h-full object-cover'
       />
 
       <ul className='relative w-full flex items-center justify-between p-4 text-xs'>
