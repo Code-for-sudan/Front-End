@@ -7,6 +7,7 @@ import { GoHome } from "react-icons/go";
 import { PiShoppingCartBold } from "react-icons/pi";
 import { MdAdd, MdOutlineMarkUnreadChatAlt } from "react-icons/md";
 import { BsPerson } from "react-icons/bs";
+import { GrFavorite } from "react-icons/gr";
 
 // welcome screen data
 export const welcomeScreens = [
@@ -77,8 +78,8 @@ export const welcomeScreens = [
 // customer navbar data
 
 export const customer_navbar_data = [
-  { id: "home", title: "الرئيسية", path: "/customer/:userId/home", icon: GoHome },
-  { id: "orders", title: "الطلبات", path: "/customer/:userId/orders", icon: PiShoppingCartBold },
+  { id: "home", title: "الرئيسية", path: "/customer/:userId/dashboard", icon: GoHome },
+  { id: "favorite", title: "المفضلة", path: "/customer/:userId/favorite", icon: GrFavorite },
   { id: "chats", title: "الدردشة", path: "/customer/:userId/chats", icon: MdOutlineMarkUnreadChatAlt },
   { id: "profile", title: "حسابي", path: "/customer/:userId/profile", icon: BsPerson },
 ]

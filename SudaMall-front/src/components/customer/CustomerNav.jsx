@@ -12,7 +12,6 @@ const CustomerNav = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [active, setActive] = useState("");
-  const dispatch = useDispatch();
 
 
   useEffect(() => {
@@ -20,28 +19,26 @@ const CustomerNav = () => {
 
     if (path.includes("/dashboard")) {
       setActive("home");
-    } else if (path.includes("/orders")) {
-      setActive("orders");
-    } else if (path.includes("/add-product")) {
-      setActive("add");
+    } else if (path.includes("/favorite")) {
+      setActive("favorite");
+    } else if (path.includes("/shopping-card")) {
+      setActive("shopping-card");
     } else if (path.includes("/chats")) {
       setActive("chats");
     } else if (path.includes("/profile")) {
       setActive("profile");
+      
     }  
   }, [location]);
 
-  const handleClick = (id, path) => {
+
+  const handleClick = ({ id, path }) => {
     // when clicking icons logic
     setActive(id);
+    console.log(id)
     navigate(path);
   }
-
-  const handleAddProduct = () => {
-    dispatch(openAddProduct());
-  };
-
-
+  
   const isOrderDetailsPage = /\/store-owner\/[^/]+\/orders\/\d+/.test(location.pathname);
   if (isOrderDetailsPage) {
     return null;
@@ -66,7 +63,9 @@ const CustomerNav = () => {
               {index === 2 && (
                 <ShoppingBasket 
                   key="shopping-basket" 
-                  handleAddProduct={handleAddProduct}
+                  id="shopping-card"
+                  title="shopping-card"
+                  handleClick={handleClick}
                   iconSize={6}
                   />
               )}
@@ -79,8 +78,7 @@ const CustomerNav = () => {
                 id={link.id}
                 path={link.path}
                 active={active}
-                setActive={setActive}
-                navigate={navigate}
+                handleClick={handleClick}
               />
             
             </Fragment>
