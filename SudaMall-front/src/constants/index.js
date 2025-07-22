@@ -82,3 +82,4 @@ export const customer_navbar_data = [
   { id: "chats", title: "الدردشة", path: "/customer/:userId/chats", icon: MdOutlineMarkUnreadChatAlt },
   { id: "profile", title: "حسابي", path: "/customer/:userId/profile", icon: BsPerson },
 ]
+

@@ -1,11 +1,12 @@
 import React from 'react'
-import { MdAdd } from 'react-icons/md'
+import shoppingCartIcon from '/src/assets/icons/menu_icons/ShoppingCartCustomer.svg';
 
-function ShoppingBasket() {
+
+function ShoppingBasket({ iconSize,handleAddProduct }) {
   return (
     <li onClick={handleAddProduct} className="flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out">
-        <div className="absolute -top-6 p-2 text-white bg-dark-blue shadow-lg rounded-full z-50">
-            <MdAdd className="size-8" />
+        <div className="absolute -top-6 p-4 text-white bg-dark-blue shadow-lg rounded-full z-50">
+            <img src={shoppingCartIcon} className={`size-${iconSize}`} />
         </div>
     </li>
   )

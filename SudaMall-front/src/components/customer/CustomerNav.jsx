@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { openAddProduct } from '../../app/AppStats';
 import { bg_nav } from '../../assets'
 import NavLink from './NavLink'
 import { customer_navbar_data } from '../../constants'
+import ShoppingBasket from './ShoppingBasket';
 
 const CustomerNav = () => {
 
@@ -36,6 +37,10 @@ const CustomerNav = () => {
     navigate(path);
   }
 
+  const handleAddProduct = () => {
+    dispatch(openAddProduct());
+  };
+
 
   const isOrderDetailsPage = /\/store-owner\/[^/]+\/orders\/\d+/.test(location.pathname);
   if (isOrderDetailsPage) {
@@ -48,23 +53,42 @@ const CustomerNav = () => {
       <img 
         src={bg_nav}
         alt='curve'
-        className='absolute top-0 max-sm:top-[-20px] w-full h-full object-cover'
+        className='absolute top-0 max-sm:top-[-12px] w-full h-full object-cover'
       />
 
       <ul className='relative w-full flex items-center justify-between p-4 text-xs'>
-        {customer_navbar_data.map((link) => (
-          <NavLink
-            key={link.id}
-            Icon={link.icon}
-            iconSize="6"
-            title={link.title}
-            id={link.id}
-            path={link.path}
-            active={active}
-            setActive={setActive}
-            navigate={navigate}
-          />
-        ))}
+        {customer_navbar_data.map((link, index) => {
+          
+          return (
+            <Fragment key={link.id}>
+              
+              {/* Shopping card icon `middle icon` */}
+              {index === 2 && (
+                <ShoppingBasket 
+                  key="shopping-basket" 
+                  handleAddProduct={handleAddProduct}
+                  iconSize={6}
+                  />
+              )}
+
+              {/* bottom Navbar links */}
+              <NavLink
+                Icon={link.icon}
+                iconSize="6"
+                title={link.title}
+                id={link.id}
+                path={link.path}
+                active={active}
+                setActive={setActive}
+                navigate={navigate}
+              />
+            
+            </Fragment>
+     
+
+          )
+
+        })}
       </ul>
 
     </nav>
