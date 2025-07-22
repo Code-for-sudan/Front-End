@@ -27,8 +27,7 @@ const CustomerNav = () => {
       setActive("chats");
     } else if (path.includes("/profile")) {
       setActive("profile");
-      
-    }  
+    } 
   }, [location]);
 
 
@@ -64,7 +63,7 @@ const CustomerNav = () => {
                 <ShoppingBasket 
                   key="shopping-basket" 
                   id="shopping-card"
-                  title="shopping-card"
+                  path="/customer/:userId/shopping-card"
                   handleClick={handleClick}
                   iconSize={6}
                   />
