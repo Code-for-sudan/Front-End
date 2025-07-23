@@ -66,6 +66,39 @@ api.interceptors.response.use(
   }
 );
 
+/** 
+* Request a list of products based on search term.
+*/
+
+export const fetchProducts = async (query) => {
+  try {
+
+    const response = await axios.get(`https://sudamall.ddns.net/api/v1/search/products`, {
+      params: { 
+        q: query,
+        page: 1,
+       },
+    });
+
+    // if (!response.ok) {
+    //   throw new Error('Failed to fetch products')
+    // }
+    // const data = await response.json()
+    const data = response.data.results;
+
+    if (data.Response === 'False') {
+      throw new Error(data.Error || 'No products found');
+    }
+    console.log(data.response)
+    return { data }
+  } catch(error) {
+    console.log("Error fetching products:", error);
+    return {
+      error: error.message || 'An error occurred while fetching products'
+    }
+  }
+}
+
 export default api;
 
 

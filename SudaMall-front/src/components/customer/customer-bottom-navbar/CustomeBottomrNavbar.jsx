@@ -1,13 +1,13 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from 'react-router-dom';
-import { openAddProduct } from '../../app/AppStats';
-import { bg_nav } from '../../assets'
+import { openAddProduct } from '../../../app/AppStats';
+import { bg_nav } from '../../../assets'
 import NavLink from './NavLink'
-import { customer_navbar_data } from '../../constants'
+import { customer_navbar_data } from '../../../constants'
 import ShoppingBasket from './ShoppingBasket';
 
-const CustomerNav = () => {
+const CustomeBottomrNavbar = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,7 +34,6 @@ const CustomerNav = () => {
   const handleClick = ({ id, path }) => {
     // when clicking icons logic
     setActive(id);
-    console.log(id)
     navigate(path);
   }
   
@@ -92,4 +91,4 @@ const CustomerNav = () => {
   )
 }
 
-export default CustomerNav
+export default CustomeBottomrNavbar

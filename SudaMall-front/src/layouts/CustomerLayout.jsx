@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router-dom';
-import CustomerNav from '../components/customer/CustomerNav';
+import CustomeBottomrNavbar from '../components/customer/customer-bottom-navbar/CustomeBottomrNavbar';
 
 const CustomerLayout = () => (
   <div>
-    <CustomerNav />
+    <CustomeBottomrNavbar/>
     <Outlet />
   </div>
 );

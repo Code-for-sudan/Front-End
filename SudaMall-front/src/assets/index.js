@@ -3,7 +3,7 @@ import welcome2 from "./welcome2.png"
 import welcome3 from "./welcome3.png"
 import people from "./people.png"
 import bg_nav from "./bg-nav.svg"
-import ShoppingCartCustomer from './icons/menu_icons/ShoppingCartCustomer.svg'
+import search from "./icons/search.svg"
 
 export {
     welcome1,
@@ -11,4 +11,5 @@ export {
     welcome3,
     people,
     bg_nav,
+    search as SearchIcon,
 }
