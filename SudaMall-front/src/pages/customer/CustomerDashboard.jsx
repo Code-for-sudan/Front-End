@@ -20,7 +20,7 @@ const CustomerDashboard = () => {
 
   // Debounc the search term to prevent making too many API requests
   // by waiting for the use to stop typing for 500ms
-  useDebounce(() => setDebounceSearchTerm(searchTerm), 500, [searchTerm]);
+  useDebounce(() => setDebounceSearchTerm(searchTerm), 800, [searchTerm]);
 
   useEffect(() => {
     if (!debounceSearchTerm.trim()) return;
@@ -29,6 +29,7 @@ const CustomerDashboard = () => {
       setIsLoading(true);
 
       const { data, error } = await fetchProducts(debounceSearchTerm);
+      console.log(data, error)
       if (error) {
         setErrorMessage(error);
         setProductList([]);
@@ -40,7 +41,7 @@ const CustomerDashboard = () => {
     }
     loadproducts();
     console.log(productList);
-    console.log(errorMessage)
+    console.log(debounceSearchTerm)
   }, [debounceSearchTerm])
 
 

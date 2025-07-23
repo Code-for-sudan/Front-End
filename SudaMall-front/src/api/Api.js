@@ -84,7 +84,7 @@ export const fetchProducts = async (query) => {
     //   throw new Error('Failed to fetch products')
     // }
     // const data = await response.json()
-    const data = response.data.results;
+    const data = response.data;
 
     if (data.Response === 'False') {
       throw new Error(data.Error || 'No products found');
@@ -98,6 +98,8 @@ export const fetchProducts = async (query) => {
     }
   }
 }
+
+api.fetchProducts = fetchProducts;
 
 export default api;
 
