@@ -64,6 +64,10 @@ const CustomerDashboard = () => {
           setSearchTerm={setSearchTerm}
         />
 
+        {/* available categories */}
+
+        
+
       </div>
     </div>
   )

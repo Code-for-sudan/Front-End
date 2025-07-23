@@ -43,7 +43,7 @@ const CustomeBottomrNavbar = () => {
   }
 
   return (
-    <nav className='fixed bottom-0 w-full z-20'>
+    <nav className='w-full relative'>
       {/* the curve in the middle */}
       <img 
         src={bg_nav}
@@ -51,7 +51,7 @@ const CustomeBottomrNavbar = () => {
         className='absolute top-0 max-sm:top-[-12px] w-full h-full object-cover'
       />
 
-      <ul className='relative w-full flex items-center justify-between p-4 text-xs'>
+      <ul className='relative w-full flex flex-row items-center justify-center py-5 text-xs'>
         {customer_navbar_data.map((link, index) => {
           
           return (
@@ -59,6 +59,8 @@ const CustomeBottomrNavbar = () => {
               
               {/* Shopping card icon `middle icon` */}
               {index === 2 && (
+                <>
+                <li className="w-1/2" />
                 <ShoppingBasket 
                   key="shopping-basket" 
                   id="shopping-card"
@@ -66,6 +68,8 @@ const CustomeBottomrNavbar = () => {
                   handleClick={handleClick}
                   iconSize={6}
                   />
+                  <li className="w-1/2" />
+                  </>
               )}
 
               {/* bottom Navbar links */}
