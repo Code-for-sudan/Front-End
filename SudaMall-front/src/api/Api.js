@@ -70,13 +70,13 @@ api.interceptors.response.use(
 * Request a list of products based on search term.
 */
 
-export const fetchProducts = async (query) => {
+export const searchProduct = async (query, page = 1) => {
   try {
 
     const response = await axios.get(`https://sudamall.ddns.net/api/v1/search/products`, {
       params: { 
         q: query,
-        page: 1,
+        page: page,
        },
     });
 
@@ -89,7 +89,37 @@ export const fetchProducts = async (query) => {
     if (data.Response === 'False') {
       throw new Error(data.Error || 'No products found');
     }
-    console.log(data.response)
+    return { data }
+  } catch(error) {
+    console.log("Error fetching products:", error);
+    return {
+      error: error.message || 'An error occurred while fetching products'
+    }
+  }
+}
+
+api.searchProduct = searchProduct;
+
+
+export const fetchProducts = async (category = '') => {
+  try {
+
+    const response = await axios.get(`https://sudamall.ddns.net/api/v1/products`, {
+      params: { 
+        category: category,
+       },
+    });
+
+    // if (!response.ok) {
+    //   throw new Error('Failed to fetch products')
+    // }
+    // const data = await response.json()
+    const data = response.data;
+    console.log(response)
+
+    if (data.Response === 'False') {
+      throw new Error(data.Error || 'No products found');
+    }
     return { data }
   } catch(error) {
     console.log("Error fetching products:", error);
