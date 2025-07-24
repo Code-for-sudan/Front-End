@@ -18,6 +18,7 @@ function SearchField({ placeholder = '', searchTerm, setSearchTerm }) {
           placeholder={placeholder}
           className="w-full py-2 sm:pr-2 pl-10 text-base text-[#1f1e1e] placeholder:text-[#797979] outline-none"
           onChange={(e) => setSearchTerm(e.target.value)}
+          // onClick={(e) => e.stopPropagation()}
         />
       </div>
     </div>
