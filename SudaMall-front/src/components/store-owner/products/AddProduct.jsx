@@ -19,12 +19,11 @@ const AddProduct = () => {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    quantity: '',
     price: '',
     type: '',
     category: '',
     color: [],
-    size: '',
+    sizes: [{ size: '', quantity: '' }],
   });
 
   // file upload functions from useFileUpload hook
@@ -99,7 +98,7 @@ const AddProduct = () => {
           />
         </div>
 
-        {/* quantity */}
+        {/* quantity
         <div>
           <label htmlFor="quantity" className="block text-sm font-medium mb-1">الكمية</label>
           <input
@@ -111,7 +110,7 @@ const AddProduct = () => {
             onChange={handleChange}
             required
           />
-        </div>
+        </div> */}
 
         {/* price */}
         <div>
@@ -225,19 +224,66 @@ const AddProduct = () => {
             <p className='text-xs text-gray-600 mt-2'>* يمكنك اختيار اكثر من لون</p>
           </div>
           
-        {/* size */}
-        <div>
-          <label htmlFor="size" className="block text-sm font-medium mb-1">المقاس</label>
-          <input
-            type="text"
-            name="size"
-            id="size"
-            className="w-full text-xs border border-gray-300 rounded-md p-2 focus:outline-none focus:ring"
-            value={formData.size}
-            onChange={handleChange}
-          />
-          <p className='text-xs mt-2 text-gray-600'>* اكتب المقاس المرفق بواسطة بيانات المصنع</p>
-        </div>
+          {/* size + quantity inputs */}
+          <div>
+            <label className="block text-sm font-medium mb-2">المقاسات والكمية</label>
+            
+            <div className="flex flex-col gap-2">
+              {formData.sizes.map((item, index) => (
+                <div key={index} className="flex gap-2 items-center">
+                  <input
+                    type="text"
+                    placeholder="المقاس"
+                    className="w-1/2 text-xs border border-gray-300 rounded-md p-2 focus:outline-none focus:ring"
+                    value={item.size}
+                    onChange={(e) => {
+                      const updatedSizes = [...formData.sizes];
+                      updatedSizes[index].size = e.target.value;
+                      setFormData((prev) => ({ ...prev, sizes: updatedSizes }));
+                    }}
+                  />
+                  <input
+                    type="number"
+                    placeholder="الكمية"
+                    className="w-1/2 text-xs border border-gray-300 rounded-md p-2 focus:outline-none focus:ring"
+                    value={item.quantity}
+                    onChange={(e) => {
+                      const updatedSizes = [...formData.sizes];
+                      updatedSizes[index].quantity = e.target.value;
+                      setFormData((prev) => ({ ...prev, sizes: updatedSizes }));
+                    }}
+                  />
+                  {index > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const updatedSizes = formData.sizes.filter((_, i) => i !== index);
+                        setFormData((prev) => ({ ...prev, sizes: updatedSizes }));
+                      }}
+                      className="text-red-500 text-xs"
+                    >
+                      حذف
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={() =>
+                setFormData((prev) => ({
+                  ...prev,
+                  sizes: [...prev.sizes, { size: '', quantity: '' }],
+                }))
+              }
+              className="mt-2 text-sm text-primary border border-primary px-2 py-1 rounded"
+            >
+              + إضافة مقاس
+            </button>
+
+            <p className="text-xs text-gray-600 mt-2">* يمكنك إضافة أكثر من مقاس مع الكمية الخاصة به</p>
+          </div>
 
         {/* add and cancel addition buttons  */}
         <div className="pt-4">

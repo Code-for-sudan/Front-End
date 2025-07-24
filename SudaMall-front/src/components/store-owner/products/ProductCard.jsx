@@ -1,7 +1,14 @@
 import { CgTrash } from "react-icons/cg";
 import { PiPencilLineBold } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({product}) => {
+    const navigate = useNavigate();
+
+    // redirect user to open edit product
+    const handleEditProduct = (id) => {
+        navigate(`/store-owner/:userId/products/edit/${id}`)
+    }
   return (
     <div
         className="border border-gray-300 bg-gray-50 p-3 rounded-md flex items-center justify-between gap-6 text-xs"
@@ -20,7 +27,9 @@ const ProductCard = ({product}) => {
             <p>{product.product_type}</p>
         </div>
         <div className="flex flex-col items-center justify-between gap-3 text-lg">
-            <button className="cursor-pointer">
+            <button 
+                onClick={() => handleEditProduct(product.product_id)}
+                className="cursor-pointer">
                 <PiPencilLineBold />
             </button>
             <button className="cursor-pointer">

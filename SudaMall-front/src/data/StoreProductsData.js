@@ -11,6 +11,7 @@ import {
 export const StoreProductsData = [
   {
     product_name: "لاب توب",
+    product_id: 2,
     product_description: "لاب توب سريع بمعالج قوي وذاكرة كبيرة.",
     price: 150000,
     category: "الكل",
@@ -23,6 +24,7 @@ export const StoreProductsData = [
   },
   {
     product_name: "حقيبة",
+    product_id: 3,
     product_description: "حقيبة أنيقة مصنوعة من الجلد الفاخر.",
     price: 35000,
     category: "رجال",
@@ -35,6 +37,7 @@ export const StoreProductsData = [
   },
   {
     product_name: "سماعة",
+    product_id: 4,
     product_description: "سماعة بلوتوث بصوت عالي الجودة.",
     price: 20000,
     category: "نساء",
@@ -47,6 +50,7 @@ export const StoreProductsData = [
   },
   {
     product_name: "قميص",
+    product_id: 5,
     product_description: " ناعم وأنيق للمناسبات.",
     price: 45000,
     category: "نساء",
@@ -59,6 +63,7 @@ export const StoreProductsData = [
   },
   {
     product_name: "تيشيرت",
+    product_id: 6,
     product_description: "تيشيرت قطني مريح بألوان متعددة.",
     price: 12000,
     category: "رجال",
@@ -71,6 +76,7 @@ export const StoreProductsData = [
   },
   {
     product_name: "حذاء",
+    product_id: 7,
     product_description: "حذاء رياضي مناسب للمشي والجري.",
     price: 28000,
     category: "أطفال أولاد",
@@ -83,6 +89,7 @@ export const StoreProductsData = [
   },
   {
     product_name: "ساعة",
+    product_id: 8,
     product_description: "ساعة رقمية مقاومة للماء.",
     price: 18000,
     category: "أطفال بنات",
