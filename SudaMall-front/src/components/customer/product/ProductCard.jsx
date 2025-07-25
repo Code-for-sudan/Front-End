@@ -40,11 +40,11 @@ function ProductCard({ name, price, picture, store_name, size = null, favorite =
         </div>
 
         <div className='w-full flex flex-row gap-2 text-sm'>
-            <button className='w-3/4 bg-gray-200 text-gray-700 py-2 rounded-md hover:bg-gray-300 transition-colors'>
-                تفاصيل المنتج
-            </button>
             <button className='w-full bg-[#FCA311CC] text-white py-2 rounded-md hover:bg-[#FCA311] transition-colors'>
                 إضافة إلى السلة
+            </button>
+            <button className='w-3/4 bg-gray-200 text-gray-700 py-2 rounded-md hover:bg-gray-300 transition-colors'>
+                تفاصيل المنتج
             </button>
         </div>
     </div>

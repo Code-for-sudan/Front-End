@@ -130,8 +130,8 @@ const CustomerDashboard = () => {
             ) : (
               <div className="w-full flex flex-col gap-2">
                 <div className='w-full flex flex-row justify-between items-center'>
-                  <h3 className="text-[#FCA311CC]">احدث المنتجات</h3>
-                  <img src={ArrowIcon} className="w-6 h-6 text-[#FCA311CC] cursor-pointer" />
+                  <h3 className="text-[#FCA311CC] text-xl">احدث المنتجات</h3>
+                  <img src={ArrowIcon} className="s-8 text-[#FCA311CC] cursor-pointer" />
                 </div>
                 <div className="flex flex-col gap-2 overflow-hidden"> 
                   {productList.length > 0 ? (
