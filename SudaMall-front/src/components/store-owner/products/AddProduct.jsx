@@ -19,10 +19,12 @@ const AddProduct = () => {
   const [formData, setFormData] = useState({
     name: '',
     description: '',
+    brand: '',
     price: '',
     type: '',
     category: '',
     color: [],
+    has_sizes: null,
     sizes: [{ size: '', quantity: '' }],
   });
 
@@ -97,20 +99,19 @@ const AddProduct = () => {
             required
           />
         </div>
-
-        {/* quantity
+        {/* product brand */}
         <div>
-          <label htmlFor="quantity" className="block text-sm font-medium mb-1">الكمية</label>
+          <label htmlFor="brand" className="block text-sm font-medium mb-1">العلامة التجارية ( الماركة )</label>
           <input
-            type="number"
-            name="quantity"
-            id="quantity"
+            type="text"
+            name="brand"
+            id="brand"
             className="w-full text-xs border border-gray-300 rounded-md p-2 focus:outline-none focus:ring"
-            value={formData.quantity}
+            value={formData.brand}
             onChange={handleChange}
             required
           />
-        </div> */}
+        </div>
 
         {/* price */}
         <div>
@@ -176,55 +177,60 @@ const AddProduct = () => {
           />
 
           {/* select product color */}
-          <div>
-            <label className="block text-sm font-medium mb-2">اللون</label>
-            <div className="flex items-center justify-between">
-              {/* Circles */}
-              <div className="flex gap-2">
-                {presetColors.map((color) => (
-                  <button
-                    key={color}
-                    type="button"
-                    onClick={() =>
-                      setFormData((prev) => {
-                        const updatedColors = prev.color?.includes(color)
-                          ? prev.color.filter((c) => c !== color)
-                          : [...(prev.color || []), color];
-                        return { ...prev, color: updatedColors };
-                      })
-                    }
-                    className={`w-6 h-6 rounded-full border-2 ${
-                      formData.color?.includes(color) ? 'ring-2 ring-black' : 'border-gray-300'
-                    }`}
-                    style={{ backgroundColor: color }}
-                  />
-                ))}
-              </div>
-
-              {/* Add custom color button */}
-              <button
-                type="button"
-                onClick={() => {
-                  const newColor = prompt('أدخل كود اللون (Hex مثل #abcdef):');
-                  if (newColor && /^#[0-9A-Fa-f]{6}$/.test(newColor)) {
-                    setFormData((prev) => ({
-                      ...prev,
-                      color: [...(prev.color || []), newColor],
-                    }));
-                  } else if (newColor) {
-                    alert('الرجاء إدخال كود لون صحيح.');
-                  }
-                }}
-                className="flex items-center gap-1 text-sm text-primary border border-primary px-2 py-1 rounded"
-              >
-                <FaPlus className="text-xs" />
-                إضافة لون
-              </button>
-            </div>
-            <p className='text-xs text-gray-600 mt-2'>* يمكنك اختيار اكثر من لون</p>
+        <div>
+          <label htmlFor="color" className="block text-sm font-medium mb-1">اللون</label>
+          <input
+            type="text"
+            name="color"
+            id="color"
+            className="w-full text-xs border border-gray-300 rounded-md p-2 focus:outline-none focus:ring"
+            value={formData.color}
+            onChange={handleChange}
+          />
+        </div>
+        {/* Question: Does the product have sizes? */}
+        <div>
+          <label className="block text-sm font-medium mb-2">هل المنتج لديه مقاسات؟</label>
+          <div className="flex gap-4">
+            <button
+              type="button"
+              className={`text-sm px-4 py-2 rounded border ${
+                formData.has_sizes === true ? "bg-primary text-white" : "bg-white text-gray-700 border-gray-300"
+              }`}
+              onClick={() => setFormData((prev) => ({ ...prev, has_sizes: true }))}
+            >
+              نعم
+            </button>
+            <button
+              type="button"
+              className={`text-sm px-4 py-2 rounded border ${
+                formData.has_sizes === false ? "bg-primary text-white" : "bg-white text-gray-700 border-gray-300"
+              }`}
+              onClick={() => setFormData((prev) => ({ ...prev, has_sizes: false }))}
+            >
+              لا
+            </button>
           </div>
-          
-          {/* size + quantity inputs */}
+        </div>
+         {/* if the product has sizes return (size + quantity inputs) else return quantity */}
+        {formData.has_sizes === null ? null : formData.has_sizes === false ? 
+        (
+        <div>
+          <label htmlFor="quantity" className="block text-sm font-medium mb-1">الكمية</label>
+          <input
+            type="number"
+            name="quantity"
+            id="quantity"
+            className="w-full text-xs border border-gray-300 rounded-md p-2 focus:outline-none focus:ring"
+            value={formData.quantity}
+            onChange={handleChange}
+            required
+          />
+        </div>
+       
+        )
+        :
+        (
           <div>
             <label className="block text-sm font-medium mb-2">المقاسات والكمية</label>
             
@@ -284,6 +290,7 @@ const AddProduct = () => {
 
             <p className="text-xs text-gray-600 mt-2">* يمكنك إضافة أكثر من مقاس مع الكمية الخاصة به</p>
           </div>
+          )}
 
         {/* add and cancel addition buttons  */}
         <div className="pt-4">
