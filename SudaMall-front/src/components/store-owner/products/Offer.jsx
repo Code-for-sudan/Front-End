@@ -55,13 +55,13 @@ const Offer = ({ formData, handleOfferChange, toggleOffer }) => {
 
       {/* Start date */}
       <div>
-        <label htmlFor="offer_start" className="block text-sm font-medium mb-1">
+        <label htmlFor="start_date" className="block text-sm font-medium mb-1">
           تاريخ بداية العرض
         </label>
         <input
           type="date"
-          name="offer_start"
-          id="offer_start"
+          name="start_date"
+          id="start_date"
           className="w-full text-xs border border-gray-300 rounded-md p-2 focus:outline-none focus:ring"
           value={formData.offer.start_date}
           onChange={handleOfferChange}
@@ -70,18 +70,34 @@ const Offer = ({ formData, handleOfferChange, toggleOffer }) => {
 
       {/* End date */}
       <div>
-        <label htmlFor="offer_end" className="block text-sm font-medium mb-1">
+        <label htmlFor="end_date" className="block text-sm font-medium mb-1">
           تاريخ نهاية العرض
         </label>
         <input
           type="date"
-          name="offer_end"
-          id="offer_end"
+          name="end_date"
+          id="end_date"
           className="w-full text-xs border border-gray-300 rounded-md p-2 focus:outline-none focus:ring"
           value={formData.offer.end_date}
           onChange={handleOfferChange}
         />
       </div>
+
+              {/* add and cancel addition buttons  */}
+        <div className="pt-4 flex items-center justify-center gap-4">
+          <button
+            type="button"
+            className="flex-1 bg-primary text-white py-2 rounded-md hover:bg-opacity-90 cursor-pointer"
+          >
+            حفظ العرض
+          </button>
+          <button
+            type="button"
+            className="flex-1 border-2 border-gray-300 text-gray-600 py-2 rounded-md cursor-pointer"
+          >
+            إلغاء العرض
+          </button>
+        </div>
     </div>
   );
 };
