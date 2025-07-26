@@ -2,17 +2,19 @@ import React, { useState } from 'react'
 import { MdOutlineArrowCircleRight } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom';
 import Offer from './Offer';
+import ProductModal from './ProductModal';
 
 const EditProduct = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        name: '',
-        description: '',
-        brand: '',
+        name: 'ايفون 14',
+        description: 'الجديد من شركة ابل',
+        brand: 'apple',
         price: '453',
-        type: '',
-        category: '',
-        color: [],
+        type: 'أجهزة',
+        category: 'all',
+        picture: null,
+        color: 'أسود',
         has_sizes: null,
         sizes: [{ size: '', quantity: '' }],
         offer: {
@@ -25,6 +27,17 @@ const EditProduct = () => {
 
     const [ active, setActive ] = useState("edit");
 
+      // handle input chang when the user type
+      const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+      };
+
+       // handle submit form changes
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("form data:", formData)
+      };
     // go back from editing
    const handleCloseEdit = () => {
     navigate(-1)
@@ -79,9 +92,13 @@ const EditProduct = () => {
         </div>
         { active === 'edit' ?
         (
-            <div>
-                edit
-            </div>
+            <ProductModal 
+                handleSubmit={handleSubmit}
+                handleCloseProduct={handleCloseEdit}
+                handleChange={handleChange}
+                formData={formData}
+                setFormData={setFormData}
+            />
         )
         :
         (

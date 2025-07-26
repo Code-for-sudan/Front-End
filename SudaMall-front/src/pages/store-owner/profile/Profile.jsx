@@ -2,9 +2,10 @@ import { useState } from "react";
 import { useSelector } from 'react-redux';
 import { userData } from "../../../data/user.js"; // this will be replaced with the database data
 
-import { ProfileHeader, ProfileStats, EditableField, LocationField, FileUploader, Map } from "../../../components/store-owner/profile";
+import { ProfileHeader, ProfileStats, EditableField, LocationField, Map } from "../../../components/store-owner/profile";
+import { FileUploader } from "../../../components/store-owner/reusable";
 import { useFileUpload } from "../../../hooks/useFileUpload.js";
-import { SelectMap } from "../../../app/AppStats"
+import { SelectMap } from "../../../app/AppStats";
 
 const Profile = () => {
   const storeInfo = userData.store_info;
