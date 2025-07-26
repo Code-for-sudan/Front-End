@@ -1,4 +1,4 @@
-import { NewOrderCard, SingleWeeklyChart } from '../../../../components/reusable'
+import { NewOrderCard, SingleWeeklyChart } from "../../../../components/store-owner/reusable";
 
 const WeeklyOrders = ({WeeklyOrdersData, srcImg}) => {
   return (

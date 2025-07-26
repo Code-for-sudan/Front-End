@@ -3,7 +3,7 @@ import TodayClients from './TodayClients';
 import WeeklyClients from './WeeklyClients';
 import { TodayClientsData } from '../../../../data/TodayClients' // this will be replaced with backend response data
 import { WeekClientsData } from '../../../../data/WeekClients'; // this also will be replaced with backend response data
-import { MainTitle } from '../../../../components/reusable';
+import { MainTitle } from '../../../../components/store-owner/reusable';
 
 const NewClients = () => {
   const [view, setView] = useState("daily"); // 'daily' or 'weekly'

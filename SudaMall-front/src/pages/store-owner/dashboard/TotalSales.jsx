@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { DailySales, WeeklySales } from "../../../components/store-owner/dashboard";
-import { MainTitle } from '../../../components/reusable';
+import { MainTitle } from "../../../components/store-owner/reusable";
 
 import { SalesAndCosts } from "../../../data/SalesAndCosts"; // this will replaced with endpoint /total-sales?period=week
 import { DailySalesData } from "../../../data/DailySales";  // this will replaced with endpoint /total-sales?period=day

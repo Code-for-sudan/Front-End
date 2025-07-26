@@ -1,30 +1,53 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
-export const useAutocompleteWebSocket = (
-  onSuggestions
-) => {
+export const useAutocompleteWebSocket = (onSuggestions) => {
   const wsRef = useRef(null);
 
-  useEffect(() => {
+  const connect = () => {
+    if (wsRef.current) return;
+
     const ws = new WebSocket("wss://sudamall.ddns.net/ws/autocomplete/");
     wsRef.current = ws;
 
-    ws.onopen = () => console.log("WebSocket connected");
+    ws.onopen = () => {
+      console.log("WebSocket connected");
+    };
 
     ws.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      if (data.suggestions) {
-        onSuggestions(data.suggestions);
+      try {
+        const data = JSON.parse(event.data);
+
+        if (data.error) {
+          // If backend sends an error message in response
+          console.error("WebSocket server error:", data.error);
+        } else if (data.suggestions) {
+          onSuggestions(data.suggestions); // Render suggestions
+          console.log(data)
+        } else {
+          console.warn("Unexpected message structure:", data);
+        }
+      } catch (err) {
+        console.error("Failed to parse WebSocket message:", event.data, err);
       }
     };
 
-    ws.onclose = () => console.log("WebSocket disconnected");
-    ws.onerror = (err) => console.error("WebSocket error", err);
+    ws.onclose = () => {
+      console.log("WebSocket disconnected");
+      wsRef.current = null;
+    };
 
-    return () => {
+    ws.onerror = (err) => {
+      console.error("WebSocket error:", err);
       ws.close();
     };
-  }, [onSuggestions]);
+  };
+
+  const disconnect = () => {
+    if (wsRef.current) {
+      wsRef.current.close();
+      wsRef.current = null;
+    }
+  };
 
   const sendQuery = (msg) => {
     if (wsRef.current?.readyState === WebSocket.OPEN) {
@@ -32,5 +55,9 @@ export const useAutocompleteWebSocket = (
     }
   };
 
-  return sendQuery;
+  return {
+    connect,
+    disconnect,
+    sendQuery,
+  };
 };

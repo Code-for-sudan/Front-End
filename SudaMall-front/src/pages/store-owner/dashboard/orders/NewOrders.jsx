@@ -4,7 +4,7 @@ import WeeklyOrders from './WeeklyOrders';
 import { TodayOrdersData } from '../../../../data/TodayOrders';
 import { WeeklyOrdersData } from '../../../../data/WeekOrders';
 import { success } from '../../../../assets/icons';
-import { MainTitle } from '../../../../components/reusable';
+import { MainTitle } from '../../../../components/store-owner/reusable';
 
 const NewOrders = () => {
   const [view, setView] = useState("daily"); // 'daily' or 'weekly'
