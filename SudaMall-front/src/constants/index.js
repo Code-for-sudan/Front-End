@@ -68,3 +68,16 @@ export const welcomeScreens = [
     path: '/store-owner/:userId/dashboard/paused-orders'
   }
 ];
+
+// services/customers.js
+export const fetchCustomers = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 1000)); // simulate delay
+  return new Array(10).fill(null).map((_, index) => ({
+    id: index + 1,
+    name: `أحمد ${index + 1}`,
+    phone: `09100000${index + 1}`,
+    email: `ahmed${index + 1}@example.com`,
+    lastPurchase: '٢٠٢٥/٠٣/٢٥',
+    avatar: `https://i.pravatar.cc/40?img=${index + 1}`,
+  }));
+};

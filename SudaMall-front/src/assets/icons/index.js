@@ -5,7 +5,7 @@ import CurrencyCircleDollar from "./menu_icons/CurrencyCircleDollar.svg";
 import Files from "./menu_icons/Files.png";
 import Gear from "./menu_icons/Gear.svg";
 import ShoppingBag from "./menu_icons/ShoppingBag.svg";
-import ShoppingCart from "./menu_icons/ShoppingCart.png";
+import ShoppingCartMenu from "./menu_icons/ShoppingCart.png";
 import Store from "./menu_icons/Store.svg";
 import UserCirclePlus from "./UserCirclePlus.png";
 import CurrencyDollar from "./CurrencyDollar.png";
@@ -21,6 +21,11 @@ import notfound1 from "./notFound/notfound1.svg";
 import notfound2 from "./notFound/notfound2.svg";
 import notfound3 from "./notFound/notfound3.svg";
 import CheckCircle from "./CheckCircle.svg";
+import edit from "./edit.svg";
+import delete_icon from "./delete_icon.svg";
+import ShoppingCart from "./customer_icons/ShoppingCart.svg";
+import CaretCircleDown from "./customer_icons/CaretCircleDown.svg";
+import CaretCircleUp from "./customer_icons/CaretCircleUp.svg";
 export {
     Admin,
     Adds,
@@ -29,7 +34,7 @@ export {
     Files,
     Gear,
     ShoppingBag,
-    ShoppingCart,
+    ShoppingCartMenu,
     Store,
     UserCirclePlus,
     CurrencyDollar,
@@ -44,5 +49,10 @@ export {
     notfound1,
     notfound2,
     notfound3,
-    CheckCircle
+    CheckCircle,
+    edit,
+    delete_icon,
+    ShoppingCart,
+    CaretCircleDown,
+    CaretCircleUp
 }

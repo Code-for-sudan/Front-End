@@ -7,7 +7,7 @@ import { NewOrders } from "../pages/store-owner/dashboard/orders";
 import { Products } from "../pages/store-owner/products";
 import OrdersPage from "../pages/store-owner/orders/OrdersPage";
 import OrderDetailsPage from "../pages/store-owner/orders/OrderDetailsPage";
-import { CustomerManagement } from "../pages/store-owner/customer";
+import { CustomerManagement , CustomerDetails} from "../pages/store-owner/customer";
 
 
 /**
@@ -47,6 +47,7 @@ const StoreOwnerRoutes = () => [
 
   {/* ------------------------------ Store owner customers routes ------------------------------- */}
       <Route path="/store-owner/:userId/customers" element={<CustomerManagement />} />
+      <Route path="/store-owner/:userId/customers/:customerId" element={<CustomerDetails />} />
 
 
     {/* ------------------------------ Store owner profile routes ------------------------------------*/}
