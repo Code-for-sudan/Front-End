@@ -50,7 +50,7 @@ export const login =  async ({ email, password, rememberMe }) => {
  */
 export const resendVerification = async (email) => {
   try {
-    const res = await axios.post("https://sudamall.me/api/v1/resend-verification/", { email });
+    const res = await axios.post("https://sudamall.ddns.net/api/v1/auth/resend-verification/", { email });
     toast.success(res.data.message || "تم إرسال رابط التفعيل مرة أخرى بنجاح..");
   } catch (error) {
     const msg = error.response?.data?.message || "حدث خطأ أثناء محاولة إعادة إرسال رابط التفعيل.";
@@ -65,6 +65,6 @@ export const resendVerification = async (email) => {
  * @returns {Promise<Object>} - API response confirming activation.
  */
 export const verifyAccount = async (token) => {
-  const response = await axios.post("https://sudamall.ddns.net/api/v1/activate-account/", { token });
+  const response = await axios.post("https://sudamall.ddns.net/api/v1/auth/activate-account/", { token });
   return response.data;
 };

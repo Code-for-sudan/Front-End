@@ -5,29 +5,34 @@ import { signupUser } from "../../api/Auth";
 import { Link } from "react-router-dom";
 import { goToLogin } from "../../hooks/navigateService";
 import { toast } from "react-toastify";
-import { CheckCircle} from "../../assets/icons/index";
+import { CheckCircle } from "../../assets/icons/index";
 import PopupMessage from "../public/auth-components/PopupMessage";
+import { Eye, EyeOff } from "lucide-react";
 
 const SignupForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [nameInputs, setNameInputs] = useState(["", "", "", ""]);
   const [signupInput, setSignupInput] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
-    gender:"M",
+    gender: "M",
     password: "",
     ConfirmPassword: "",
     phoneNumber: "",
   });
+
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [errors, setErrors] = useState({});
+
   const { mutate, isPending } = useMutation({
     mutationFn: signupUser,
-    
     onSuccess: () => {
-     setShowSuccessPopup(true);
+      setShowSuccessPopup(true);
       setTimeout(() => {
-      setShowSuccessPopup(false);
-        goToLogin(); // go to login page after success
+        setShowSuccessPopup(false);
+        goToLogin(); // After completion, the user is redirected to the login page.
       }, 8000);
     },
     onError: (error) => {
@@ -42,40 +47,54 @@ const SignupForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-          const { email, password } = signupInput;
-      if (!email.trim() || !password.trim()) {
-        toast.error("يرجى ملء جميع الحقول");
-        return;
-      }
-    // تقسيم الاسم الكامل إلى first_name و last_name
-    const nameParts = signupInput.name.trim().split(/\s+/);
-    if (nameParts.length !== 4) {
-      setErrors((prev) => ({ ...prev, name: "يرجى إدخال الاسم رباعي " }));
+    // Combine the first and second names into firstName, and the third and fourth names into lastName
+    const fullFirstName =
+      `${nameInputs[0].trim()} ${nameInputs[1].trim()}`.trim();
+    const fullLastName =
+      `${nameInputs[2].trim()} ${nameInputs[3].trim()}`.trim();
+
+    // Create an updated copy of the data
+    const updatedSignup = {
+      ...signupInput,
+      firstName: fullFirstName,
+      lastName: fullLastName,
+    };
+
+    // Check the fields
+    if (
+      !updatedSignup.firstName ||
+      !updatedSignup.lastName ||
+      !updatedSignup.email.trim() ||
+      !updatedSignup.password.trim()
+    ) {
+      toast.error("يرجى ملء جميع الحقول");
       return;
     }
-    const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[a-zA-Z\d@$!%*?&]{8,}$/
-;
 
-    if (!passwordPattern.test(signupInput.password)) {
+    const passwordPattern =
+      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[a-zA-Z\d@$!%*?&]{8,}$/;
+    if (!passwordPattern.test(updatedSignup.password)) {
       setErrors((prev) => ({
         ...prev,
         password:
-          "  كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل وتشمل حروف وأرقام ورموز",
+          "كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل وتشمل حروف وأرقام ورموز",
       }));
       return;
     }
 
-    if (signupInput.password !== signupInput.ConfirmPassword) {
+    if (updatedSignup.password !== updatedSignup.ConfirmPassword) {
       setErrors((prev) => ({
         ...prev,
         ConfirmPassword: "كلمتا المرور غير متطابقتين",
       }));
       return;
     }
-    let cleanedPhone = signupInput.phoneNumber.trim();
+
+    let cleanedPhone = updatedSignup.phoneNumber.trim();
     if (cleanedPhone.startsWith("0")) {
-      cleanedPhone = cleanedPhone.slice(1); // remove leading zero
+      cleanedPhone = cleanedPhone.slice(1);
     }
+
     if (
       cleanedPhone.length < 9 ||
       cleanedPhone.length > 10 ||
@@ -87,18 +106,22 @@ const SignupForm = () => {
       }));
       return;
     }
+    if (!signupInput.gender) {
+      setErrors((prev) => ({
+        ...prev,
+        gender: " يرجى تحديد الجنس",
+      }));
+      return;
+    }
+
     const formattedPhone = `+249${cleanedPhone}`;
 
-    const [first1, first2, last1, last2] = nameParts;
-    const first_name = `${first1} ${first2}`;
-    const last_name = `${last1} ${last2}`;
-
     const formData = {
-      first_name,
-      last_name,
-      gender: signupInput.gender,
-      email: signupInput.email,
-      password: signupInput.password,
+      first_name: updatedSignup.firstName,
+      last_name: updatedSignup.lastName,
+      gender: updatedSignup.gender,
+      email: updatedSignup.email,
+      password: updatedSignup.password,
       phone_number: formattedPhone,
     };
 
@@ -127,37 +150,47 @@ const SignupForm = () => {
       >
         <div className="container mx-auto px-4 mt-2">
           <h1 className="text-2xl font-bold text-black text-center mb-6">
-            انشاء حساب جديد
+            إنشاء حساب جديد
           </h1>
 
           <form className="space-y-4" onSubmit={handleSubmit}>
-            {/* Full Name */}
+            {/* Input: Full Name (4 fields) */}
             <div>
               <label className="block text-right font-medium mb-2">
                 الاسم الكامل
               </label>
-              <input
-                type="text"
-                placeholder=""
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
-                style={{ "--tw-ring-color": "var(--primary)" }}
-                value={signupInput.name}
-                onChange={(e) => {
-                  setSignupInput({ ...signupInput, name: e.target.value });
-                  setErrors({ ...errors, name: null });
-                }}
-              />
-              {errors.name && (
+              <div className="flex gap-4">
+                {[0, 1, 2, 3].map((i) => (
+                  <input
+                    key={i}
+                    type="text"
+                    maxLength={10}
+                    placeholder={""}
+                    value={nameInputs[i]}
+                    onChange={(e) => {
+                      const updated = [...nameInputs];
+                      updated[i] = e.target.value;
+                      setNameInputs(updated);
+                    }}
+                    className="w-1/4 px-3 py-2 text-right rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                ))}
+              </div>
+              {errors.firstName && (
                 <p className="text-sm text-red-500 mt-1 text-right">
-                  {errors.name}
+                  {errors.firstName}
+                </p>
+              )}
+              {errors.lastName && (
+                <p className="text-sm text-red-500 mt-1 text-right">
+                  {errors.lastName}
                 </p>
               )}
             </div>
-
             {/* Email */}
             <div>
               <label className="block text-right font-medium mb-2">
-                البريد الالكتروني
+                البريد الإلكتروني
               </label>
               <input
                 type="email"
@@ -172,21 +205,34 @@ const SignupForm = () => {
             </div>
 
             {/* Password */}
+
             <div>
               <label className="block text-right font-medium mb-2">
                 كلمة المرور
               </label>
-              <input
-                type="password"
-                placeholder="********"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
-                style={{ "--tw-ring-color": "var(--primary)" }}
-                value={signupInput.password}
-                onChange={(e) => {
-                  setSignupInput({ ...signupInput, password: e.target.value });
-                  setErrors({ ...errors, password: null });
-                }}
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="********"
+                  className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
+                  style={{ "--tw-ring-color": "var(--primary)" }}
+                  value={signupInput.password}
+                  onChange={(e) => {
+                    setSignupInput({
+                      ...signupInput,
+                      password: e.target.value,
+                    });
+                    setErrors({ ...errors, password: null });
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
               {errors.password && (
                 <p className="text-sm text-red-500 mt-1 text-right">
                   {errors.password}
@@ -199,20 +245,29 @@ const SignupForm = () => {
               <label className="block text-right font-medium mb-2">
                 تأكيد كلمة المرور
               </label>
-              <input
-                type="password"
-                placeholder="********"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
-                style={{ "--tw-ring-color": "var(--primary)" }}
-                value={signupInput.ConfirmPassword}
-                onChange={(e) => {
-                  setSignupInput({
-                    ...signupInput,
-                    ConfirmPassword: e.target.value,
-                  });
-                  setErrors({ ...errors, ConfirmPassword: null });
-                }}
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="********"
+                  className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
+                  style={{ "--tw-ring-color": "var(--primary)" }}
+                  value={signupInput.ConfirmPassword}
+                  onChange={(e) => {
+                    setSignupInput({
+                      ...signupInput,
+                      ConfirmPassword: e.target.value,
+                    });
+                    setErrors({ ...errors, ConfirmPassword: null });
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
               {errors.ConfirmPassword && (
                 <p className="text-sm text-red-500 mt-1 text-right">
                   {errors.ConfirmPassword}
@@ -248,16 +303,56 @@ const SignupForm = () => {
                 </p>
               )}
             </div>
+            {/*determine gender */}
+            <div className="mb-4">
+              <label className="block mb-2 font-medium">الجنس</label>
+              <div className="flex gap-6">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="M"
+                    checked={signupInput.gender === "M"}
+                    onChange={(e) =>
+                      setSignupInput({ ...signupInput, gender: e.target.value })
+                    }
+                    style={{ accentColor: "var(--primary)" }}
+                  />
+                  <span>ذكر</span>
+                </label>
 
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="F"
+                    checked={signupInput.gender === "F"}
+                    onChange={(e) =>
+                      setSignupInput({ ...signupInput, gender: e.target.value })
+                    }
+                    style={{ accentColor: "var(--primary)" }}
+                  />
+                  <span>أنثى</span>
+                </label>
+              </div>
+              {errors.gender && (
+                <p className="text-red-500 text-sm mt-1 text-right">
+                  {errors.gender}
+                </p>
+              )}
+            </div>
+
+            {/* Submit Button */}
             <button
               type="submit"
               disabled={isPending}
               className="w-full text-white font-semibold py-2 rounded-xl transition duration-200"
               style={{ backgroundColor: "var(--primary)" }}
             >
-              {isPending? "جاري الإرسال..." : "انشاء حساب"}
+              {isPending ? "جاري الإرسال..." : "إنشاء حساب"}
             </button>
 
+            {/* Link to Login */}
             <p className="text-center text-sm mt-4">
               هل لديك حساب بالفعل؟
               <Link
@@ -271,18 +366,18 @@ const SignupForm = () => {
           </form>
         </div>
       </div>
-       {/* Popup للنجاح */}
- {showSuccessPopup && (
-  <PopupMessage
-    show={showSuccessPopup}
-    icon={CheckCircle}
-    title="تم إنشاء الحساب بنجاح"
-    message="يرجى التحقق من البريد الإلكتروني لتفعيل الحساب."
-   
-  />
-)}
 
-      {/* Toast للخطأ */}
+      {/* Success Popup */}
+      {showSuccessPopup && (
+        <PopupMessage
+          show={showSuccessPopup}
+          icon={CheckCircle}
+          title="تم إنشاء الحساب بنجاح"
+          message="يرجى التحقق من البريد الإلكتروني لتفعيل الحساب."
+        />
+      )}
+
+      {/* Error Toast */}
       {errorMessage && (
         <div className="fixed bottom-4 right-4 z-50 bg-red-500 text-white px-4 py-2 rounded shadow-lg">
           {errorMessage}
