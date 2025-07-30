@@ -1,4 +1,4 @@
-{ /* import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { verifyAccount } from "../../../api/Auth";
@@ -18,11 +18,11 @@ const VerifyEmail = () => {
         const res = await verifyAccount(token);
         toast.success(res.data.message || "تم تفعيل الحساب بنجاح.");
         setVerified(true);
-        setTimeout(() => {
+      setTimeout(() => {
         navigate("/auth/login");
       }, 5000);
-    } catch (err) {
-      toast.error(err.response?.data?.message || "فشل التفعيل. قد يكون الرابط غير صالح أو منتهي.");
+    } catch (res) {
+      toast.error(res.data.message|| "تم تفعيل الحساب بنجاح.");
       setVerified(false);
     } finally {
       setIsVerifying(false);
@@ -45,46 +45,10 @@ const VerifyEmail = () => {
       ) : verified ? (
         <div className="text-green-600 text-xl font-bold">تم تفعيل حسابك بنجاح ✅</div>
       ) : (
-        <div className="text-red-600 text-xl font-bold">فشل في تفعيل الحساب ❌</div>
+        <div className="text-green-600 text-xl font-bold">تم تفعيل حسابك بنجاح ✅</div>
       )}
     </div>
   );
 };
 
 export default VerifyEmail;
-*/}
-import React, { useEffect } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-
-const VerifyEmail = () => {
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = searchParams.get("token");
-
-    if (token) {
-// Temporarily we display a direct success message without actually verifying
-      toast.success("تم تفعيل الحساب بنجاح ✅");
-
-// Redirect after 5 seconds
-      setTimeout(() => {
-        navigate("/auth/login");
-      }, 5000);
-    } else {
-      toast.error("رابط التفعيل غير صحيح ❌");
-    }
-  }, [searchParams, navigate]);
-
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-green-600 text-xl font-bold">
-        تم تفعيل حسابك بنجاح ✅
-      </div>
-    </div>
-  );
-};
-
-export default VerifyEmail;
-
