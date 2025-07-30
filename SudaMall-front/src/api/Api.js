@@ -106,7 +106,6 @@ export const fetchProducts = async (category = '') => {
 
     const response = await axios.get(`https://sudamall.ddns.net/api/v1/products`, {
       params: { 
-        category: category,
        },
     });
 

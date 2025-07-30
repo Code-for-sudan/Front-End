@@ -5,6 +5,7 @@ import { useDebounce } from 'react-use';
 import { searchProduct, fetchProducts } from '../../api/Api';
 import { ArrowIcon } from '../../assets';
 import ProductCard from '../../components/customer/product/ProductCard';
+import { products } from '../../assets/products';
 
 const CustomerDashboard = () => {
 
@@ -30,14 +31,17 @@ const CustomerDashboard = () => {
   // use fetch product api instead of searchProduct
   const loadProducts = async () => {
     setIsLoading(true);
-    const { data, error } = await fetchProducts();
-    if (error) {
-      setErrorMessage(error);
-      setProductList([]);
-    } else {
-      setProductList(data || []);
-      setErrorMessage('');
-    }
+    // const { data, error } = await fetchProducts();
+    const data = products; // Mock data for now
+    setProductList(data || []);
+    setErrorMessage('');
+    // if (error) {
+    //   setErrorMessage(error);
+    //   setProductList([]);
+    // } else {
+    //   setProductList(data || []);
+    //   setErrorMessage('');
+    // }
     setIsLoading(false);
   }
 
@@ -51,17 +55,20 @@ const CustomerDashboard = () => {
       return;
     }
     
-    const loadSearchedproducts = async () => {
+    const loadSearchedproducts = () => {
       setIsLoading(true);
-      const { data, error } = await searchProduct(debounceSearchTerm);
+      // const { data, error } = await searchProduct(debounceSearchTerm);
+      const data = { results: products.filter(product => product.title.toLowerCase().includes(debounceSearchTerm.toLowerCase())) };
       console.log(data)
-      if (error) {
-        setErrorMessage(error);
-        setSearchResults([]);
-      } else {
-        setSearchResults(data.results || []);
-        setErrorMessage('');
-      }
+      setSearchResults(data.results || []);
+      setErrorMessage('');
+      // if (error) {
+      //   setErrorMessage(error);
+      //   setSearchResults([]);
+      // } else {
+      //   setSearchResults(data.results || []);
+      //   setErrorMessage('');
+      // }
       setIsLoading(false);
     }
     loadSearchedproducts();
@@ -113,33 +120,36 @@ const CustomerDashboard = () => {
 
                     <ProductCard 
                       key={product.id}
-                      name={product.product_name}
+                      id={product.id}
+                      name={product.title}
                       price={product.price}
-                      picture={product.picture}
+                      picture={product.images[0]}
                       store_name={product.store_name}
                       size={product.size}
                     />
-                    // <div key={product.id} className="p-4 bg-white shadow rounded">
-                    //   <h4 className="text-lg font-semibold">{product.product_name}</h4>
-                    //   <p className="text-sm text-gray-600">{product.product_description}</p>
-                    // </div>
                   ))}
                 </div>
-
               </div>
-            ) : (
+            ) : (searchResults.length <= 0 && searchTerm.trim().size < 1) ? (
+                <p className="text-red-500">{'لا توجد نتائج بحث'}</p>
+            ): (
               <div className="w-full flex flex-col gap-2">
                 <div className='w-full flex flex-row justify-between items-center'>
                   <h3 className="text-[#FCA311CC] text-xl">احدث المنتجات</h3>
                   <img src={ArrowIcon} className="s-8 text-[#FCA311CC] cursor-pointer" />
                 </div>
-                <div className="flex flex-col gap-2 overflow-hidden"> 
+                <div className="grid grid-cols-2 gap-4 overflow-hidden"> 
                   {productList.length > 0 ? (
                     productList.map((product) => (
-                      <div key={product.id} className="p-4 bg-white shadow rounded">
-                        <h4 className="text-lg font-semibold">{product.product_name}</h4>
-                        <p className="text-sm text-gray-600">{product.product_description}</p>
-                      </div>
+                      <ProductCard 
+                        key={product.id}
+                        id={product.id}
+                        name={product.title}
+                        price={product.price}
+                        picture={product.images[0]}
+                        store_name={product.store_name}
+                        size={product.size}
+                      />
                     ))
                   ) : (
                     <p className="text-red-500">{errorMessage || 'لا توجد منتجات متاحة'}</p>

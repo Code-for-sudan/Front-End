@@ -1,7 +1,7 @@
 import { Route } from "react-router-dom";
 import CustomerDashboard from "../pages/customer/CustomerDashboard";
 import { CustomerLayout } from "../layouts";
-
+import ProductDetails from "../pages/customer/ProductDetails";
 /**
  * CustomerRoutes
  * ---------------
@@ -16,7 +16,7 @@ import { CustomerLayout } from "../layouts";
 const CustomerRoutes = () => [
   <Route key="customer" element={<CustomerLayout />}>
     <Route path="/customer/:userId/dashboard" element={<CustomerDashboard />} />
-    {/* <Route path="/customer/:userId/Product" element={<ProductDetails />} /> */}
+    <Route path="/customer/Product/:id" element={<ProductDetails />} />
   </Route>
 ];
 
