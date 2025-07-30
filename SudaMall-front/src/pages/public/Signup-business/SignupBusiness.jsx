@@ -12,6 +12,9 @@ const SignupBusiness = () => {
   const [errors, setErrors] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+      const [showPassword, setShowPassword] = useState(false);
+    const [nameInputs, setNameInputs] = useState(["", "", "", ""]);
+
   const [signupInput, setSignupInput] = useState({
     name: "",
     email: "",
@@ -51,17 +54,32 @@ const SignupBusiness = () => {
     toast.error("يرجى ملء جميع الحقول");
     return;
   }
+ // Combine the first and second names into firstName, and the third and fourth names into lastName
+    const fullFirstName =
+      `${nameInputs[0].trim()} ${nameInputs[1].trim()}`.trim();
+    const fullLastName =
+      `${nameInputs[2].trim()} ${nameInputs[3].trim()}`.trim();
 
- // Split the full name into first_name and last_name
-    const nameParts = signupInput.name.trim().split(/\s+/);
-    if (nameParts.length !== 4) {
-      setErrors((prev) => ({ ...prev, name: "يرجى إدخال الاسم رباعي " }));
+    // Create an updated copy of the data
+    const updatedSignup = {
+      ...signupInput,
+      firstName: fullFirstName,
+      lastName: fullLastName,
+    };
+ // Check the fields
+    if (
+      !updatedSignup.firstName ||
+      !updatedSignup.lastName ||
+      !updatedSignup.email.trim() ||
+      !updatedSignup.password.trim()
+    ) {
+      toast.error("يرجى ملء جميع الحقول");
       return;
     }
     const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[a-zA-Z\d@$!%*?&]{8,}$/
 ;
 
-    if (!passwordPattern.test(signupInput.password)) {
+    if (!passwordPattern.test(updatedSignup.password)) {
       setErrors((prev) => ({
         ...prev,
         password:
@@ -70,14 +88,14 @@ const SignupBusiness = () => {
       return;
     }
 
-    if (signupInput.password !== signupInput.confirmPassword) {
+    if (signupInput.password !== updatedSignup.confirmPassword) {
       setErrors((prev) => ({
         ...prev,
         confirmPassword: "كلمتا المرور غير متطابقتين",
       }));
       return;
     }
-    let cleanedPhone = signupInput.phoneNumber.trim();
+    let cleanedPhone = updatedSignup.phoneNumber.trim();
     if (cleanedPhone.startsWith("0")) {
       cleanedPhone = cleanedPhone.slice(1); // remove leading zero
     }
@@ -94,20 +112,18 @@ const SignupBusiness = () => {
     }
     const formattedPhone = `+249${cleanedPhone}`;
 
-    const [first1, first2, last1, last2] = nameParts;
-    const first_name = `${first1} ${first2}`;
-    const last_name = `${last1} ${last2}`;
+    // Prepare the form data
     const formData2 = {
       email: signupInput.email,
-      first_name,
-      last_name,
-      gender: signupInput.gender,
-      password: signupInput.password,
+      first_name: updatedSignup.firstName,
+      last_name: updatedSignup.lastName,
+      gender: updatedSignup.gender,
+      password: updatedSignup.password,
       phone_number: formattedPhone,
-      store_name: signupInput.storeName,
-      store_location: signupInput.storeLocation,
-      store_type: signupInput.storeType,
-      description: signupInput.storeDesc,
+      store_name: updatedSignup.storeName,
+      store_location: updatedSignup.storeLocation,
+      store_type: updatedSignup.storeType,
+      description: updatedSignup.storeDesc,
     };
 
     mutation.mutate(formData2);
@@ -119,6 +135,10 @@ const SignupBusiness = () => {
         <StepOne
           signupInput={signupInput}
           setSignupInput={setSignupInput}
+          nameInputs={nameInputs}
+          setNameInputs={setNameInputs}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
           errors={errors}
           setErrors={setErrors}
           onNext={() => setStep(2)}
@@ -137,6 +157,7 @@ const SignupBusiness = () => {
       {step === 3 && (
         <StepThree
           signupInput={signupInput}
+          nameInputs={nameInputs}
           errorMessage={errorMessage}
           setErrorMessage={setErrorMessage}
           showSuccessPopup={showSuccessPopup}

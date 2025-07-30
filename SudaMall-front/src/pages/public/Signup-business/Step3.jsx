@@ -1,10 +1,11 @@
 // src/components/RegisterSteps/StepThree.jsx
 import React from "react";
-import { CheckCircle} from "../../../assets/icons/index";
+import { CheckCircle } from "../../../assets/icons/index";
 import PopupMessage from "../auth-components/PopupMessage";
 
 const StepThree = ({
   signupInput,
+  nameInputs,
   onBack,
   handleSubmit,
   isPending,
@@ -29,7 +30,7 @@ const StepThree = ({
             انشاء حساب جديد
           </h1>
 
-          <form className="space-y-4"  onSubmit={handleSubmit}>
+          <form className="space-y-4" onSubmit={handleSubmit}>
             {/* Full Name */}
             <div>
               <label className="block text-right font-medium mb-2">
@@ -38,10 +39,10 @@ const StepThree = ({
               <input
                 type="text"
                 placeholder="محمد علي"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2  bg-gray-100"
                 style={{ "--tw-ring-color": "var(--primary)" }}
-                value={signupInput.name}
-                readOnly
+                value={`${nameInputs[0]} ${nameInputs[1]} ${nameInputs[2]} ${nameInputs[3]}`}
+                disabled
               />
             </div>
 
@@ -53,10 +54,10 @@ const StepThree = ({
               <input
                 type="email"
                 placeholder="example@gmail.com"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2  bg-gray-100"
                 style={{ "--tw-ring-color": "var(--primary)" }}
                 value={signupInput.email}
-                readOnly
+                disabled
               />
             </div>
 
@@ -68,10 +69,10 @@ const StepThree = ({
               <input
                 type="password"
                 placeholder="********"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2  bg-gray-100"
                 style={{ "--tw-ring-color": "var(--primary)" }}
                 value={signupInput.password}
-                readOnly
+                disabled
               />
             </div>
 
@@ -83,10 +84,10 @@ const StepThree = ({
               <input
                 type="password"
                 placeholder="********"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2  bg-gray-100"
                 style={{ "--tw-ring-color": "var(--primary)" }}
                 value={signupInput.confirmPassword}
-                readOnly
+                disabled
               />
             </div>
 
@@ -99,13 +100,24 @@ const StepThree = ({
                 <span className="px-3 text-gray-500">249+</span>
                 <input
                   type="tel"
-                  className="flex-1 px-4 py-2 focus:outline-none text-right"
+                  className="flex-1 px-4 py-2 focus:outline-none text-right  bg-gray-100"
                   placeholder="XXX XXX XXXX"
                   value={signupInput.phoneNumber}
-                  readOnly
+                  disabled
                 />
               </div>
             </div>
+            {/* Gender */}
+            <div>
+              <label className="block text-right font-medium mb-2">الجنس</label>
+              <input
+                type="text"
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right bg-gray-100"
+                value={signupInput.gender === "M" ? "ذكر" : "أنثى"}
+                disabled
+              />
+            </div>
+            {/* Store Name */}
             <div>
               <label className="block text-right font-medium mb-2">
                 اسم المتجر
@@ -113,10 +125,10 @@ const StepThree = ({
               <input
                 type="text"
                 placeholder=""
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2  bg-gray-100"
                 style={{ "--tw-ring-color": "var(--primary)" }}
                 value={signupInput.storeName}
-                readOnly
+                disabled
               />
             </div>
 
@@ -128,10 +140,10 @@ const StepThree = ({
               <input
                 type="text"
                 placeholder="الخرطوم - السودان"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2  bg-gray-100"
                 style={{ "--tw-ring-color": "var(--primary)" }}
                 value={signupInput.storeLocation}
-                readOnly
+                disabled
               />
             </div>
 
@@ -143,10 +155,10 @@ const StepThree = ({
               <input
                 type="text"
                 placeholder="مثال: ملابس، إلكترونيات"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2  bg-gray-100"
                 style={{ "--tw-ring-color": "var(--primary)" }}
                 value={signupInput.storeType}
-                readOnly
+                disabled
               />
             </div>
 
@@ -159,13 +171,13 @@ const StepThree = ({
                 rows="3"
                 type="text"
                 placeholder="مثال: متجر يقدم أفضل الملابس الرجالية والنسائية"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2  bg-gray-100"
                 style={{ "--tw-ring-color": "var(--primary)" }}
                 value={signupInput.storeDesc}
-                readOnly
+                disabled
               />
             </div>
-            {/* المؤشر وزر المتابعة */}
+            {/* Step indicator and continue button */}
             <div className="flex flex-col  items-center mt-12">
               <div className="flex items-center  gap-0">
                 <span className="bg-yellow-500 text-white w-8 h-8 flex items-center justify-center rounded-full">
@@ -190,7 +202,7 @@ const StepThree = ({
                   }}
                   disabled={isPending}
                 >
-                   {isPending? "جاري الإرسال..." : "انشاء حساب"}
+                  {isPending ? "جاري الإرسال..." : "انشاء حساب"}
                 </button>
 
                 <button
@@ -209,16 +221,14 @@ const StepThree = ({
         </div>
       </div>
       {/* Popup للنجاح */}
- {showSuccessPopup && (
-  <PopupMessage
-    show={showSuccessPopup}
-    icon={CheckCircle}
-    title="تم إنشاء الحساب بنجاح"
-    message="يرجى التحقق من البريد الإلكتروني لتفعيل الحساب."
-   
-  />
-)}
-
+      {showSuccessPopup && (
+        <PopupMessage
+          show={showSuccessPopup}
+          icon={CheckCircle}
+          title="تم إنشاء الحساب بنجاح"
+          message="يرجى التحقق من البريد الإلكتروني لتفعيل الحساب."
+        />
+      )}
 
       {/* Toast للخطأ */}
       {errorMessage && (

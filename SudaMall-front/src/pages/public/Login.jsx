@@ -19,7 +19,7 @@ const Login = () => {
   const [showResend, setShowResend] = useState(false);
   const [resendEmail, setResendEmail] = useState("");
 
-  const { mutate: login, isPending, isError, error } = useLogin();
+  const { mutate: login, isPending, } = useLogin();
 
   /**  const handleGoogleSuccess = (credentialResponse) => {
     const token = credentialResponse.credential;
@@ -172,7 +172,7 @@ const Login = () => {
                 </Link>
               </div>
             </div>
-            {isError && <p className="text-red-500">{error.message}</p>}
+        
 
             {/* Login Button */}
             <button
@@ -194,7 +194,7 @@ const Login = () => {
                 </p>
                 <button
                   onClick={() => resendVerification(resendEmail)}
-                  className="text-sm underline text-blue-600 hover:text-blue-800"
+                  className="text-sm underline hover:text-blue-800" style={{color: "var(--primary)"}}
                 >
                   إعادة إرسال رابط التفعيل
                 </button>
@@ -202,7 +202,7 @@ const Login = () => {
             )}
 
           {/* Or Divider */}
-          <Divider />
+       {/*   <Divider />*/}
           {/* Google Login 
           {typeof window !== 'undefined' && (
           <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
