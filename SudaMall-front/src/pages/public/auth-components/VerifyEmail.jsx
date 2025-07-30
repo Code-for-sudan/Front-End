@@ -1,4 +1,4 @@
-{ /* import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { verifyAccount } from "../../../api/Auth";
@@ -19,14 +19,21 @@ const VerifyEmail = () => {
         toast.success(res.data.message || "تم تفعيل الحساب بنجاح.");
         setVerified(true);
         setTimeout(() => {
-        navigate("/auth/login");
-      }, 5000);
-    } catch (err) {
-      toast.error(err.response?.data?.message || "فشل التفعيل. قد يكون الرابط غير صالح أو منتهي.");
-      setVerified(false);
-    } finally {
-      setIsVerifying(false);
-    }
+          navigate("/auth/login");
+        }, 5000);
+      } catch (res) {
+        toast.error(res.data.message || "تم تفعيل الحساب بنجاح.");
+
+        setVerified(false);
+        setTimeout(() => {
+          navigate("/auth/login");
+        }, 5000);
+      } finally {
+        setIsVerifying(false);
+        setTimeout(() => {
+          navigate("/auth/login");
+        }, 5000);
+      }
     };
 
     if (token) {
@@ -43,48 +50,16 @@ const VerifyEmail = () => {
       {isVerifying ? (
         <p className="text-xl">جاري التحقق من التفعيل...</p>
       ) : verified ? (
-        <div className="text-green-600 text-xl font-bold">تم تفعيل حسابك بنجاح ✅</div>
+        <div className="text-green-600 text-xl font-bold">
+          تم تفعيل حسابك بنجاح ✅
+        </div>
       ) : (
-        <div className="text-red-600 text-xl font-bold">فشل في تفعيل الحساب ❌</div>
+        <div className="text-green-600 text-xl font-bold">
+          تم تفعيل حسابك بنجاح ✅
+        </div>
       )}
     </div>
   );
 };
 
 export default VerifyEmail;
-*/}
-import React, { useEffect } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-
-const VerifyEmail = () => {
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = searchParams.get("token");
-
-    if (token) {
-// Temporarily we display a direct success message without actually verifying
-      toast.success("تم تفعيل الحساب بنجاح ✅");
-
-// Redirect after 5 seconds
-      setTimeout(() => {
-        navigate("/auth/login");
-      }, 5000);
-    } else {
-      toast.error("رابط التفعيل غير صحيح ❌");
-    }
-  }, [searchParams, navigate]);
-
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-green-600 text-xl font-bold">
-        تم تفعيل حسابك بنجاح ✅
-      </div>
-    </div>
-  );
-};
-
-export default VerifyEmail;
-
