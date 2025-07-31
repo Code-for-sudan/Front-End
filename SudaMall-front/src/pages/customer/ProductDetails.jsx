@@ -3,7 +3,7 @@ import NavBar from '../../components/customer/customer-main/NavBar'
 import { products } from '../../assets/products';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { getProductDetails } from '../../api/Api';
+import { getProductDetails } from '../../api/Product';
 import { FiPlus, FiMinus } from "react-icons/fi";
 
 function ProductDetails() {
@@ -16,7 +16,11 @@ function ProductDetails() {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState(null)
+  const [isFavorite, setIsFavorite] = useState(false)
 
+  const handleFavoriteToggle = (newValue) => {
+    setIsFavorite(newValue)
+  }
 
   useEffect(() => {
     const loadProductDetails = async () => {
@@ -25,6 +29,7 @@ function ProductDetails() {
         console.error("Error fetching product details:", error);
       } else {
         setProduct(data || {});
+        setIsFavorite(data.is_favorite)
       if (data?.sizes && data.sizes.length > 0) {
         setSize(data.sizes[0]);
       }
@@ -49,7 +54,7 @@ function ProductDetails() {
 
   return (
     <div className="min-h-screen w-full flex flex-col">
-      <NavBar title="تفاصيل المنتج" />
+      <NavBar title="تفاصيل المنتج" isFavorite={isFavorite} handleFavoriteToggle={handleFavoriteToggle} />
       <div className="w-full flex flex-col px-6">
         <div className="w-full flex flex-col gap-4 pt-4">
           <div className="w-full flex flex-col items-left gap-4">

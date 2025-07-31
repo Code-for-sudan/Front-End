@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import TopNavbar from '../../components/customer/customer-main/TopNavbar'
 import SearchField from '../../components/customer/customer-main/SearchField'
 import { useDebounce } from 'react-use';
-import { searchProduct, fetchProducts } from '../../api/Api';
+// import { searchProduct, fetchProducts } from '../../api/Api';
+import { searchProduct, fetchProducts } from '../../api/Product';
 import { ArrowIcon } from '../../assets';
 import ProductCard from '../../components/customer/product/ProductCard';
-// import { products } from '../../assets/products';
 
 const CustomerDashboard = () => {
 
@@ -35,7 +35,7 @@ const CustomerDashboard = () => {
     // const data = products; // Mock data for now
     // setProductList(data || []);
     // setErrorMessage('');
-    console.log(data.results)
+    // console.log(data.results)
     if (error) {
       setErrorMessage(error);
       setProductList([]);
