@@ -5,6 +5,7 @@ import people from "./people.png"
 import bg_nav from "./bg-nav.svg"
 import search from "./icons/search.svg"
 import arrowicon from "./arrowicon.svg"
+import ArrowCircleRightR from './ArrowCircleRightR.svg'
 export {
     welcome1,
     welcome2,
@@ -12,5 +13,6 @@ export {
     people,
     bg_nav,
     search as SearchIcon,
-    arrowicon as ArrowIcon
+    arrowicon as ArrowIcon,
+    ArrowCircleRightR
 }

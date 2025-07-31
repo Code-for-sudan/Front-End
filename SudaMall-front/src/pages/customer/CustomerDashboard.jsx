@@ -5,7 +5,7 @@ import { useDebounce } from 'react-use';
 import { searchProduct, fetchProducts } from '../../api/Api';
 import { ArrowIcon } from '../../assets';
 import ProductCard from '../../components/customer/product/ProductCard';
-import { products } from '../../assets/products';
+// import { products } from '../../assets/products';
 
 const CustomerDashboard = () => {
 
@@ -31,17 +31,18 @@ const CustomerDashboard = () => {
   // use fetch product api instead of searchProduct
   const loadProducts = async () => {
     setIsLoading(true);
-    // const { data, error } = await fetchProducts();
-    const data = products; // Mock data for now
-    setProductList(data || []);
-    setErrorMessage('');
-    // if (error) {
-    //   setErrorMessage(error);
-    //   setProductList([]);
-    // } else {
-    //   setProductList(data || []);
-    //   setErrorMessage('');
-    // }
+    const { data, error } = await fetchProducts();
+    // const data = products; // Mock data for now
+    // setProductList(data || []);
+    // setErrorMessage('');
+    console.log(data.results)
+    if (error) {
+      setErrorMessage(error);
+      setProductList([]);
+    } else {
+      setProductList(data.results || []);
+      setErrorMessage('');
+    }
     setIsLoading(false);
   }
 
@@ -55,20 +56,20 @@ const CustomerDashboard = () => {
       return;
     }
     
-    const loadSearchedproducts = () => {
+    const loadSearchedproducts = async () => {
       setIsLoading(true);
-      // const { data, error } = await searchProduct(debounceSearchTerm);
-      const data = { results: products.filter(product => product.title.toLowerCase().includes(debounceSearchTerm.toLowerCase())) };
-      console.log(data)
+      const { data, error } = await searchProduct(debounceSearchTerm);
+      // const data = { results: products.filter(product => product.title.toLowerCase().includes(debounceSearchTerm.toLowerCase())) };
+      console.log(data.results)
       setSearchResults(data.results || []);
       setErrorMessage('');
-      // if (error) {
-      //   setErrorMessage(error);
-      //   setSearchResults([]);
-      // } else {
-      //   setSearchResults(data.results || []);
-      //   setErrorMessage('');
-      // }
+      if (error) {
+        setErrorMessage(error);
+        setSearchResults([]);
+      } else {
+        setSearchResults(data.results || []);
+        setErrorMessage('');
+      }
       setIsLoading(false);
     }
     loadSearchedproducts();
@@ -121,11 +122,11 @@ const CustomerDashboard = () => {
                     <ProductCard 
                       key={product.id}
                       id={product.id}
-                      name={product.title}
+                      name={product.product_name}
                       price={product.price}
-                      picture={product.images[0]}
-                      store_name={product.store_name}
-                      size={product.size}
+                      picture={product.picture}
+                      // store_name={product?.store_name}
+                      // size={product.size}
                     />
                   ))}
                 </div>
@@ -144,11 +145,12 @@ const CustomerDashboard = () => {
                       <ProductCard 
                         key={product.id}
                         id={product.id}
-                        name={product.title}
+                        name={product.product_name}
                         price={product.price}
-                        picture={product.images[0]}
+                        picture={product.picture}
                         store_name={product.store_name}
                         size={product.size}
+                        favorite={product.is_favorite}
                       />
                     ))
                   ) : (

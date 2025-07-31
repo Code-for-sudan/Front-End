@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 
 // product card component
-function ProductCard({ id, name, price, picture, store_name, size = null, favorite = false }) {
+function ProductCard({ id, name, price, picture, store_name = null, size = null, favorite = false }) {
 
 
 
@@ -29,8 +29,8 @@ function ProductCard({ id, name, price, picture, store_name, size = null, favori
                 {isFavorite ? <MdFavorite /> : <MdFavoriteBorder/>}
             </button>
             <img 
-                src={picture}
-                // src={`https://sudamall.ddns.net${picture}`}
+                // src={picture}
+                src={`https://sudamall.ddns.net${picture}`}
                 alt={name}
                 className='w-full h-full object-contain mb-2'
             />
