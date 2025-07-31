@@ -61,3 +61,4 @@
   .dark-green-gradient {
     @apply bg-gradient-to-bl from-dark-green/90 via-dark-green to-transparent p-4 rounded-xl w-full
   }
+
