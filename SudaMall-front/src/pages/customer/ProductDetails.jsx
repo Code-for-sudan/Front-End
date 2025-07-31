@@ -12,7 +12,7 @@ function ProductDetails() {
     // You can implement the product details logic here
     // parm = 
   const { id } = useParams(); // Assuming you are using react-router-dom to get the product ID from the URL
-  const [details, setDetails] = useState(false)
+  const [details, setDetails] = useState(true)
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState(null)
@@ -56,13 +56,13 @@ function ProductDetails() {
             <img 
                 src={`https://sudamall.ddns.net${product.picture}`}
                 alt={product.product_name}
-              className="w-full h-64 object-contain mb-4"
+              className="w-full h-64 object-cover mb-4"
             />
-            <div className='w-full flex flex-col gap-5 py-6 px-6 bg-[#D9D9D926]'>
-              <div className='w-full flex flex-col gap-1'>
+            <div className='w-full flex flex-col gap-1'>
                 <h2 className="text-xl font-semibold text-gray-800">{product?.product_name}</h2>
                 <p className="text-lg text-gray-600">السعر: {product?.price} جنيه</p>
-              </div>
+            </div>
+            <div className='w-full flex flex-col gap-5 py-6 px-6 bg-[#D9D9D926]'>
 
 
 
