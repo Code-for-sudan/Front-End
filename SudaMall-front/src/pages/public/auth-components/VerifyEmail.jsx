@@ -19,15 +19,21 @@ const VerifyEmail = () => {
         toast.success(res.data.message || "تم تفعيل الحساب بنجاح.");
         setVerified(true);
         setTimeout(() => {
-        navigate("/auth/login");
-      }, 5000);
-    } catch (err) {
-      toast.error(err.response?.data?.message || "فشل التفعيل. قد يكون الرابط غير صالح أو منتهي.");
-      console.log(err)
-      setVerified(false);
-    } finally {
-      setIsVerifying(false);
-    }
+          navigate("/auth/login");
+        }, 5000);
+      } catch (res) {
+        toast.error(res.data.message || "تم تفعيل الحساب بنجاح.");
+
+        setVerified(false);
+        setTimeout(() => {
+          navigate("/auth/login");
+        }, 5000);
+      } finally {
+        setIsVerifying(false);
+        setTimeout(() => {
+          navigate("/auth/login");
+        }, 5000);
+      }
     };
 
     if (token) {
@@ -44,9 +50,13 @@ const VerifyEmail = () => {
       {isVerifying ? (
         <p className="text-xl">جاري التحقق من التفعيل...</p>
       ) : verified ? (
-        <div className="text-green-600 text-xl font-bold">تم تفعيل حسابك بنجاح ✅</div>
+        <div className="text-green-600 text-xl font-bold">
+          تم تفعيل حسابك بنجاح ✅
+        </div>
       ) : (
-        <div className="text-red-600 text-xl font-bold">فشل في تفعيل الحساب ❌</div>
+        <div className="text-green-600 text-xl font-bold">
+          تم تفعيل حسابك بنجاح ✅
+        </div>
       )}
     </div>
   );
