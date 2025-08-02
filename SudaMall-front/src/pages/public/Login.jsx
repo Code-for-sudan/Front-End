@@ -1,15 +1,16 @@
-import React from "react";
 import { useState } from "react";
+import { useDispatch } from 'react-redux';
 import { useLogin } from "../../hooks/uselogin";
 import ArrowCircleRight from "../../assets/icons/ArrowCircleRight.svg";
-import Divider from "./auth-components/Divider";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { resendVerification } from "../../api/Auth";
+import { setUser } from "../../app/UserInfo";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch(); // dispatcher to set item to redux store
 
   const [loginInput, setLoginInput] = useState({
     email: "",
@@ -56,6 +57,8 @@ const Login = () => {
       onSuccess: (data) => {
         const userId = data?.user?.id || data?.user?._id;
         const accountType = data?.user?.account_type;
+        dispatch(setUser(data?.user)); // set the new user data to redux store and localStorage
+        console.log("user", data)
         if (userId && accountType === "seller") {
           navigate(`/store-owner/${userId}/dashboard`);
         } else if (userId && accountType === "buyer") {
@@ -183,7 +186,7 @@ const Login = () => {
                 hoverBackgroundColor: "var(--color-primary)",
               }}
             >
-              {isPending ? "جاري تسجيل الدخول..." : "تسجيل دخول"}
+              {isPending ? "جاري تسجيل الدخول..." : "تسجيل الدخول"}
             </button>
            
           </form>
@@ -239,7 +242,7 @@ const Login = () => {
           <p className="text-center text-sm mt-8">
             ليس لديك حساب؟
             <Link
-              to="/auth"
+              to="/auth?step=2"
               className="font-semibold ml-1 mr-2.5"
               style={{ color: "var(--primary)" }}
             >

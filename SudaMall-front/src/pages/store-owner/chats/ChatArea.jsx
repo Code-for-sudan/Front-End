@@ -12,7 +12,7 @@ const ChatArea = () => {
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
-  const owner = ChatHistory.chat_between.owne
+  const owner = ChatHistory.chat_between.owner
   const user = ChatHistory.chat_between.customer;
   const messages = ChatHistory.messages;
 

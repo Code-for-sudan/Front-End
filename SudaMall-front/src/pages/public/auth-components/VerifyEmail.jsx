@@ -23,6 +23,7 @@ const VerifyEmail = () => {
       }, 5000);
     } catch (err) {
       toast.error(err.response?.data?.message || "فشل التفعيل. قد يكون الرابط غير صالح أو منتهي.");
+      console.log(err)
       setVerified(false);
     } finally {
       setIsVerifying(false);
