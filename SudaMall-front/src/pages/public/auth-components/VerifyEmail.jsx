@@ -16,20 +16,16 @@ const VerifyEmail = () => {
     const verify = async () => {
       try {
         const res = await verifyAccount(token);
-        toast.success(res.data.message || "تم تفعيل الحساب بنجاح.");
         setVerified(true);
-        setTimeout(() => {
-          navigate("/auth/login");
-        }, 5000);
-      } catch (res) {
-        toast.error(res.data.message || "تم تفعيل الحساب بنجاح.");
-
-        setVerified(false);
-        setTimeout(() => {
-          navigate("/auth/login");
-        }, 5000);
-      } finally {
         setIsVerifying(false);
+        console.log("response data: ", res);
+        setTimeout(() => {
+          navigate("/auth/login");
+        }, 5000);
+      } catch (err) {
+        setVerified(false);
+        setIsVerifying(false);
+        console.log("error data:" ,err);
         setTimeout(() => {
           navigate("/auth/login");
         }, 5000);
@@ -54,8 +50,8 @@ const VerifyEmail = () => {
           تم تفعيل حسابك بنجاح ✅
         </div>
       ) : (
-        <div className="text-green-600 text-xl font-bold">
-          تم تفعيل حسابك بنجاح ✅
+        <div className="text-red-600 text-center text-xl font-bold">
+          رابط التفعيل غير صحيح أو منتهي الصلاحية
         </div>
       )}
     </div>
