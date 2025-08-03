@@ -14,6 +14,7 @@ const StoreOwnerNav = () => {
   const location = useLocation();
   const [active, setActive] = useState("");
   const dispatch = useDispatch();
+  const userId = JSON.parse(localStorage.getItem("user")).id;
 
   useEffect(() => {
     const path = location.pathname;
@@ -64,7 +65,7 @@ const StoreOwnerNav = () => {
             active === "home" ? "text-primary" : ""
           }`}
           onClick={() =>
-            handleClick({ id: "home", path: "/store-owner/:userId/dashboard" })
+            handleClick({ id: "home", path: `/store-owner/${userId}/dashboard` })
           }
         >
           <GoHome className="size-6" />
@@ -80,7 +81,7 @@ const StoreOwnerNav = () => {
           onClick={() =>
             handleClick({
               id: "orders",
-              path: "/store-owner/:userId/orders",
+              path: `/store-owner/${userId}/orders`,
             })
           }
         >
@@ -101,7 +102,7 @@ const StoreOwnerNav = () => {
             active === "chats" ? "text-primary" : ""
           }`}
           onClick={() =>
-            handleClick({ id: "chats", path: "/store-owner/:userId/chats" })
+            handleClick({ id: "chats", path: `/store-owner/${userId}/chats` })
           }
         >
           <MdOutlineMarkUnreadChatAlt className="size-6" />
@@ -113,7 +114,7 @@ const StoreOwnerNav = () => {
             active === "profile" ? "text-primary" : ""
           }`}
           onClick={() =>
-            handleClick({ id: "profile", path: "/store-owner/:userId/profile" })
+            handleClick({ id: "profile", path: `/store-owner/${userId}/profile` })
           }
         >
           <BsPerson className="size-6" />
