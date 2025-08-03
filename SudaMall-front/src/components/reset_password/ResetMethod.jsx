@@ -3,6 +3,7 @@ import { ComponentsContext } from "../../pages/public/ResetPassword";
 import Image from "../../assets/reset_password.png";
 import { useContext } from "react";
 import { FaTelegram } from "react-icons/fa";
+import { toast, ToastContainer } from "react-toastify";
 
 // define a part that gives you a two options to reset password
 export const ResetMethod = () => {
@@ -12,7 +13,9 @@ export const ResetMethod = () => {
 		Context.dispatch({ render: "EmailMethod" });
 	};
 	const handleTelegram = () => {
-		Context.dispatch({ render: "TelegramMethod" });
+		toast.info("هذه الميزة قيد التطوير");
+		// Uncomment the line below when Telegram method is ready
+		//Context.dispatch({ render: "TelegramMethod" });
 	};
 
 	return (
