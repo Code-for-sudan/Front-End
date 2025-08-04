@@ -27,9 +27,9 @@ const Welcome = () => {
 
   return (
     <div className="h-screen flex flex-col justify-center bg-white -mt-10">
-      <link rel="preload" href={welcomeScreens[0].image} as="image" />
-      <link rel="preload" href={welcomeScreens[1].image} as="image" />
-      <link rel="preload" href={welcomeScreens[2].image} as="image" />
+      {welcomeScreens.map((screen, index) => (
+        <link key={index} rel="preload" href={screen.image} as="image" />
+      ))}
       <WelcomeScreen
         image={welcomeScreens[current].image}
         text={welcomeScreens[current].text}
