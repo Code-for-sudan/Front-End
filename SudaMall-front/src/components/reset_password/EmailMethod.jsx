@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import Image from "../../assets/reset_password.png";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
 import { ComponentsContext } from "../../pages/public/ResetPassword";
+import api from "../../api/Api";
+import { toast } from "react-toastify";
 
 // defines a part that let enter your email address
 export const EmailMethod = () => {
@@ -16,11 +18,21 @@ export const EmailMethod = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		// api code here to send email
-
-		context.dispatch({
-			render: "ValidateSentCode",
-		});
+		api.post("/auth/reset-password/request/", {
+			email,
+		})
+			.then(() => {
+				toast.success("تم إرسال رمز التحقق إلى بريدك الإلكتروني");
+				context.dispatch({
+					render: "ValidateSentCode",
+				});
+				sessionStorage.setItem("email", email);
+			})
+			.catch(() => {
+				toast.error("حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى");
+			});
 	};
+	
 	return (
 		<div className="flex flex-col justify-center items-center mt-[10px]">
 			<img
