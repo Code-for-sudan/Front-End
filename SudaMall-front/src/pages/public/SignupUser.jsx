@@ -135,7 +135,7 @@ const SignupForm = () => {
       dir="rtl"
     >
       <Link
-        to="/auth"
+        to="/auth?step=2"
         className="absolute top-10 left-6 text-white hover:text-gray-200"
       >
         <img src={ArrowCircleRight} alt="رجوع" className="h-8 w-8" />
