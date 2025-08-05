@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Offer = ({ formData, handleOfferChange, toggleOffer }) => {
+const Offer = ({ formData, handleOfferChange, toggleOffer, onSubmit }) => {
   return (
     <div className="flex flex-col gap-4 text-gray-800">
       {/* Toggle Offer */}
@@ -87,6 +87,7 @@ const Offer = ({ formData, handleOfferChange, toggleOffer }) => {
         <div className="pt-4 flex items-center justify-center gap-4">
           <button
             type="button"
+            onClick={onSubmit}
             className="flex-1 bg-primary text-white py-2 rounded-md hover:bg-opacity-90 cursor-pointer"
           >
             حفظ العرض

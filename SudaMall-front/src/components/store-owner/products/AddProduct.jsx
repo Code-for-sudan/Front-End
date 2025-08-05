@@ -14,13 +14,14 @@ const AddProduct = () => {
     product_description: '',
     brand: '',
     price: '',
-    type: '',
+    classification: '',
     category: '',
     picture: null,
     color: '',
+    tags: [],
     has_sizes: null,
     available_quantity: "",
-    sizes: [{ size: '', quantity: '' }],
+    sizes: [{ size: '', available_quantity: '' }],
   });
 
   // handle input chang when the user type
@@ -36,7 +37,7 @@ const AddProduct = () => {
    // handle submit form changes
   const handleSubmit = (e) => {
     e.preventDefault();
-    createProductMutation.mutate(formData);
+    createProductMutation.mutate(formData); // mutation function to post product creation
     console.log("form data:", formData)
   };
 

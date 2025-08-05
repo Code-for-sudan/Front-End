@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createProduct } from '../api/products.js';
+import { createProduct } from '../api/products/createProducts.js';
 import { toast } from "react-toastify";
 import { closeAddProduct } from '../app/AppStats.js';
 import { useDispatch } from 'react-redux';

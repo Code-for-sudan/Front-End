@@ -1,29 +1,37 @@
 import React, { useState } from 'react'
 import { MdOutlineArrowCircleRight } from 'react-icons/md'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Offer from './Offer';
 import ProductModal from './ProductModal';
+import { useUpdateProduct } from '../../../hooks/useUpdateProduct';
 
 const EditProduct = () => {
     const navigate = useNavigate();
+    const params = useParams()
+    const ProductId = parseInt(params.product_id);
+
+    // mutation function for updating product
+    const { mutate: updateProduct } = useUpdateProduct();
+
     const [formData, setFormData] = useState({
-        name: 'ايفون 14',
-        description: 'الجديد من شركة ابل',
-        brand: 'apple',
-        price: '453',
-        type: 'أجهزة',
-        category: 'all',
+        product_name: 'الحذاء الذهبي',
+        product_description: 'حذاء رياضي اصلي',
+        brand: 'اوريجينال',
+        price: '60000',
+        classification: 'رجال',
+        category: 'أحذية',
         picture: null,
-        color: 'أسود',
-        has_sizes: null,
-        sizes: [{ size: '', quantity: '' }],
+        color: 'ذهبي',
+        tags: ["رياضة", "كرة قدم"],
+        has_sizes: "true",
+        available_quantity: "",
+        sizes: [{ size: '40', available_quantity: '7' }],
         offer: {
-            is_active: false,
             offer_price: '',
             start_date: '',
             end_date: '',
         }
-    });
+        });
 
     const [ active, setActive ] = useState("edit");
 
@@ -33,11 +41,6 @@ const EditProduct = () => {
         setFormData((prev) => ({ ...prev, [name]: value }));
       };
 
-       // handle submit form changes
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("form data:", formData)
-      };
     // go back from editing
    const handleCloseEdit = () => {
     navigate(-1)
@@ -67,8 +70,20 @@ const EditProduct = () => {
         }));
         };
 
+    // handle submit form changes
+    const handleSubmit = (e) => {
+    e.preventDefault();
+
+    updateProduct({
+        productId: ProductId,
+        productData: formData, // your state object
+    });
+
+    console.log("form data:", formData)
+    };
+
   return (
-    <div className='bg-white container px-4 py-6'>
+    <div className='bg-white container px-4 py-6 max-w-xl'>
         <div className="relative flex items-center justify-center w-full mb-6">
             <MdOutlineArrowCircleRight
             onClick={handleCloseEdit}
@@ -103,6 +118,7 @@ const EditProduct = () => {
         :
         (
             <Offer 
+                onSubmit={handleSubmit}
                 formData={formData}
                 toggleOffer={toggleOffer}
                 handleOfferChange={handleOfferChange}

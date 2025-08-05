@@ -68,6 +68,7 @@ const Login = () => {
       onError: (error) => {
         const message = error.response?.data?.message;
         const allowResend = error.response?.data?.resend_verification_link;
+        console.log(error)
 
         toast.error(message || "فشل تسجيل الدخول");
 

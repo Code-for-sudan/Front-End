@@ -4,10 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({product}) => {
     const navigate = useNavigate();
+    const userId = JSON.parse(localStorage.getItem("user"))?.id;
 
     // redirect user to open edit product
     const handleEditProduct = (id) => {
-        navigate(`/store-owner/:userId/products/edit/${id}`)
+        navigate(`/store-owner/${userId}/products/edit/${id}`)
     }
   return (
     <div
