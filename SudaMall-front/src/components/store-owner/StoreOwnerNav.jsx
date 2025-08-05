@@ -14,7 +14,7 @@ const StoreOwnerNav = () => {
   const location = useLocation();
   const [active, setActive] = useState("");
   const dispatch = useDispatch();
-  const userId = JSON.parse(localStorage.getItem("user")).id;
+  const userId = JSON.parse(localStorage.getItem("user"))?.id;
 
   useEffect(() => {
     const path = location.pathname;

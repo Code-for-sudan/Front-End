@@ -36,13 +36,13 @@ const ProductModal = ({ handleSubmit, formData, handleChange, setFormData, handl
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         {/* product name  */}
         <div>
-          <label htmlFor="name" className="block text-sm font-medium mb-1">اسم المنتج</label>
+          <label htmlFor="product_name" className="block text-sm font-medium mb-1">اسم المنتج</label>
           <input
             type="text"
-            name="name"
-            id="name"
+            name="product_name"
+            id="product_name"
             className="w-full text-xs border border-gray-300 rounded-md p-2 focus:outline-none focus:ring"
-            value={formData.name}
+            value={formData.product_name}
             onChange={handleChange}
             required
           />
@@ -50,13 +50,13 @@ const ProductModal = ({ handleSubmit, formData, handleChange, setFormData, handl
 
         {/* product description  */}
         <div>
-          <label htmlFor="description" className="block text-sm font-medium mb-1">وصف المنتج</label>
+          <label htmlFor="product_description" className="block text-sm font-medium mb-1">وصف المنتج</label>
           <textarea
-            name="description"
-            id="description"
+            name="product_description"
+            id="product_description"
             rows="3"
             className="w-full text-xs border border-gray-300 rounded-md p-2 focus:outline-none focus:ring"
-            value={formData.description}
+            value={formData.product_description}
             onChange={handleChange}
             required
           />
@@ -178,13 +178,13 @@ const ProductModal = ({ handleSubmit, formData, handleChange, setFormData, handl
         {formData.has_sizes === null ? null : formData.has_sizes === false ? 
         (
         <div>
-          <label htmlFor="quantity" className="block text-sm font-medium mb-1">الكمية</label>
+          <label htmlFor="available_quantity" className="block text-sm font-medium mb-1">الكمية</label>
           <input
             type="number"
-            name="quantity"
-            id="quantity"
+            name="available_quantity"
+            id="available_quantity"
             className="w-full text-xs border border-gray-300 rounded-md p-2 focus:outline-none focus:ring"
-            value={formData.quantity}
+            value={formData.available_quantity}
             onChange={handleChange}
             required
           />
@@ -217,7 +217,7 @@ const ProductModal = ({ handleSubmit, formData, handleChange, setFormData, handl
                     value={item.quantity}
                     onChange={(e) => {
                       const updatedSizes = [...formData.sizes];
-                      updatedSizes[index].quantity = e.target.value;
+                      updatedSizes[index].available_quantity = e.target.value;
                       setFormData((prev) => ({ ...prev, sizes: updatedSizes }));
                     }}
                   />
@@ -242,7 +242,7 @@ const ProductModal = ({ handleSubmit, formData, handleChange, setFormData, handl
               onClick={() =>
                 setFormData((prev) => ({
                   ...prev,
-                  sizes: [...prev.sizes, { size: '', quantity: '' }],
+                  sizes: [...prev.sizes, { size: '', available_quantity: '' }],
                 }))
               }
               className="mt-2 text-sm text-primary border border-primary px-2 py-1 rounded"

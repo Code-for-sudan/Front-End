@@ -15,7 +15,7 @@ const DashboardHead = ({ userData }) => {
   return (
     <div className='flex flex-row-reverse items-center justify-between py-4'>
       <div>
-        <img src={userData.profile_picture || profile_pic } alt="profile" className='w-12 h-12 rounded-full' />
+        <img src={userData?.profile_picture || profile_pic } alt="profile" className='w-12 h-12 rounded-full' />
       </div>
       <div className='flex flex-row-reverse items-center gap-4'>
         <button className='relative cursor-pointer'>

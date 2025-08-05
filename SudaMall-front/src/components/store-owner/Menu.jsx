@@ -45,8 +45,8 @@ const Menu = ({ userData }) => {
           }`}
         >
         <div className="flex items-center gap-4 py-6 px-8 bg-white">
-            <img src={userData.profile_picture || profile_pic } alt="profile" className='w-12 h-12 rounded-full' />
-            <p className='font-semibold text-base'>{userData.first_name}</p>
+            <img src={userData?.profile_picture || profile_pic } alt="profile" className='w-12 h-12 rounded-full' />
+            <p className='font-semibold text-base'>{userData?.first_name}</p>
         </div>
         <ul className="flex flex-col gap-6 py-6 px-8 bg-white">
           { Store_Owner_Sidebar.map((item, i) =>

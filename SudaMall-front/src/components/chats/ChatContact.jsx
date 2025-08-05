@@ -3,10 +3,11 @@ import { formatChatTimestamp } from "../../utils/utilities.js";
 
 const ChatContact = ({ contact }) => {
   const navigate = useNavigate()
+  const userId = JSON.parse(localStorage.getItem("user"))?.id;
 
   return (
     <div 
-      onClick={() => navigate(`/store-owner/:userId/chats/${contact.contact_id}`)}
+      onClick={() => navigate(`/store-owner/${userId}/chats/${contact.contact_id}`)}
       className='flex justify-between border-b border-gray-300 px-4 py-2 cursor-pointer'>
       <div className='flex items-center gap-3'>
         <div className="relative w-16">

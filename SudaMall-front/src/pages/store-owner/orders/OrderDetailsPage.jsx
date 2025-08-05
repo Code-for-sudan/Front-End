@@ -14,7 +14,7 @@ import { accsoar, TelImage } from "../../../assets/demo_data/index.js";
 
 const OrderDetailsPage = () => {
   const { id } = useParams();
-  const userId = JSON.parse(localStorage.getItem("user")).id;
+  const userId = JSON.parse(localStorage.getItem("user"))?.id;
 
   return (
     <div className="bg-white min-h-screen text-xs text-right p-3">

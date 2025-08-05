@@ -5,8 +5,8 @@ import { AddProductBtn, ProductFilters } from '../../../components/store-owner/p
 import { StoreProductsData } from '../../../data/StoreProductsData';
 
 const Products = () => {
-  const userId = JSON.parse(localStorage.getItem("user")).id;
-  
+  const userId = JSON.parse(localStorage.getItem("user"))?.id;
+
   return (
     <div className='container flex flex-col gap-6'>
       <MainTitle

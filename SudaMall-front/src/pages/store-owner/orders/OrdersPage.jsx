@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const OrdersPage = () => {
   const [activeTab, setActiveTab] = useState("confirmed");
   const [orders, setOrders] = useState([]);
-  const userId = JSON.parse(localStorage.getItem("user")).id;
+  const userId = JSON.parse(localStorage.getItem("user"))?.id;
 
   useEffect(() => {
     const fakeOrders = [

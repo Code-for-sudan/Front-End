@@ -28,15 +28,15 @@ export const welcomeScreens = [
   // store owner side bar data
 
   export const Store_Owner_Sidebar = [
-    { label: "إدارة الطلبات", icon: ShoppingCart, path: `/store-owner/${user.id}/orders` },
-    { label: "المنتجات", icon: ShoppingBag, path: `/store-owner/${user.id}/products`},
-    { label: "العملاء", icon: Agents, path: `/store-owner/${user.id}/dashboard` },
-    { label: "الفواتير", icon: Files, path: `/store-owner/${user.id}/dashboard` },
-    { label: "الدفع الإلكتروني", icon: CurrencyCircleDollar, path: `/store-owner/${user.id}/dashboard` },
-    { label: "إدارة المخزن", icon: Store, path: `/store-owner/${user.id}/dashboard` },
-    { label: "الإعلانات", icon: Adds, path: `/store-owner/${user.id}/dashboard` },
-    { label: "الإعدادات", icon: Gear, path: `/store-owner/${user.id}/dashboard` },
-    { label: "المشرف", icon: Admin, path: `/store-owner/${user.id}/dashboard` },
+    { label: "إدارة الطلبات", icon: ShoppingCart, path: `/store-owner/${user?.id}/orders` },
+    { label: "المنتجات", icon: ShoppingBag, path: `/store-owner/${user?.id}/products`},
+    { label: "العملاء", icon: Agents, path: `/store-owner/${user?.id}/dashboard` },
+    { label: "الفواتير", icon: Files, path: `/store-owner/${user?.id}/dashboard` },
+    { label: "الدفع الإلكتروني", icon: CurrencyCircleDollar, path: `/store-owner/${user?.id}/dashboard` },
+    { label: "إدارة المخزن", icon: Store, path: `/store-owner/${user?.id}/dashboard` },
+    { label: "الإعلانات", icon: Adds, path: `/store-owner/${user?.id}/dashboard` },
+    { label: "الإعدادات", icon: Gear, path: `/store-owner/${user?.id}/dashboard` },
+    { label: "المشرف", icon: Admin, path: `/store-owner/${user?.id}/dashboard` },
   ]
 
   // analytics data
@@ -46,27 +46,27 @@ export const welcomeScreens = [
     value: 45,
     icon: UserCirclePlus,
     bgClass: 'gold-gradient',
-    path: `/store-owner/${user.id}/dashboard/new-clients`
+    path: `/store-owner/${user?.id}/dashboard/new-clients`
   },
   {
     label: 'الطلبات الجديدة',
     value: 30,
     icon: Cart,
     bgClass: 'violet-gradient',
-    path: `/store-owner/${user.id}/dashboard/new-orders`
+    path: `/store-owner/${user?.id}/dashboard/new-orders`
   },
   {
     label: 'المبيعات اليوم',
     value: 10000,
     icon: CurrencyDollar,
     bgClass: 'dark-green-gradient',
-    path: `/store-owner/${user.id}/dashboard/total-sales`
+    path: `/store-owner/${user?.id}/dashboard/total-sales`
   },
   {
     label: 'الطلبات المعلقة',
     value: 30,
     icon: Cart,
     bgClass: 'sky-blue-gradient',
-    path: `/store-owner/${user.id}/dashboard/paused-orders`
+    path: `/store-owner/${user?.id}/dashboard/paused-orders`
   }
 ];
