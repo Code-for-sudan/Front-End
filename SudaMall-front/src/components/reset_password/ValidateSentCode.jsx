@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import Image from "../../assets/reset_password.png";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
 import { ComponentsContext } from "../../pages/public/ResetPassword";
+import api from "../../api/Api";
+import { toast } from "react-toastify";
 
 const ValidateSentCode = () => {
 	const isKeyboardOpen = useKeyboardStatus();
@@ -46,20 +48,18 @@ const ValidateSentCode = () => {
 
 	// move the cursor to the next or previous input based on the direction
 	const moveCursor = (direction, e) => {
+		const index = parseInt(e.target.dataset.index);
+
 		switch (direction) {
 			case "forward":
-				document
-					.querySelector(
-						`[data-index="${parseInt(e.target.dataset.index) + 1}"]`
-					)
-					.focus();
+				if (index >= 5) return; // prevent moving beyond the last input
+				// focus the next input
+				document.querySelector(`[data-index="${index + 1}"]`).focus();
 				break;
 			case "backward":
-				document
-					.querySelector(
-						`[data-index="${parseInt(e.target.dataset.index) - 1}"]`
-					)
-					.focus();
+				if (index <= 0) return; // prevent moving before the first input
+				// focus the previous input
+				document.querySelector(`[data-index="${index - 1}"]`).focus();
 				break;
 		}
 	};
@@ -67,9 +67,24 @@ const ValidateSentCode = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		// api code here to validate the sent code
-
-		// if successful, navigate to the next step
-		context.dispatch({ render: "SetNewPassword" });
+		const email = sessionStorage.getItem("email");
+		api.post("/auth/verify-password/request/", {
+			email,
+			otp: code.join(""),
+		})
+			.then((response) => {
+				if (response.status === 200) {
+					toast.success("Code validated successfully!");
+					context.dispatch({ render: "SetNewPassword" });
+				}
+			})
+			.catch((error) => {
+				if (error.response.status === 400)
+					toast.error("Invalid code, please try again.");
+				else if (error.response.status === 404)
+					toast.error("Email not found, please check your email.");
+				else toast.error("An error occurred, please try again later.");
+			});
 	};
 
 	return (

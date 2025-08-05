@@ -2,6 +2,9 @@ import { useState } from "react";
 import Image from "../../assets/reset_password.png";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
 import { GrFormView, GrFormViewHide } from "react-icons/gr";
+import api from "../../api/Api";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const SetNewPassword = () => {
 	const isKeyboardOpen = useKeyboardStatus();
@@ -11,10 +14,23 @@ const SetNewPassword = () => {
 	const [passwordEqualError, setPasswordEqualError] = useState(false);
 	const [passwordConditionError, setPasswordConditionError] = useState(false);
 
+	const navigate = useNavigate();
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// api request here
-		alert("تم حفظ كلمة المرور بنجاح");
+		const email = sessionStorage.getItem("email");
+		api.post("/auth/update-password/", {
+			email,
+			new_password: password,
+		})
+			.then(() => {
+				toast.success("تم إرسال بريد لتفعيل حسابك");
+				sessionStorage.removeItem("email");
+				navigate("/auth/login");
+			})
+			.catch(() => {
+				toast.error("حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى");
+			});
 	};
 
 	const handlePassword = (e) => {
@@ -54,13 +70,13 @@ const SetNewPassword = () => {
 					{visible ? (
 						<GrFormView
 							onClick={toggleVisibility}
-       aria-label="إخفاء كلمة المرور"
+							aria-label="إخفاء كلمة المرور"
 							className="text-[40px] absolute mr-2 mt-4.5"
 						/>
 					) : (
 						<GrFormViewHide
 							onClick={toggleVisibility}
-       aria-label="إظهار كلمة المرور"
+							aria-label="إظهار كلمة المرور"
 							className="text-[40px] text-light-gray absolute mr-2 mt-4.5"
 						/>
 					)}
@@ -72,8 +88,13 @@ const SetNewPassword = () => {
 						value={password}
 						placeholder="**********"
 					/>
-				<div className="text-[14px] mt-1">{passwordConditionError && <p className="text-red-500">كلمة المرور 8 من الارقام والاحرف الانجليزية</p>}</div>
-
+					<div className="text-[14px] mt-1">
+						{passwordConditionError && (
+							<p className="text-red-500">
+								كلمة المرور 8 من الارقام والاحرف الانجليزية
+							</p>
+						)}
+					</div>
 				</div>
 				<div className="flex flex-col px-5">
 					<label htmlFor="confirm-password">
@@ -82,13 +103,13 @@ const SetNewPassword = () => {
 					{visible ? (
 						<GrFormView
 							onClick={toggleVisibility}
-       aria-label="إخفاء كلمة المرور"
+							aria-label="إخفاء كلمة المرور"
 							className="text-[40px] absolute mr-2 mt-4.5"
 						/>
 					) : (
 						<GrFormViewHide
 							onClick={toggleVisibility}
-       aria-label="إظهار كلمة المرور"
+							aria-label="إظهار كلمة المرور"
 							className="text-[40px] text-light-gray absolute mr-2 mt-4.5"
 						/>
 					)}
@@ -101,8 +122,13 @@ const SetNewPassword = () => {
 						value={confirmPassword}
 						placeholder="**********"
 					/>
-				<div className="text-[14px] mt-1">{passwordEqualError && <p className="text-red-500">كلمات المرور غير متطابقة</p>}</div>
-
+					<div className="text-[14px] mt-1">
+						{passwordEqualError && (
+							<p className="text-red-500">
+								كلمات المرور غير متطابقة
+							</p>
+						)}
+					</div>
 				</div>
 				<input
 					type="submit"

@@ -1,36 +1,35 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import { welcomeScreens } from "../../constants";
 import WelcomeScreen from "./WelcomeScreen";
 import WelcomeDots from "./WelcomeDots";
 import WelcomeNavigation from "./WelcomeNavigation";
 
 const Welcome = () => {
+  if( localStorage.getItem("welcoming") ) 
+    return <Navigate to="/auth" replace={true} />;
   const [current, setCurrent] = useState(0);
   const navigate = useNavigate();
 
-  // Preload images asynchronously
-  useEffect(() => {
-    welcomeScreens.forEach(screen => {
-      const img = new Image();
-      img.src = screen.image;
-    });
-  }, []);
 
   const handleNext = () => {
     if (current < welcomeScreens.length - 1) {
       setCurrent(current + 1);
     } else {
-      navigate("/auth");
+      handleSkip();
     }
   };
 
   const handleSkip = () => {
+    localStorage.setItem("welcoming", "true");
     navigate("/auth");
   };
 
   return (
     <div className="h-screen flex flex-col justify-center bg-white -mt-10">
+      {welcomeScreens.map((screen, index) => (
+        <link key={index} rel="preload" href={screen.image} as="image" />
+      ))}
       <WelcomeScreen
         image={welcomeScreens[current].image}
         text={welcomeScreens[current].text}
