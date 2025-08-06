@@ -18,6 +18,7 @@ const SetNewPassword = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		if( passwordConditionError || passwordEqualError ) return;
 		const email = sessionStorage.getItem("email");
 		api.post("/auth/update-password/", {
 			email,
