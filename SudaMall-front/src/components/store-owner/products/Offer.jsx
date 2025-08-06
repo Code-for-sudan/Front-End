@@ -94,9 +94,9 @@ const Offer = ({ formData, handleOfferChange, toggleOffer, onSubmit }) => {
           </button>
           <button
             type="button"
-            className="flex-1 border-2 border-gray-300 text-gray-600 py-2 rounded-md cursor-pointer"
+            className="flex-1 border border-red-500 text-red-500 py-2 rounded-md cursor-pointer"
           >
-            إلغاء العرض
+            حذف العرض
           </button>
         </div>
     </div>

@@ -13,7 +13,7 @@ const MAX_TAG_LENGTH = 20;
 // allowed files for product image
 const allowedTypes = ["image/png", "image/jpeg"];
 
-const ProductModal = ({ handleSubmit, formData, handleChange, setFormData, handleCloseProduct}) => {
+const ProductModal = ({ handleSubmit, formData, handleChange, setFormData, handleCloseProduct, errors}) => {
     const [tagInput, setTagInput] = useState("");
 
     // file upload functions from useFileUpload hook
@@ -100,7 +100,7 @@ const ProductModal = ({ handleSubmit, formData, handleChange, setFormData, handl
         </div>
         {/* product brand */}
         <div>
-          <label htmlFor="brand" className="block text-sm font-medium mb-1">العلامة التجارية ( الماركة )</label>
+          <label htmlFor="brand" className="block text-sm font-medium mb-1">العلامة التجارية - الماركة - ( إختياري )</label>
           <input
             type="text"
             name="brand"
@@ -108,7 +108,6 @@ const ProductModal = ({ handleSubmit, formData, handleChange, setFormData, handl
             className="w-full text-xs border border-gray-300 rounded-md p-2 focus:outline-none focus:ring"
             value={formData.brand}
             onChange={handleChange}
-            required
           />
         </div>
 
@@ -163,7 +162,8 @@ const ProductModal = ({ handleSubmit, formData, handleChange, setFormData, handl
         </div>
 
         {/* upload product image */}
-         <FileUploader
+        <div>
+          <FileUploader
             label="قم بإرفاق صورة للمنتج"
             hint="الملفات المسموح بها: png, jpeg"
             inputRef={inputRef}
@@ -174,10 +174,13 @@ const ProductModal = ({ handleSubmit, formData, handleChange, setFormData, handl
             selectedFile={selectedFile}
             setSelectedFile={setSelectedFile}
           />
+          {errors?.picture && <p className='text-red-500 text-sm'>{errors.picture}</p>}
+        </div>
+
 
           {/* select product color */}
         <div>
-          <label htmlFor="color" className="block text-sm font-medium mb-1">اللون</label>
+          <label htmlFor="color" className="block text-sm font-medium mb-1">اللون ( إختياري )</label>
           <input
             type="text"
             name="color"
@@ -210,6 +213,7 @@ const ProductModal = ({ handleSubmit, formData, handleChange, setFormData, handl
               لا
             </button>
           </div>
+          {errors?.has_sizes && <p className='text-red-500 text-sm'>{errors.has_sizes}</p>}
         </div>
          {/* if the product has sizes return (size + quantity inputs) else return quantity */}
         {formData.has_sizes === null ? null : formData.has_sizes === false ? 
@@ -223,8 +227,8 @@ const ProductModal = ({ handleSubmit, formData, handleChange, setFormData, handl
             className="w-full text-xs border border-gray-300 rounded-md p-2 focus:outline-none focus:ring"
             value={formData.available_quantity}
             onChange={handleChange}
-            required
           />
+          {errors?.available_quantity && <p className='text-red-500 text-sm'>{errors.available_quantity}</p>}
         </div>
        
         )
@@ -272,6 +276,7 @@ const ProductModal = ({ handleSubmit, formData, handleChange, setFormData, handl
                   )}
                 </div>
               ))}
+              {errors?.sizes && <p className='text-red-500 text-sm'>{errors.sizes}</p>}
             </div>
 
             <button

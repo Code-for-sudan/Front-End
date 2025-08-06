@@ -1,28 +1,60 @@
-import { useDispatch } from 'react-redux';
-import { closeAddProduct } from '../../../app/AppStats';
-import { MdOutlineArrowCircleRight } from 'react-icons/md';
-import { useState } from 'react';
-import ProductModal from './ProductModal';
-import { useCreateProduct } from '../../../hooks/useCreateProduct';
+import { useDispatch } from "react-redux";
+import { closeAddProduct } from "../../../app/AppStats";
+import { MdOutlineArrowCircleRight } from "react-icons/md";
+import { useState } from "react";
+import ProductModal from "./ProductModal";
+import { useCreateProduct } from "../../../hooks/useCreateProduct";
+import { MainLoading } from "../../loadings";
 
 const AddProduct = () => {
   const dispatch = useDispatch();
   const createProductMutation = useCreateProduct();
+  const isLoading = createProductMutation.isPending;
 
   const [formData, setFormData] = useState({
-    product_name: '',
-    product_description: '',
-    brand: '',
-    price: '',
-    classification: '',
-    category: '',
+    product_name: "",
+    product_description: "",
+    brand: "",
+    price: "",
+    classification: "",
+    category: "",
     picture: null,
-    color: '',
+    color: "",
     tags: [],
     has_sizes: null,
     available_quantity: "",
-    sizes: [{ size: '', available_quantity: '' }],
+    sizes: [{ size: "", available_quantity: "" }],
   });
+
+  const [errors, setErrors] = useState({});
+
+  // Validate the form data
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.classification) newErrors.classification = "التصنيف مطلوب";
+    if (!formData.category) newErrors.category = "الفئة مطلوبة";
+    if (!formData.picture) newErrors.picture = "صورة المنتج مطلوبة";
+    if (formData.has_sizes === null)
+      newErrors.has_sizes = "يرجى تحديد ما إذا كان المنتج يحتوي على مقاسات";
+
+    if (formData.has_sizes === "true" || formData.has_sizes === true) {
+      const hasValidSize = formData.sizes.some(
+        (s) => s.size.trim() && s.available_quantity
+      );
+      if (!hasValidSize) {
+        newErrors.sizes = "يرجى إضافة مقاس واحد على الأقل مع الكمية المتاحة";
+      }
+    } else if (
+      (formData.has_sizes === "false" || formData.has_sizes === false) &&
+      !formData.available_quantity
+    ) {
+      newErrors.available_quantity = "الكمية المتاحة مطلوبة للمنتج بدون مقاسات";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   // handle input chang when the user type
   const handleChange = (e) => {
@@ -34,15 +66,19 @@ const AddProduct = () => {
     dispatch(closeAddProduct());
   };
 
-   // handle submit form changes
+  // handle submit form changes
   const handleSubmit = (e) => {
     e.preventDefault();
-    createProductMutation.mutate(formData); // mutation function to post product creation
-    console.log("form data:", formData)
+    const validated = validateForm();
+
+    if (validated) {
+      createProductMutation.mutate(formData); // mutation function to post product creation
+    }
   };
 
   return (
-    <div className='fixed inset-0 h-[100dvh] z-[250] bg-white container px-4 py-6 overflow-y-auto'>
+    <div className="fixed inset-0 h-[100dvh] z-[250] bg-white container px-4 py-6 overflow-y-auto">
+      {isLoading && <MainLoading />}
       <div className="relative flex items-center justify-center w-full mb-6">
         <MdOutlineArrowCircleRight
           onClick={handleCloseProduct}
@@ -50,13 +86,14 @@ const AddProduct = () => {
         />
         <h2 className="text-base font-bold">إضافة منتج</h2>
       </div>
-      <ProductModal 
+      <ProductModal
         handleSubmit={handleSubmit}
         handleCloseProduct={handleCloseProduct}
         handleChange={handleChange}
         formData={formData}
         setFormData={setFormData}
-        />
+        errors={errors}
+      />
     </div>
   );
 };
