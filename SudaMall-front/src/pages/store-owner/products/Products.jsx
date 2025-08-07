@@ -38,11 +38,14 @@ const Products = () => {
          navigatePath={`/store-owner/${userId}/dashboard`} />
       <SearchBar />
       <AddProductBtn />
+      { allProducts?.length === 0 
+      ? <p className='text-center text-gray-600 mt-8'>ليس لديك منتجات في متجرك</p>
+      : 
       <ProductFilters 
           products={allProducts}
           isLoading={isLoading}
           isError={isError} 
-      />
+      />}
       
       {/* This div will be observed to trigger the next page */}
       <div ref={ref} className="col-span-full -mt-18">
