@@ -319,7 +319,7 @@ const ProductModal = ({ handleSubmit, formData, handleChange, setFormData, handl
               ))}
             </div>
 
-            {formData.tags.length < MAX_TAGS && (
+            {formData.tags?.length < MAX_TAGS && (
               <input
                 type="text"
                 name="tags"

@@ -11,7 +11,7 @@ export const updateProduct = async ({ productId, productData }) => {
     "classification",
     "category",
     "has_sizes",
-    "picture",
+    // "picture",
     "color",
     "available_quantity",
   ];
@@ -35,7 +35,7 @@ export const updateProduct = async ({ productId, productData }) => {
   }
 
   // Offer (nested object)
-  if (productData.offer) {
+  if ((productData.offer.start_date && productData.offer.end_date && productData.offer.offer_price) !== ""  ) {
     formData.append("offer", JSON.stringify(productData.offer));
   }
 
@@ -45,7 +45,7 @@ export const updateProduct = async ({ productId, productData }) => {
   }
 
   // Send PUT request
-  const response = await api.put(`/products/${productId}/`, formData, {
+  const response = await api.patch(`/products/${productId}/`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },

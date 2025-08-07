@@ -1,37 +1,60 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdOutlineArrowCircleRight } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
 import Offer from "./Offer";
 import ProductModal from "./ProductModal";
 import { useUpdateProduct } from "../../../hooks/useUpdateProduct";
+import { useGetSingleProduct } from "../../../hooks/useGetProducts";
+import { MainLoading } from "../../loadings";
 
 const EditProduct = () => {
+  // mutation function for updating product
+  const { mutate: updateProduct, isPending } = useUpdateProduct();
+
   const navigate = useNavigate();
   const params = useParams();
   const ProductId = parseInt(params.product_id);
 
-  // mutation function for updating product
-  const { mutate: updateProduct } = useUpdateProduct();
+  const { data: product, isLoading, isError } = useGetSingleProduct(ProductId);
 
-  const [formData, setFormData] = useState({
-    product_name: "الحذاء الذهبي",
-    product_description: "حذاء رياضي اصلي",
-    brand: "اوريجينال",
-    price: "60000",
-    classification: "رجال",
-    category: "أحذية",
-    picture: null,
-    color: "ذهبي",
-    tags: ["رياضة", "كرة قدم"],
-    has_sizes: "true",
-    available_quantity: "",
-    sizes: [{ size: "40", available_quantity: "7" }],
-    offer: {
-      offer_price: "",
-      start_date: "",
-      end_date: "",
-    },
-  });
+  // format date function
+  const formatDate = (isoString) => {
+  return isoString ? isoString.split("T")[0] : "";
+};
+
+  const [formData, setFormData] = useState(null);
+
+  useEffect(() => {
+    if (product) {
+      setFormData({
+        product_name: product.product_name || "",
+        product_description: product.product_description || "",
+        brand: product.brand || "",
+        price: product.price || "",
+        classification: product.classification || "",
+        category: product.category || "",
+        picture: product.picture || null,
+        color: product.color || "",
+        tags: product.tags || [],
+        has_sizes: product.has_sizes ?? null,
+        available_quantity: product.available_quantity || "",
+        sizes: product.has_sizes
+          ? product.sizes
+          : [{ size: "", available_quantity: "" }],
+         offer: product?.offer
+          ? {
+              ...product.offer,
+              start_date: formatDate(product.offer.start_date),
+              end_date: formatDate(product.offer.end_date),
+            }
+          : {
+              offer_price: "",
+              start_date: "",
+              end_date: "",
+            },
+      });
+    }
+  }, [product]);
 
   const [active, setActive] = useState("edit");
   const [errors, setErrors] = useState({});
@@ -109,10 +132,11 @@ const EditProduct = () => {
         productId: ProductId,
         productData: formData, // your state object
       });
-
-      console.log("form data:", formData);
     }
   };
+
+  if (isLoading || !formData) return <MainLoading />;
+  if (isError) return <p>حدث خطأ أثناء تحميل المنتج</p>;
 
   return (
     <div className="bg-white container px-4 py-6 max-w-xl">
@@ -124,6 +148,8 @@ const EditProduct = () => {
         <h2 className="text-base font-bold">تعديل المنتج</h2>
       </div>
 
+      {/* pending updates */}
+      { isPending && <MainLoading text="تحديث المنتج..." />}
       {/* switch between edit and add offer buttons */}
       <div className="flex items-center justify-center gap-6 text-sm px-6 my-8">
         <button
