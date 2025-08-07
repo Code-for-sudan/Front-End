@@ -78,7 +78,11 @@ const AddProduct = () => {
 
   return (
     <div className="fixed inset-0 h-[100dvh] z-[250] bg-white container px-4 py-6 overflow-y-auto">
-      {isLoading && <MainLoading />}
+
+      {/* spinner loading */}
+      {isLoading && <MainLoading text="جاري حفظ المنتج..." />}
+
+      {/* header text and back button */}
       <div className="relative flex items-center justify-center w-full mb-6">
         <MdOutlineArrowCircleRight
           onClick={handleCloseProduct}
@@ -86,6 +90,8 @@ const AddProduct = () => {
         />
         <h2 className="text-base font-bold">إضافة منتج</h2>
       </div>
+
+      {/* product form */}
       <ProductModal
         handleSubmit={handleSubmit}
         handleCloseProduct={handleCloseProduct}

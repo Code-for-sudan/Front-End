@@ -1,22 +1,28 @@
 import { useState } from 'react';
 import ProductCard from './ProductCard';
+import FilterProductsSkeleton from '../../loadings/FilterProductsSkeleton';
 
 // Dummy product types and statuses
 const productTypes = ['كل الفئات', 'ملابس', 'أجهزة', 'شنط', 'إكسسوارات', 'أخرى'];
 const statusOptions = ['كل الحالات', 'متوفر', 'غير متوفر'];
 
-const ProductFilters = ({products}) => {
+const ProductFilters = ({products, isLoading, isError}) => {
   const [selectedType, setSelectedType] = useState('كل الفئات');
   const [selectedStatus, setSelectedStatus] = useState('كل الحالات');
 
-  const filteredProducts = products.filter((product) => {
-    const matchType = selectedType === 'كل الفئات' || product.product_type === selectedType;
+  const filteredProducts = products?.filter((product) => {
+    const matchType = selectedType === 'كل الفئات' || product.category === selectedType;
     const matchStatus =
       selectedStatus === 'كل الحالات' ||
-      (selectedStatus === 'متوفر' && product.quantity > 0) ||
-      (selectedStatus === 'غير متوفر' && product.quantity === 0);
+      (selectedStatus === 'متوفر' && product.available_quantity > 0) ||
+      (selectedStatus === 'غير متوفر' && product.available_quantity === 0);
     return matchType && matchStatus;
   });
+
+  if(isLoading) return <FilterProductsSkeleton />
+
+  if (isError) return <div className='flex items-center justify-center text-gray-600 mt-10'>حدث خطأ أثناء تحميل المنتجات</div>;
+
 
   return (
     <div className="pb-4 w-full mb-10">
@@ -55,7 +61,7 @@ const ProductFilters = ({products}) => {
 
       {/* Filtered product results */}
       <div className="flex flex-col gap-2">
-        {filteredProducts.map((product, index) => (
+        {filteredProducts?.map((product, index) => (
           <ProductCard 
             key={index}
             product={product}
