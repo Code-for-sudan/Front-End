@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useLogin } from "../../hooks/uselogin";
 import ArrowCircleRight from "../../assets/icons/ArrowCircleRight.svg";
@@ -20,6 +20,26 @@ const Login = () => {
   });
   const [showResend, setShowResend] = useState(false);
   const [resendEmail, setResendEmail] = useState("");
+  const [resendCooldown, setResendCooldown] = useState(0);
+  const cooldownTime = 100; // seconds
+
+  // When clicking the resend button
+  const handleResend = () => {
+    if (resendCooldown > 0) return; // Still in cooldown period
+
+    resendVerification(resendEmail);
+    setResendCooldown(cooldownTime); // Start countdown
+  };
+
+  // Countdown timer
+  useEffect(() => {
+    if (resendCooldown > 0) {
+      const timer = setTimeout(() => {
+        setResendCooldown(resendCooldown - 1);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [resendCooldown]);
 
   const { mutate: login, isPending } = useLogin();
 
@@ -169,13 +189,23 @@ const Login = () => {
                 لم يتم تفعيل حسابك. يمكنك إعادة إرسال رابط التفعيل.
               </p>
               <button
-                onClick={() => resendVerification(resendEmail)}
-                className="text-sm underline hover:text-blue-800 text-primary"
+                onClick={handleResend}
+                disabled={resendCooldown > 0}
+                className={`text-sm underline text-primary ${
+                  resendCooldown > 0
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:text-blue-800"
+                }`}
               >
-                إعادة إرسال رابط التفعيل
+                {resendCooldown > 0
+                  ? `أعد الإرسال بعد ${resendCooldown} ثانية`
+                  : "إعادة إرسال رابط التفعيل"}
               </button>
             </div>
           )}
+
+          {/* Or Divider */}
+          {/*   <Divider />*/}
 
           {/* Signup */}
           <p className="text-center text-sm mt-8">
