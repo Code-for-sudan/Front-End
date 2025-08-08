@@ -1,16 +1,17 @@
 import { useState } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { useLogin } from "../../hooks/uselogin";
 import ArrowCircleRight from "../../assets/icons/ArrowCircleRight.svg";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { resendVerification } from "../../api/Auth";
 import { setUser } from "../../app/UserInfo";
+import { Eye, EyeOff } from "lucide-react";
 
 const Login = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch(); // dispatcher to set item to redux store
+  const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
 
   const [loginInput, setLoginInput] = useState({
     email: "",
@@ -20,45 +21,29 @@ const Login = () => {
   const [showResend, setShowResend] = useState(false);
   const [resendEmail, setResendEmail] = useState("");
 
-  const { mutate: login, isPending, } = useLogin();
+  const { mutate: login, isPending } = useLogin();
 
-  /**  const handleGoogleSuccess = (credentialResponse) => {
-    const token = credentialResponse.credential;
-    fetch("http://localhost:8000/api/auth/google/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ token }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log("Login success:", data));
-  };
-*/
   const handleSubmit = (e) => {
     e.preventDefault();
-      
-  const { email, password } = loginInput;
 
-// Check that the fields are filled in
-  if (!email.trim() || !password.trim()) {
-    toast.error("يرجى ملء جميع الحقول");
-    return;
-  }
+    const { email, password } = loginInput;
 
-// Email verification
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    toast.error("يرجى إدخال بريد إلكتروني صحيح");
-    return;
-  }
+    if (!email.trim() || !password.trim()) {
+      toast.error("يرجى ملء جميع الحقول");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error("يرجى إدخال بريد إلكتروني صحيح");
+      return;
+    }
 
     login(loginInput, {
       onSuccess: (data) => {
         const userId = data?.user?.id || data?.user?._id;
         const accountType = data?.user?.account_type;
-        dispatch(setUser(data?.user)); // set the new user data to redux store and localStorage
-        console.log("user", data)
+        dispatch(setUser(data?.user));
         if (userId && accountType === "seller") {
           navigate(`/store-owner/${userId}/dashboard`);
         } else if (userId && accountType === "buyer") {
@@ -76,29 +61,19 @@ const Login = () => {
           setResendEmail(loginInput.email);
         }
       },
-     
     });
   };
 
   return (
-    <div
-      className="min-h-screen flex items-start justify-center pt-20"
-      style={{ backgroundColor: "var(--primary)" }}
-    >
+    <div className="min-h-screen flex items-start justify-center pt-20 bg-primary">
       <Link
         to="/auth"
         className="absolute top-10 left-6 text-white hover:text-gray-200"
       >
         <img src={ArrowCircleRight} alt="رجوع" className="h-8 w-8" />
       </Link>
-      <div
-        className="bg-white w-full max-w-md shadow-lg px-6 pt-10 pb-8 relative"
-        style={{
-          borderTopLeftRadius: "80px",
-          borderTopRightRadius: "80px",
-          minHeight: "calc(100vh - 80px)",
-        }}
-      >
+
+      <div className="bg-white w-full max-w-md shadow-lg px-6 pt-10 pb-8 relative rounded-t-[80px] min-h-[calc(100vh-80px)]">
         <div className="container mx-auto px-4 mt-2">
           <h1 className="text-2xl font-bold text-black text-center mb-6">
             تسجيل دخول
@@ -112,13 +87,12 @@ const Login = () => {
               </label>
               <input
                 value={loginInput.email}
-                onChange={(event) => {
-                  setLoginInput({ ...loginInput, email: event.target.value });
-                }}
+                onChange={(event) =>
+                  setLoginInput({ ...loginInput, email: event.target.value })
+                }
                 type="email"
                 placeholder="example@gmail.com"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
-                style={{ focusRingColor: "var(--primary)" }}
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
 
@@ -127,37 +101,41 @@ const Login = () => {
               <label className="block text-right font-medium mb-2">
                 كلمة المرور
               </label>
-              <input
-                value={loginInput.password}
-                onChange={(event) => {
-                  setLoginInput({
-                    ...loginInput,
-                    password: event.target.value,
-                  });
-                }}
-                type="password"
-                placeholder="********"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
-                style={{ focusRingColor: "var(--primary)" }}
-              />
+              <div className="relative">
+                <input
+                  value={loginInput.password}
+                  onChange={(event) =>
+                    setLoginInput({
+                      ...loginInput,
+                      password: event.target.value,
+                    })
+                  }
+                  type={showPassword ? "text" : "password"}
+                  placeholder="********"
+                  className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+                <div
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </div>
+              </div>
+
               <div className="flex items-center justify-between mt-2">
                 {/* Remember Me */}
                 <div className="flex items-center space-x-2 space-x-reverse mt-1.5">
                   <input
                     checked={loginInput.rememberMe}
-                    onChange={(event) => {
+                    onChange={(event) =>
                       setLoginInput({
                         ...loginInput,
                         rememberMe: event.target.checked,
-                      });
-                    }}
+                      })
+                    }
                     type="checkbox"
                     id="remember"
-                    style={{
-                      accentColor: "var(--primary)",
-                      borderColor: "var(--primary)",
-                    }}
-                    className="rounded-sm"
+                    className="rounded-sm accent-primary border-primary"
                   />
                   <label
                     htmlFor="remember"
@@ -166,85 +144,45 @@ const Login = () => {
                     تذكرني
                   </label>
                 </div>
+
                 <Link
                   to="/auth/reset-password"
-                  className="text-sm"
-                  style={{ color: "var(--primary)" }}
+                  className="text-sm text-primary"
                 >
                   هل نسيت كلمة المرور؟
                 </Link>
               </div>
             </div>
-        
 
             {/* Login Button */}
             <button
               type="submit"
-              className="w-full text-white font-semibold py-2 rounded-xl transition duration-200 mt-5"
-              style={{
-                backgroundColor: "var(--primary)",
-                hoverBackgroundColor: "var(--color-primary)",
-              }}
+              className="w-full text-white font-semibold py-2 rounded-xl transition duration-200 mt-5 bg-primary hover:bg-primary"
             >
               {isPending ? "جاري تسجيل الدخول..." : "تسجيل الدخول"}
             </button>
-           
           </form>
-           {showResend && (
-              <div className="text-center mt-4">
-                <p className="text-red-500 mb-2">
-                  لم يتم تفعيل حسابك. يمكنك إعادة إرسال رابط التفعيل.
-                </p>
-                <button
-                  onClick={() => resendVerification(resendEmail)}
-                  className="text-sm underline hover:text-blue-800" style={{color: "var(--primary)"}}
-                >
-                  إعادة إرسال رابط التفعيل
-                </button>
-              </div>
-            )}
 
-          {/* Or Divider */}
-       {/*   <Divider />*/}
-          {/* Google Login 
-          {typeof window !== 'undefined' && (
-          <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
-            <GoogleLogin
-              onSuccess={handleGoogleSuccess}
-              onError={() => console.log("Login Failed")}
-              useOneTap={true}
-              theme="outline"
-              shape="rectangular"
-              text="signin_with"
-              width="100%"
-              locale="ar"
-              ux_mode="popup"
-              // Custom render
-              render={({ onClick, disabled }) => (
-                <button
-                  onClick={onClick}
-                  disabled={disabled}
-                  className="w-full border border-primary py-2 rounded-xl flex items-center justify-center gap-2 hover:bg-gray-100"
-                >
-                  <img
-                    src="https://www.svgrepo.com/show/355037/google.svg"
-                    alt="Google"
-                    className="w-5 h-5"
-                  />
-                  <span className="text-sm">تسجيل الدخول بواسطة قوقل</span>
-                </button>
-              )}
-            />
-          </GoogleOAuthProvider>
+          {showResend && (
+            <div className="text-center mt-4">
+              <p className="text-red-500 mb-2">
+                لم يتم تفعيل حسابك. يمكنك إعادة إرسال رابط التفعيل.
+              </p>
+              <button
+                onClick={() => resendVerification(resendEmail)}
+                className="text-sm underline hover:text-blue-800 text-primary"
+              >
+                إعادة إرسال رابط التفعيل
+              </button>
+            </div>
           )}
-*/}
+
           {/* Signup */}
           <p className="text-center text-sm mt-8">
             ليس لديك حساب؟
             <Link
               to="/auth?step=2"
-              className="font-semibold ml-1 mr-2.5"
-              style={{ color: "var(--primary)" }}
+              className="font-semibold ml-1 mr-2.5 text-primary"
             >
               إنشاء حساب جديد
             </Link>

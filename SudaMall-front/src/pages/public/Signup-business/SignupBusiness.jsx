@@ -12,8 +12,8 @@ const SignupBusiness = () => {
   const [errors, setErrors] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
-      const [showPassword, setShowPassword] = useState(false);
-    const [nameInputs, setNameInputs] = useState(["", "", "", ""]);
+  const [showPassword, setShowPassword] = useState(false);
+  const [nameInputs, setNameInputs] = useState(["", "", "", ""]);
 
   const [signupInput, setSignupInput] = useState({
     name: "",
