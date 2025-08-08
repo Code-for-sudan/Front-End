@@ -27,7 +27,6 @@ const ProductModal = ({ handleSubmit, formData, handleChange, setFormData, handl
         handleDrop,
     } = useFileUpload(allowedTypes);
 
-    
     useEffect(() => {
     if (selectedFile) {
         setFormData((prev) => ({
@@ -160,6 +159,16 @@ const ProductModal = ({ handleSubmit, formData, handleChange, setFormData, handl
             ))}
           </select>
         </div>
+
+        {/* render product image on edit product */}
+       {formData.picture && 
+        typeof formData.picture !== 'object' &&
+        formData.picture !== '' &&
+        <div>
+          <label>صورة المنتج</label>
+          <img src={`https://sudamall.ddns.net${formData.picture}`} alt="product-image" className='size-18 rounded my-2' />
+        </div>
+        }
 
         {/* upload product image */}
         <div>

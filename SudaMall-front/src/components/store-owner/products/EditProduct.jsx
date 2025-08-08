@@ -3,19 +3,24 @@ import { MdOutlineArrowCircleRight } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
 import Offer from "./Offer";
 import ProductModal from "./ProductModal";
-import { useUpdateProduct } from "../../../hooks/useUpdateProduct";
-import { useGetSingleProduct } from "../../../hooks/useGetProducts";
 import { MainLoading } from "../../loadings";
+import { useDeleteOffer, useUpdateProduct, useGetSingleProduct } from "../../../hooks";
 
 const EditProduct = () => {
   // mutation function for updating product
   const { mutate: updateProduct, isPending } = useUpdateProduct();
+
+  // mutation function for deleting offer
+  const { mutate: deleteOffer } = useDeleteOffer();
 
   const navigate = useNavigate();
   const params = useParams();
   const ProductId = parseInt(params.product_id);
 
   const { data: product, isLoading, isError } = useGetSingleProduct(ProductId);
+
+  // check if the product has offer
+  const has_offer = product?.offer ? true : false;
 
   // format date function
   const formatDate = (isoString) => {
@@ -56,7 +61,7 @@ const EditProduct = () => {
     }
   }, [product]);
 
-  const [active, setActive] = useState("edit");
+  const [active, setActive] = useState("edit"); // active tap state * edit or offer
   const [errors, setErrors] = useState({});
 
   // Validate the form data
@@ -112,15 +117,15 @@ const EditProduct = () => {
   };
 
   // enable and disable offer function
-  const toggleOffer = () => {
-    setFormData((prev) => ({
-      ...prev,
-      offer: {
-        ...prev.offer,
-        is_active: !prev.offer.is_active,
-      },
-    }));
-  };
+  // const toggleOffer = () => {
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     offer: {
+  //       ...prev.offer,
+  //       is_active: !prev.offer.is_active,
+  //     },
+  //   }));
+  // };
 
   // handle submit form changes
   const handleSubmit = (e) => {
@@ -132,6 +137,13 @@ const EditProduct = () => {
         productId: ProductId,
         productData: formData, // your state object
       });
+    }
+  };
+
+  // handle delete product offer
+  const handleDeleteOffer = () => {
+    if (confirm("هل انت متأكد من أنك تريد حذف العرض؟")) {
+      deleteOffer({ id: ProductId });
     }
   };
 
@@ -182,8 +194,11 @@ const EditProduct = () => {
         <Offer
           onSubmit={handleSubmit}
           formData={formData}
-          toggleOffer={toggleOffer}
+          // toggleOffer={toggleOffer}
           handleOfferChange={handleOfferChange}
+          handleDeleteOffer={handleDeleteOffer}
+          initialOffer={product.offer}
+          has_offer={has_offer}
         />
       )}
     </div>

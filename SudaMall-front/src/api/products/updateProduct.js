@@ -11,16 +11,21 @@ export const updateProduct = async ({ productId, productData }) => {
     "classification",
     "category",
     "has_sizes",
-    // "picture",
     "color",
     "available_quantity",
   ];
 
+  // append simple fields
   fieldsToAppend.forEach((key) => {
     if (productData[key] !== undefined && productData[key] !== null) {
       formData.append(key, productData[key]);
     }
   });
+
+  // Append picture if it's a File
+  if (productData.picture instanceof File) {
+    formData.append("picture", productData.picture);
+  }
 
   // Sizes
   if (productData.has_sizes === "true" || productData.has_sizes === true) {

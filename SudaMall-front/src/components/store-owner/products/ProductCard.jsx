@@ -1,8 +1,11 @@
 import { CgTrash } from "react-icons/cg";
 import { PiPencilLineBold } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
+import { useDeleteProduct } from "../../../hooks/useDeleteProduct";
 
 const ProductCard = ({product}) => {
+    const { mutate: deleteProduct } = useDeleteProduct();
+
     const navigate = useNavigate();
     const userId = JSON.parse(localStorage.getItem("user"))?.id;
 
@@ -10,6 +13,13 @@ const ProductCard = ({product}) => {
     const handleEditProduct = (id) => {
         navigate(`/store-owner/${userId}/products/edit/${id}`)
     }
+
+    // handle delete product by id 
+    const handleDeleteProduct = (productId) => {
+    if (confirm("Are you sure you want to delete this product?")) {
+      deleteProduct({ id: productId });
+    }
+  };
   return (
     <div
         className="border border-gray-300 bg-gray-50 p-3 rounded-md flex items-center justify-between gap-6 text-xs"
@@ -33,7 +43,9 @@ const ProductCard = ({product}) => {
                 className="cursor-pointer">
                 <PiPencilLineBold />
             </button>
-            <button className="cursor-pointer">
+            <button 
+                onClick={() => handleDeleteProduct(product.id)}
+                className="cursor-pointer">
                 <CgTrash />
             </button>
         </div>
