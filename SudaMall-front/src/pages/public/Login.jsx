@@ -18,8 +18,8 @@ const Login = () => {
     password: "",
     rememberMe: false,
   });
-const [showResendMessage, setShowResendMessage] = useState(false);
-const [showResendButton, setShowResendButton] = useState(false);
+  const [showResendMessage, setShowResendMessage] = useState(false);
+  const [showResendButton, setShowResendButton] = useState(false);
   const [resendEmail, setResendEmail] = useState("");
   const [resendCooldown, setResendCooldown] = useState(0);
   const cooldownTime = 100; // seconds
@@ -42,14 +42,14 @@ const [showResendButton, setShowResendButton] = useState(false);
     }
   }, [resendCooldown]);
 
- useEffect(() => {
-  if (showResendMessage) {
-    const timer = setTimeout(() => {
-      setShowResendMessage(false);
-    }, 8000); // Hide after 8 seconds
-    return () => clearTimeout(timer);
-  }
-}, [showResendMessage]);
+  useEffect(() => {
+    if (showResendMessage) {
+      const timer = setTimeout(() => {
+        setShowResendMessage(false);
+      }, 8000); // Hide after 8 seconds
+      return () => clearTimeout(timer);
+    }
+  }, [showResendMessage]);
   const { mutate: login, isPending } = useLogin();
 
   const handleSubmit = (e) => {
@@ -80,16 +80,30 @@ const [showResendButton, setShowResendButton] = useState(false);
         }
       },
       onError: (error) => {
-        const message = error.response?.data?.message;
-        const allowResend = error.response?.data?.resend_verification_link;
+        const data = error.response?.data || {};
 
-        toast.error(message || "فشل تسجيل الدخول");
+        let finalMessage = "فشل تسجيل الدخول";
 
-         if (allowResend) {
-    setShowResendMessage(true); // Display the message for a short time
-    setShowResendButton(true); //Display permanently
-    setResendEmail(loginInput.email);
-  }
+       // Check login error message
+        if (
+          data.message?.non_field_errors?.[0] === "Invalid email or password."
+        ) {
+          finalMessage = "الايميل أو كلمة المرور غير صحيحة";
+        } else if (typeof data.message === "string") {
+          finalMessage = data.message;
+        }
+
+       // Verify resending activation link
+        if (
+          data.resend_verification_link === true ||
+          data.resend_verification_link === "True"
+        ) {
+          setShowResendMessage(true); // The message appears temporarily.
+          setShowResendButton(true); // Permanent absence
+          setResendEmail(loginInput.email);
+        }
+
+        toast.error(finalMessage);
       },
     });
   };
@@ -194,29 +208,29 @@ const [showResendButton, setShowResendButton] = useState(false);
           </form>
 
           {(showResendMessage || showResendButton) && (
-  <div className="text-center mt-4">
-    {showResendMessage && (
-      <p className="text-red-500 mb-2">
-        لم يتم تفعيل حسابك. يمكنك إعادة إرسال رابط التفعيل.
-      </p>
-    )}
-    {showResendButton && (
-      <button
-        onClick={handleResend}
-        disabled={resendCooldown > 0}
-        className={`text-sm underline text-primary ${
-          resendCooldown > 0
-            ? "opacity-50 cursor-not-allowed"
-            : "hover:text-blue-800"
-        }`}
-      >
-        {resendCooldown > 0
-          ? `أعد الإرسال بعد ${resendCooldown} ثانية`
-          : "إعادة إرسال رابط التفعيل"}
-      </button>
-    )}
-  </div>
-)}
+            <div className="text-center mt-4">
+              {showResendMessage && (
+                <p className="text-red-500 mb-2">
+                  لم يتم تفعيل حسابك. يمكنك إعادة إرسال رابط التفعيل.
+                </p>
+              )}
+              {showResendButton && (
+                <button
+                  onClick={handleResend}
+                  disabled={resendCooldown > 0}
+                  className={`text-sm underline text-primary ${
+                    resendCooldown > 0
+                      ? "opacity-50 cursor-not-allowed"
+                      : "hover:text-blue-800"
+                  }`}
+                >
+                  {resendCooldown > 0
+                    ? `أعد الإرسال بعد ${resendCooldown} ثانية`
+                    : "إعادة إرسال رابط التفعيل"}
+                </button>
+              )}
+            </div>
+          )}
 
           {/* Or Divider */}
           {/*   <Divider />*/}
