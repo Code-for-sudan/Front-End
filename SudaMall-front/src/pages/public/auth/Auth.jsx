@@ -3,7 +3,7 @@ import { useSearchParams  } from "react-router-dom"
 import { AccountChoices, AuthChoices } from "../../../components"
 
 const Auth = () => {
-    const [param] = useSearchParams ();
+    const [param] = useSearchParams();
     const step = parseInt(param.get('step'));
     const [current, setCurrent] = useState(step || 1)
 

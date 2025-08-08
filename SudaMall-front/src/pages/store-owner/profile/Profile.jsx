@@ -4,7 +4,6 @@ import { userData } from "../../../data/user.js"; // this will be replaced with 
 
 import { ProfileHeader, ProfileStats, EditableField, LocationField, Map } from "../../../components/store-owner/profile";
 import { FileUploader } from "../../../components/store-owner/reusable";
-import { useFileUpload } from "../../../hooks/useFileUpload.js";
 import { SelectMap } from "../../../app/AppStats";
 
 const Profile = () => {
@@ -16,16 +15,6 @@ const Profile = () => {
     activity_type: false,
     store_description: false,
   });
-
-  const {
-    selectedFile,
-    setSelectedFile,
-    dragActive,
-    setDragActive,
-    inputRef,
-    handleFileChange,
-    handleDrop,
-  } = useFileUpload();
 
   const [formData, setFormData] = useState({
     store_name: storeInfo.store_name,
@@ -113,13 +102,9 @@ const Profile = () => {
         <FileUploader
           label="مستندات توثيق المتجر"
           hint="الملفات المسموح بها: pdf, png"
-          inputRef={inputRef}
-          handleFileChange={handleFileChange}
-          handleDrop={handleDrop}
-          dragActive={dragActive}
-          setDragActive={setDragActive}
-          selectedFile={selectedFile}
-          setSelectedFile={setSelectedFile}
+          allowedTypes={["image/png", "image/jpeg"]}
+          defaultFile={typeof formData.store_license !== "object" ? { name: "ملف موجود" } : null}
+          onFileSelect={(file) => setFormData((prev) => ({ ...prev, store_license: file }))}
         />
         <button
           type="submit"
