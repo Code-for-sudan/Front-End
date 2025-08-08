@@ -99,6 +99,7 @@ const AddProduct = () => {
         formData={formData}
         setFormData={setFormData}
         errors={errors}
+        isEdit={false}
       />
     </div>
   );
