@@ -5,11 +5,13 @@ import { AddProductBtn, ProductFilters } from '../../../components/store-owner/p
 import { StoreProductsData } from '../../../data/StoreProductsData';
 
 const Products = () => {
+  const userId = JSON.parse(localStorage.getItem("user"))?.id;
+
   return (
     <div className='container flex flex-col gap-6'>
       <MainTitle
         title={"إدارة المنتجات"}
-         navigatePath={'/store-owner/:userId/dashboard'} />
+         navigatePath={`/store-owner/${userId}/dashboard`} />
       <SearchBar />
       <AddProductBtn />
       <ProductFilters products={StoreProductsData} />

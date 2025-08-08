@@ -14,13 +14,14 @@ import { accsoar, TelImage } from "../../../assets/demo_data/index.js";
 
 const OrderDetailsPage = () => {
   const { id } = useParams();
+  const userId = JSON.parse(localStorage.getItem("user"))?.id;
 
   return (
     <div className="bg-white min-h-screen text-xs text-right p-3">
       {/* Header */}
       <div className="relative p-4 text-base  flex items-center">
         <Link
-          to={`/store-owner/:userId/orders`}
+          to={`/store-owner/${userId}/orders`}
           className="top-10 left-6 text-white hover:text-gray-200"
         >
           <img src={ArrowCircleRightR} alt="رجوع" className="h-6 w-6" />

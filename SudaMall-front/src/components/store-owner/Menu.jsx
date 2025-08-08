@@ -2,13 +2,13 @@ import React, { useRef } from 'react'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux'
 import { closeMenu, SelectOpenMenu } from '../../app/AppStats';
-import { userData } from '../../data/user';
 import { useDetectOutside } from '../../hooks';
 import { Store_Owner_Sidebar } from '../../constants';
 import { Link } from 'react-router-dom';
 import { MdLogout } from "react-icons/md";
+import { profile_pic } from '../../assets';
 
-const Menu = () => {
+const Menu = ({ userData }) => {
   const dispatch = useDispatch();
   const MenuOpened  = useSelector(SelectOpenMenu);
 
@@ -45,8 +45,8 @@ const Menu = () => {
           }`}
         >
         <div className="flex items-center gap-4 py-6 px-8 bg-white">
-            <img src={userData.profile_pic} alt="profile" className='w-12 h-12 rounded-full' />
-            <p className='font-semibold text-base'>{userData.name}</p>
+            <img src={userData?.profile_picture || profile_pic } alt="profile" className='w-12 h-12 rounded-full' />
+            <p className='font-semibold text-base'>{userData?.first_name}</p>
         </div>
         <ul className="flex flex-col gap-6 py-6 px-8 bg-white">
           { Store_Owner_Sidebar.map((item, i) =>

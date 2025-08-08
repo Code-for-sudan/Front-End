@@ -3,19 +3,23 @@ import { closeAddProduct } from '../../../app/AppStats';
 import { MdOutlineArrowCircleRight } from 'react-icons/md';
 import { useState } from 'react';
 import ProductModal from './ProductModal';
+import { useCreateProduct } from '../../../hooks/useCreateProduct';
 
 const AddProduct = () => {
   const dispatch = useDispatch();
+  const createProductMutation = useCreateProduct();
+
   const [formData, setFormData] = useState({
-    name: '',
-    description: '',
+    product_name: '',
+    product_description: '',
     brand: '',
     price: '',
     type: '',
     category: '',
     picture: null,
-    color: [],
+    color: '',
     has_sizes: null,
+    available_quantity: "",
     sizes: [{ size: '', quantity: '' }],
   });
 
@@ -32,6 +36,7 @@ const AddProduct = () => {
    // handle submit form changes
   const handleSubmit = (e) => {
     e.preventDefault();
+    createProductMutation.mutate(formData);
     console.log("form data:", formData)
   };
 

@@ -3,9 +3,8 @@ import { IoNotificationsOutline } from "react-icons/io5";
 import { MdMenu } from "react-icons/md";
 import { useDispatch } from 'react-redux';
 import { openMenu } from '../../../app/AppStats';
-import { userData } from '../../../data/user';  // this will be deleted after connecting with backend
-
-const DashboardHead = () => {
+import { profile_pic } from '../../../assets';
+const DashboardHead = ({ userData }) => {
     const dispatch = useDispatch();
 
     // open menu
@@ -16,7 +15,7 @@ const DashboardHead = () => {
   return (
     <div className='flex flex-row-reverse items-center justify-between py-4'>
       <div>
-        <img src={userData.profile_pic} alt="profile" className='w-12 h-12 rounded-full' />
+        <img src={userData?.profile_picture || profile_pic } alt="profile" className='w-12 h-12 rounded-full' />
       </div>
       <div className='flex flex-row-reverse items-center gap-4'>
         <button className='relative cursor-pointer'>

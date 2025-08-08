@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const OrdersPage = () => {
   const [activeTab, setActiveTab] = useState("confirmed");
   const [orders, setOrders] = useState([]);
+  const userId = JSON.parse(localStorage.getItem("user"))?.id;
 
   useEffect(() => {
     const fakeOrders = [
@@ -64,7 +65,7 @@ const OrdersPage = () => {
       {/* Header */}
       <div className="relative p-4 text-base  border-b border-gray-200 flex items-center">
         <Link
-          to ={`/store-owner/:userId/dashboard`} 
+          to ={`/store-owner/${userId}/dashboard`} 
           className="top-10 left-6 text-white hover:text-gray-200"
         >
           <img src={ArrowCircleRightR} alt="رجوع" className="h-6 w-6" />
@@ -115,7 +116,7 @@ const OrdersPage = () => {
                   className="bg-white text-center shadow rounded"
                 >
                   <td className="p-3 text-blue-800 font-medium cursor-pointer underline hover:text-amber-400 transition-colors duration-200">
-                    <Link to={`/store-owner/:userId/orders/${order.id}`}>#{order.id}</Link>
+                    <Link to={`/store-owner/${userId}/orders/${order.id}`}>#{order.id}</Link>
                   </td>
                   <td className="p-3">{order.date}</td>
                   <td className="p-3">{order.customer_name}</td>
