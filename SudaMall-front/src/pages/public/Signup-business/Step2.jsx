@@ -3,10 +3,7 @@ import React from "react";
 
 const StepTwo = ({ signupInput, setSignupInput, onNext, onBack }) => {
   return (
-    <div
-      className="min-h-screen flex items-start justify-center pt-20"
-      style={{ backgroundColor: "var(--primary)" }}
-    >
+    <div className="min-h-screen flex items-start justify-center pt-20 bg-primary">
       <div
         className="bg-white w-full max-w-md shadow-lg px-6 pt-10 pb-8"
         style={{
@@ -29,8 +26,7 @@ const StepTwo = ({ signupInput, setSignupInput, onNext, onBack }) => {
               <input
                 type="text"
                 placeholder=""
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
-                style={{ "--tw-ring-color": "var(--primary)" }}
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2 focus:ring-primary"
                 value={signupInput.storeName}
                 onChange={(e) =>
                   setSignupInput({ ...signupInput, storeName: e.target.value })
@@ -38,7 +34,7 @@ const StepTwo = ({ signupInput, setSignupInput, onNext, onBack }) => {
               />
             </div>
 
-            {/* Store location  */}
+            {/* Store location */}
             <div>
               <label className="block text-right font-medium mb-2">
                 مكان المتجر
@@ -46,8 +42,7 @@ const StepTwo = ({ signupInput, setSignupInput, onNext, onBack }) => {
               <input
                 type="text"
                 placeholder="الخرطوم - السودان"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
-                style={{ "--tw-ring-color": "var(--primary)" }}
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2 focus:ring-primary"
                 value={signupInput.storeLocation}
                 onChange={(e) =>
                   setSignupInput({
@@ -58,7 +53,7 @@ const StepTwo = ({ signupInput, setSignupInput, onNext, onBack }) => {
               />
             </div>
 
-            {/* Store Type*/}
+            {/* Store Type */}
             <div>
               <label className="block text-right font-medium mb-2">
                 نوع النشاط التجاري
@@ -66,8 +61,7 @@ const StepTwo = ({ signupInput, setSignupInput, onNext, onBack }) => {
               <input
                 type="text"
                 placeholder="مثال: ملابس، إلكترونيات"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
-                style={{ "--tw-ring-color": "var(--primary)" }}
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2 focus:ring-primary"
                 value={signupInput.storeType}
                 onChange={(e) =>
                   setSignupInput({ ...signupInput, storeType: e.target.value })
@@ -84,8 +78,7 @@ const StepTwo = ({ signupInput, setSignupInput, onNext, onBack }) => {
                 rows="3"
                 type="text"
                 placeholder="مثال: متجر يقدم أفضل الملابس الرجالية والنسائية"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
-                style={{ "--tw-ring-color": "var(--primary)" }}
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2 focus:ring-primary"
                 value={signupInput.storeDesc}
                 onChange={(e) =>
                   setSignupInput({ ...signupInput, storeDesc: e.target.value })
@@ -94,27 +87,23 @@ const StepTwo = ({ signupInput, setSignupInput, onNext, onBack }) => {
             </div>
 
             {/* المؤشر وزر المتابعة */}
-            <div className="flex flex-col  items-center mt-12">
-              <div className="flex items-center  gap-0">
+            <div className="flex flex-col items-center mt-12">
+              <div className="flex items-center gap-0">
                 <span className="border border-yellow-500 text-yellow-500 w-8 h-8 flex items-center justify-center rounded-full">
                   3
                 </span>
-                <div className="h-0.5 w-15 bg-gray-300"></div> {/* الخط */}
+                <div className="h-0.5 w-15 bg-gray-300"></div>
                 <span className="bg-yellow-500 text-white w-8 h-8 flex items-center justify-center rounded-full">
                   2
                 </span>
-                <div className="h-0.5 w-15 bg-gray-300"></div> {/* الخط */}
-                <span className="border border-yellow-500 text-yellow-500  w-8 h-8 flex items-center justify-center rounded-full">
+                <div className="h-0.5 w-15 bg-gray-300"></div>
+                <span className="border border-yellow-500 text-yellow-500 w-8 h-8 flex items-center justify-center rounded-full">
                   1
                 </span>
               </div>
-              <div className="grid grid-cols-2 gap-4 w-full ">
+              <div className="grid grid-cols-2 gap-4 w-full">
                 <button
-                  className=" w-full text-white font-semibold py-2 rounded-xl transition duration-200 mt-6"
-                  style={{
-                    backgroundColor: "var(--primary)",
-                    hoverBackgroundColor: "var(--color-primary)",
-                  }} 
+                  className="w-full bg-primary text-white font-semibold py-2 rounded-xl transition duration-200 mt-6 hover:opacity-90"
                   type="button"
                   onClick={onNext}
                 >
@@ -122,11 +111,7 @@ const StepTwo = ({ signupInput, setSignupInput, onNext, onBack }) => {
                 </button>
 
                 <button
-                  style={{
-                    backgroundColor: "var(--primary)",
-                    hoverBackgroundColor: "var(--color-primary)",
-                  }}
-                  className=" w-full text-white font-semibold py-2 rounded-xl transition duration-200 mt-6"
+                  className="w-full bg-primary text-white font-semibold py-2 rounded-xl transition duration-200 mt-6 hover:opacity-90"
                   onClick={onBack}
                 >
                   رجوع

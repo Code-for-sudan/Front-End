@@ -12,8 +12,8 @@ const SignupBusiness = () => {
   const [errors, setErrors] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
-      const [showPassword, setShowPassword] = useState(false);
-    const [nameInputs, setNameInputs] = useState(["", "", "", ""]);
+  const [showPassword, setShowPassword] = useState(false);
+  const [nameInputs, setNameInputs] = useState(["", "", "", ""]);
 
   const [signupInput, setSignupInput] = useState({
     name: "",
@@ -83,7 +83,7 @@ const SignupBusiness = () => {
       setErrors((prev) => ({
         ...prev,
         password:
-          " كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل وتشمل حروف وأرقام و رموز",
+          " كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل، وتشمل حروف وأرقام ورموز، ويجب أن تحتوي على حرف كبير وحرف صغير على الأقل.",
       }));
       return;
     }

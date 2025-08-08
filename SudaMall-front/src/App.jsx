@@ -20,13 +20,14 @@ const App = () => {
         position="top-center"
         autoClose={3000}
         hideProgressBar={true}
-        newestOnTop={false}
+        newestOnTop={true}
+        closeButton={false}
         closeOnClick
         rtl
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="colored"
+        className={"p-5"}
       />
   </>;
 };
