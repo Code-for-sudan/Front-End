@@ -32,7 +32,7 @@ const SignupForm = () => {
       setShowSuccessPopup(true);
       setTimeout(() => {
         setShowSuccessPopup(false);
-        goToLogin(); // After completion, the user is redirected to the login page.
+        goToLogin();
       }, 8000);
     },
     onError: (error) => {
@@ -47,20 +47,17 @@ const SignupForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Combine the first and second names into firstName, and the third and fourth names into lastName
     const fullFirstName =
       `${nameInputs[0].trim()} ${nameInputs[1].trim()}`.trim();
     const fullLastName =
       `${nameInputs[2].trim()} ${nameInputs[3].trim()}`.trim();
 
-    // Create an updated copy of the data
     const updatedSignup = {
       ...signupInput,
       firstName: fullFirstName,
       lastName: fullLastName,
     };
 
-    // Check the fields
     if (
       !updatedSignup.firstName ||
       !updatedSignup.lastName ||
@@ -77,7 +74,7 @@ const SignupForm = () => {
       setErrors((prev) => ({
         ...prev,
         password:
-          "كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل وتشمل حروف وأرقام ورموز",
+     "كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل، وتشمل حروف وأرقام ورموز، ويجب أن تحتوي على حرف كبير وحرف صغير على الأقل.",
       }));
       return;
     }
@@ -130,8 +127,7 @@ const SignupForm = () => {
 
   return (
     <div
-      className="min-h-screen flex items-start justify-center pt-20"
-      style={{ backgroundColor: "var(--primary)" }}
+      className="min-h-screen flex items-start justify-center pt-20 bg-primary"
       dir="rtl"
     >
       <Link
@@ -141,12 +137,7 @@ const SignupForm = () => {
         <img src={ArrowCircleRight} alt="رجوع" className="h-8 w-8" />
       </Link>
       <div
-        className="bg-white w-full max-w-md shadow-lg px-6 pt-10 pb-8"
-        style={{
-          borderTopLeftRadius: "80px",
-          borderTopRightRadius: "80px",
-          minHeight: "calc(100vh - 80px)",
-        }}
+        className="bg-white w-full max-w-md shadow-lg px-6 pt-10 pb-8 rounded-t-[80px] min-h-[calc(100vh-80px)]"
       >
         <div className="container mx-auto px-4 mt-2">
           <h1 className="text-2xl font-bold text-black text-center mb-6">
@@ -154,7 +145,7 @@ const SignupForm = () => {
           </h1>
 
           <form className="space-y-4" onSubmit={handleSubmit}>
-            {/* Input: Full Name (4 fields) */}
+            {/* Full Name */}
             <div>
               <label className="block text-right font-medium mb-2">
                 الاسم الكامل
@@ -165,14 +156,13 @@ const SignupForm = () => {
                     key={i}
                     type="text"
                     maxLength={10}
-                    placeholder={""}
                     value={nameInputs[i]}
                     onChange={(e) => {
                       const updated = [...nameInputs];
                       updated[i] = e.target.value;
                       setNameInputs(updated);
                     }}
-                    className="w-1/4 px-3 py-2 text-right rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-1/4 px-3 py-2 text-right rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
                   />
                 ))}
               </div>
@@ -187,6 +177,7 @@ const SignupForm = () => {
                 </p>
               )}
             </div>
+
             {/* Email */}
             <div>
               <label className="block text-right font-medium mb-2">
@@ -195,8 +186,7 @@ const SignupForm = () => {
               <input
                 type="email"
                 placeholder="example@gmail.com"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
-                style={{ "--tw-ring-color": "var(--primary)" }}
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2 focus:ring-primary"
                 value={signupInput.email}
                 onChange={(e) =>
                   setSignupInput({ ...signupInput, email: e.target.value })
@@ -205,7 +195,6 @@ const SignupForm = () => {
             </div>
 
             {/* Password */}
-
             <div>
               <label className="block text-right font-medium mb-2">
                 كلمة المرور
@@ -214,8 +203,7 @@ const SignupForm = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="********"
-                  className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
-                  style={{ "--tw-ring-color": "var(--primary)" }}
+                  className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2 focus:ring-primary"
                   value={signupInput.password}
                   onChange={(e) => {
                     setSignupInput({
@@ -249,8 +237,7 @@ const SignupForm = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="********"
-                  className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
-                  style={{ "--tw-ring-color": "var(--primary)" }}
+                  className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2 focus:ring-primary"
                   value={signupInput.ConfirmPassword}
                   onChange={(e) => {
                     setSignupInput({
@@ -303,7 +290,8 @@ const SignupForm = () => {
                 </p>
               )}
             </div>
-            {/*determine gender */}
+
+            {/* Gender */}
             <div className="mb-4">
               <label className="block mb-2 font-medium">الجنس</label>
               <div className="flex gap-6">
@@ -316,7 +304,7 @@ const SignupForm = () => {
                     onChange={(e) =>
                       setSignupInput({ ...signupInput, gender: e.target.value })
                     }
-                    style={{ accentColor: "var(--primary)" }}
+                    className="accent-primary"
                   />
                   <span>ذكر</span>
                 </label>
@@ -330,7 +318,7 @@ const SignupForm = () => {
                     onChange={(e) =>
                       setSignupInput({ ...signupInput, gender: e.target.value })
                     }
-                    style={{ accentColor: "var(--primary)" }}
+                    className="accent-primary"
                   />
                   <span>أنثى</span>
                 </label>
@@ -346,8 +334,7 @@ const SignupForm = () => {
             <button
               type="submit"
               disabled={isPending}
-              className="w-full text-white font-semibold py-2 rounded-xl transition duration-200"
-              style={{ backgroundColor: "var(--primary)" }}
+              className="w-full text-white font-semibold py-2 rounded-xl transition duration-200 bg-primary"
             >
               {isPending ? "جاري الإرسال..." : "إنشاء حساب"}
             </button>
@@ -357,8 +344,7 @@ const SignupForm = () => {
               هل لديك حساب بالفعل؟
               <Link
                 to="/auth/login"
-                className="font-semibold ml-1 mr-2.5"
-                style={{ color: "var(--primary)" }}
+                className="font-semibold ml-1 mr-2.5 text-primary"
               >
                 تسجيل دخول
               </Link>
