@@ -13,10 +13,7 @@ const StepThree = ({
   showSuccessPopup,
 }) => {
   return (
-    <div
-      className="min-h-screen flex items-start justify-center pt-20"
-      style={{ backgroundColor: "var(--primary)" }}
-    >
+    <div className="min-h-screen flex items-start justify-center pt-20 bg-primary">
       <div
         className="bg-white w-full max-w-md shadow-lg px-6 pt-10 pb-8"
         style={{
@@ -39,8 +36,7 @@ const StepThree = ({
               <input
                 type="text"
                 placeholder="محمد علي"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2  bg-gray-100"
-                style={{ "--tw-ring-color": "var(--primary)" }}
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary"
                 value={`${nameInputs[0]} ${nameInputs[1]} ${nameInputs[2]} ${nameInputs[3]}`}
                 disabled
               />
@@ -54,8 +50,7 @@ const StepThree = ({
               <input
                 type="email"
                 placeholder="example@gmail.com"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2  bg-gray-100"
-                style={{ "--tw-ring-color": "var(--primary)" }}
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary"
                 value={signupInput.email}
                 disabled
               />
@@ -69,8 +64,7 @@ const StepThree = ({
               <input
                 type="password"
                 placeholder="********"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2  bg-gray-100"
-                style={{ "--tw-ring-color": "var(--primary)" }}
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary"
                 value={signupInput.password}
                 disabled
               />
@@ -84,8 +78,7 @@ const StepThree = ({
               <input
                 type="password"
                 placeholder="********"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2  bg-gray-100"
-                style={{ "--tw-ring-color": "var(--primary)" }}
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary"
                 value={signupInput.confirmPassword}
                 disabled
               />
@@ -96,17 +89,18 @@ const StepThree = ({
               <label className="block mb-1 font-medium text-right">
                 رقم الهاتف
               </label>
-              <div className="flex items-center border border-gray-300 rounded-xl overflow-hidden">
+              <div className="flex items-center border border-gray-300 rounded-xl overflow-hidden bg-gray-100">
                 <span className="px-3 text-gray-500">249+</span>
                 <input
                   type="tel"
-                  className="flex-1 px-4 py-2 focus:outline-none text-right  bg-gray-100"
+                  className="flex-1 px-4 py-2 focus:outline-none text-right bg-gray-100"
                   placeholder="XXX XXX XXXX"
                   value={signupInput.phoneNumber}
                   disabled
                 />
               </div>
             </div>
+
             {/* Gender */}
             <div>
               <label className="block text-right font-medium mb-2">الجنس</label>
@@ -117,6 +111,7 @@ const StepThree = ({
                 disabled
               />
             </div>
+
             {/* Store Name */}
             <div>
               <label className="block text-right font-medium mb-2">
@@ -124,15 +119,13 @@ const StepThree = ({
               </label>
               <input
                 type="text"
-                placeholder=""
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2  bg-gray-100"
-                style={{ "--tw-ring-color": "var(--primary)" }}
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary"
                 value={signupInput.storeName}
                 disabled
               />
             </div>
 
-            {/* Store location  */}
+            {/* Store location */}
             <div>
               <label className="block text-right font-medium mb-2">
                 مكان المتجر
@@ -140,14 +133,13 @@ const StepThree = ({
               <input
                 type="text"
                 placeholder="الخرطوم - السودان"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2  bg-gray-100"
-                style={{ "--tw-ring-color": "var(--primary)" }}
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary"
                 value={signupInput.storeLocation}
                 disabled
               />
             </div>
 
-            {/* Store Type*/}
+            {/* Store Type */}
             <div>
               <label className="block text-right font-medium mb-2">
                 نوع النشاط التجاري
@@ -155,8 +147,7 @@ const StepThree = ({
               <input
                 type="text"
                 placeholder="مثال: ملابس، إلكترونيات"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2  bg-gray-100"
-                style={{ "--tw-ring-color": "var(--primary)" }}
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary"
                 value={signupInput.storeType}
                 disabled
               />
@@ -171,46 +162,40 @@ const StepThree = ({
                 rows="3"
                 type="text"
                 placeholder="مثال: متجر يقدم أفضل الملابس الرجالية والنسائية"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2  bg-gray-100"
-                style={{ "--tw-ring-color": "var(--primary)" }}
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary"
                 value={signupInput.storeDesc}
                 disabled
               />
             </div>
+
             {/* Step indicator and continue button */}
-            <div className="flex flex-col  items-center mt-12">
-              <div className="flex items-center  gap-0">
+            <div className="flex flex-col items-center mt-12">
+              <div className="flex items-center gap-0">
                 <span className="bg-yellow-500 text-white w-8 h-8 flex items-center justify-center rounded-full">
                   3
                 </span>
-                <div className="h-0.5 w-15 bg-gray-300"></div> {/* الخط */}
-                <span className="border border-yellow-500 text-yellow-500  w-8 h-8 flex items-center justify-center rounded-full">
+                <div className="h-0.5 w-15 bg-gray-300"></div>
+                <span className="border border-yellow-500 text-yellow-500 w-8 h-8 flex items-center justify-center rounded-full">
                   2
                 </span>
-                <div className="h-0.5 w-15 bg-gray-300"></div> {/* الخط */}
-                <span className="border border-yellow-500 text-yellow-500  w-8 h-8 flex items-center justify-center rounded-full">
+                <div className="h-0.5 w-15 bg-gray-300"></div>
+                <span className="border border-yellow-500 text-yellow-500 w-8 h-8 flex items-center justify-center rounded-full">
                   1
                 </span>
               </div>
-              <div className="grid grid-cols-2 gap-4 w-full ">
+
+              <div className="grid grid-cols-2 gap-4 w-full">
                 <button
                   type="submit"
-                  className={`w-full text-white font-semibold py-2 rounded-xl transition duration-200 mt-6`}
-                  style={{
-                    backgroundColor: "var(--primary)",
-                    hoverBackgroundColor: "var(--color-primary)",
-                  }}
+                  className="w-full text-white font-semibold py-2 rounded-xl transition duration-200 mt-6 bg-primary hover:bg-primary/90"
                   disabled={isPending}
                 >
                   {isPending ? "جاري الإرسال..." : "انشاء حساب"}
                 </button>
 
                 <button
-                  style={{
-                    backgroundColor: "var(--primary)",
-                    hoverBackgroundColor: "var(--color-primary)",
-                  }}
-                  className=" w-full text-white font-semibold py-2 rounded-xl transition duration-200 mt-6"
+                  type="button"
+                  className="w-full text-white font-semibold py-2 rounded-xl transition duration-200 mt-6 bg-primary hover:bg-primary/90"
                   onClick={onBack}
                 >
                   رجوع
@@ -220,6 +205,7 @@ const StepThree = ({
           </form>
         </div>
       </div>
+
       {/* Popup للنجاح */}
       {showSuccessPopup && (
         <PopupMessage

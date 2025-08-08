@@ -52,7 +52,7 @@ const StepOne = ({ showPassword , setShowPassword,nameInputs ,setNameInputs,sign
                       updated[i] = e.target.value;
                       setNameInputs(updated);
                     }}
-                    className="w-1/4 px-3 py-2 text-right rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-1/4 px-3 py-2 text-right rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
                   />
                 ))}
               </div>
@@ -76,8 +76,7 @@ const StepOne = ({ showPassword , setShowPassword,nameInputs ,setNameInputs,sign
               <input
                 type="email"
                 placeholder="example@gmail.com"
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2"
-                style={{ "--tw-ring-color": "var(--primary)" }}
+                className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2 focus:ring-primary"
                 value={signupInput.email}
                 onChange={(e) =>
                   setSignupInput({ ...signupInput, email: e.target.value })
@@ -94,8 +93,7 @@ const StepOne = ({ showPassword , setShowPassword,nameInputs ,setNameInputs,sign
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="********"
-                  className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2 pr-10"
-                  style={{ "--tw-ring-color": "var(--primary)" }}
+                  className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2 focus:ring-primary pr-10"
                   value={signupInput.password}
                   onChange={(e) => {
                     setSignupInput({ ...signupInput, password: e.target.value });
@@ -125,8 +123,7 @@ const StepOne = ({ showPassword , setShowPassword,nameInputs ,setNameInputs,sign
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="********"
-                  className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2 pr-10"
-                  style={{ "--tw-ring-color": "var(--primary)" }}
+                  className="w-full rounded-xl px-4 py-2 border border-gray-300 text-right focus:outline-none focus:ring-2 focus:ring-primary pr-10"
                   value={signupInput.confirmPassword}
                   onChange={(e) => {
                     setSignupInput({
@@ -159,7 +156,7 @@ const StepOne = ({ showPassword , setShowPassword,nameInputs ,setNameInputs,sign
                 <span className="px-3 text-gray-500">+249</span>
                 <input
                   type="tel"
-                  className="flex-1 px-4 py-2 focus:outline-none text-right"
+                  className="flex-1 px-4 py-2 focus:outline-none  focus:ring-2 focus:ring-primary  text-right"
                   placeholder="XXX XXX XXXX"
                   value={signupInput.phoneNumber}
                   onChange={(e) => {
@@ -190,7 +187,7 @@ const StepOne = ({ showPassword , setShowPassword,nameInputs ,setNameInputs,sign
                     onChange={(e) =>
                       setSignupInput({ ...signupInput, gender: e.target.value })
                     }
-                    style={{ accentColor: "var(--primary)" }}
+                   className="accent-primary"
                   />
                   <span>ذكر</span>
                 </label>
