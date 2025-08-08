@@ -18,7 +18,8 @@ const Login = () => {
     password: "",
     rememberMe: false,
   });
-  const [showResend, setShowResend] = useState(false);
+const [showResendMessage, setShowResendMessage] = useState(false);
+const [showResendButton, setShowResendButton] = useState(false);
   const [resendEmail, setResendEmail] = useState("");
   const [resendCooldown, setResendCooldown] = useState(0);
   const cooldownTime = 100; // seconds
@@ -41,6 +42,14 @@ const Login = () => {
     }
   }, [resendCooldown]);
 
+ useEffect(() => {
+  if (showResendMessage) {
+    const timer = setTimeout(() => {
+      setShowResendMessage(false);
+    }, 8000); // Hide after 8 seconds
+    return () => clearTimeout(timer);
+  }
+}, [showResendMessage]);
   const { mutate: login, isPending } = useLogin();
 
   const handleSubmit = (e) => {
@@ -76,10 +85,11 @@ const Login = () => {
 
         toast.error(message || "فشل تسجيل الدخول");
 
-        if (allowResend) {
-          setShowResend(true);
-          setResendEmail(loginInput.email);
-        }
+         if (allowResend) {
+    setShowResendMessage(true); // Display the message for a short time
+    setShowResendButton(true); //Display permanently
+    setResendEmail(loginInput.email);
+  }
       },
     });
   };
@@ -183,26 +193,30 @@ const Login = () => {
             </button>
           </form>
 
-          {showResend && (
-            <div className="text-center mt-4">
-              <p className="text-red-500 mb-2">
-                لم يتم تفعيل حسابك. يمكنك إعادة إرسال رابط التفعيل.
-              </p>
-              <button
-                onClick={handleResend}
-                disabled={resendCooldown > 0}
-                className={`text-sm underline text-primary ${
-                  resendCooldown > 0
-                    ? "opacity-50 cursor-not-allowed"
-                    : "hover:text-blue-800"
-                }`}
-              >
-                {resendCooldown > 0
-                  ? `أعد الإرسال بعد ${resendCooldown} ثانية`
-                  : "إعادة إرسال رابط التفعيل"}
-              </button>
-            </div>
-          )}
+          {(showResendMessage || showResendButton) && (
+  <div className="text-center mt-4">
+    {showResendMessage && (
+      <p className="text-red-500 mb-2">
+        لم يتم تفعيل حسابك. يمكنك إعادة إرسال رابط التفعيل.
+      </p>
+    )}
+    {showResendButton && (
+      <button
+        onClick={handleResend}
+        disabled={resendCooldown > 0}
+        className={`text-sm underline text-primary ${
+          resendCooldown > 0
+            ? "opacity-50 cursor-not-allowed"
+            : "hover:text-blue-800"
+        }`}
+      >
+        {resendCooldown > 0
+          ? `أعد الإرسال بعد ${resendCooldown} ثانية`
+          : "إعادة إرسال رابط التفعيل"}
+      </button>
+    )}
+  </div>
+)}
 
           {/* Or Divider */}
           {/*   <Divider />*/}
