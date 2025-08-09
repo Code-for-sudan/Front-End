@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FileUploader } from "../reusable";
+import { compareFromData } from "../../../utils/compareFormData";
 
 // arrays for product types and categories
 const productCategories = [
@@ -26,7 +27,17 @@ const ProductModal = ({
   isEdit,
   handleRemoveSize,
 }) => {
+
   const [tagInput, setTagInput] = useState("");
+  const [initialData, setInitialData] = useState("");
+
+  useEffect(() => {
+    if (isEdit) {
+      setInitialData(formData);
+    }
+  }, []);
+
+  const isChanged = compareFromData(initialData, formData);
 
   // handle tag input function
   const handleTagInputChange = (e) => {
@@ -60,10 +71,17 @@ const ProductModal = ({
   };
 
   // remove size fields
-  const handleRemoveFields = () => {
-    const updatedSizes = formData.sizes.filter((_, i) => i !== index);
-    setFormData((prev) => ({ ...prev, sizes: updatedSizes }));
-  }
+  const removeSize = (index, item) => {
+    if (isEdit && item.id) {
+      handleRemoveSize(item.id);
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        sizes: prev.sizes.filter((_, i) => i !== index),
+      }));
+    }
+  };
+
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -316,14 +334,7 @@ const ProductModal = ({
                 {index > 0 && (
                   <button
                     type="button"
-                    onClick={
-                      isEdit && item.id 
-                      ? handleRemoveSize 
-                      : () => {
-                          const updatedSizes = formData.sizes.filter((_, i) => i !== index);
-                          setFormData((prev) => ({ ...prev, sizes: updatedSizes }));
-                        }
-                    }
+                    onClick={() => removeSize(index, item)}
                     className="text-red-500 text-xs"
                   >
                     حذف
@@ -403,9 +414,14 @@ const ProductModal = ({
       <div className="pt-4">
         <button
           type="submit"
-          className="w-full bg-primary text-white py-2 rounded-md hover:bg-opacity-90 cursor-pointer mb-4"
+          disabled={isEdit && !isChanged}
+          className={`w-full py-2 rounded-md mb-4 ${
+            isEdit && !isChanged
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-primary text-white hover:bg-opacity-90 cursor-pointer"
+          }`}
         >
-          حفظ المنتج
+          {isEdit ? "حفظ التعديلات" : "حفظ المنتج"}
         </button>
         <button
           type="button"

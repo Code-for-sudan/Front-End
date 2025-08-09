@@ -2,6 +2,7 @@ import { CgTrash } from "react-icons/cg";
 import { PiPencilLineBold } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import { useDeleteProduct } from "../../../hooks/useDeleteProduct";
+import { ConfirmPopUp } from "../../reusableGlobal";
 
 const ProductCard = ({product}) => {
     const { mutate: deleteProduct } = useDeleteProduct();
@@ -15,8 +16,9 @@ const ProductCard = ({product}) => {
     }
 
     // handle delete product by id 
-    const handleDeleteProduct = (productId) => {
-    if (confirm("Are you sure you want to delete this product?")) {
+    const handleDeleteProduct = async (productId) => {
+    const confirmed = await ConfirmPopUp(`انت متاكد يازول داير تحذف المنتج ${product.product_name} ؟`);
+    if (confirmed) {
       deleteProduct({ id: productId });
     }
   };
@@ -32,8 +34,8 @@ const ProductCard = ({product}) => {
             </div>
         </div>
         <div className="flex flex-col items-center gap-2 w-18">
-            <p className={`text-center text-white py-1 px-2 rounded-lg ${product.available_quantity === 0 ? 'bg-red-600' : 'bg-green-700'}`}>
-              {product.available_quantity === 0 ? 'غير متوفر' : 'متوفر'}
+            <p className={`text-center text-white py-1 px-2 rounded-lg ${product.availability === 'available' ? 'bg-green-700' : 'bg-red-700'}`}>
+              {product.availability !== 'available' ? 'غير متوفر' : 'متوفر'}
             </p>
             <p className="text-center">{product.category}</p>
         </div>
