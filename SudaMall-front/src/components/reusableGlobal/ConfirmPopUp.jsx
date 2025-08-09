@@ -4,20 +4,20 @@ import { createRoot } from "react-dom/client";    // for root rendering
 const ConfirmModal = ({ message, onClose }) => {
   return createPortal(
     <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 max-w-sm w-full shadow-lg text-right">
+      <div className="bg-white text-sm rounded px-4 py-8 max-w-sm w-full shadow-lg text-right mx-6">
         <p className="mb-6">{message}</p>
         <div className="flex items-center justify-center gap-4">
           <button
-            onClick={() => onClose(false)}
-            className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition"
+            onClick={() => onClose(true)}
+            className="px-6 py-1 bg-primary border border-primary text-white rounded active:scale-90 cursor-pointer"
           >
-            إلغاء
+            اااي
           </button>
           <button
-            onClick={() => onClose(true)}
-            className="px-4 py-2 bg-primary text-white rounded hover:opacity-85 transition"
+            onClick={() => onClose(false)}
+            className="px-6 py-1 border border-gray-800 text-gray-800 rounded active:scale-90 cursor-pointer"
           >
-            تأكيد
+            لالا
           </button>
         </div>
       </div>
