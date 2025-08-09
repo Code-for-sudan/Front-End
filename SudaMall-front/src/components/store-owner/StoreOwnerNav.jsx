@@ -60,65 +60,75 @@ const StoreOwnerNav = () => {
 
       <ul className="relative w-full flex items-center justify-between p-4 text-xs">
         {/* home page button */}
-        <li
-          className={`flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ease-in-out ${
-            active === "home" ? "text-primary" : ""
-          }`}
-          onClick={() =>
-            handleClick({ id: "home", path: `/store-owner/${userId}/dashboard` })
-          }
-        >
-          <GoHome className="size-6" />
-          <p>الرئيسية</p>
+        <li>
+          <button
+              className={`flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ease-in-out ${
+                active === "home" ? "text-primary" : ""
+              }`}
+              onClick={() =>
+                handleClick({ id: "home", path: `/store-owner/${userId}/dashboard` })
+              }
+            >
+              <GoHome className="size-6" />
+              <p>الرئيسية</p>
+            </button>
         </li>
-
-
+    
         {/* store page button */}
-        <li
-          className={`flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ease-in-out ${
-            active === "orders" ? "text-primary" : ""
-          }`}
-          onClick={() =>
-            handleClick({
-              id: "orders",
-              path: `/store-owner/${userId}/orders`,
-            })
-          }
-        >
-          <PiShoppingCartBold className="size-6" />
-          <p>الطلبات</p>
+        <li>
+          <button
+            className={`flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ease-in-out ${
+              active === "orders" ? "text-primary" : ""
+            }`}
+            onClick={() =>
+              handleClick({
+                id: "orders",
+                path: `/store-owner/${userId}/orders`,
+              })
+            }
+          >
+            <PiShoppingCartBold className="size-6" />
+            <p>الطلبات</p>
+          </button>
         </li>
 
         {/* Floating Add Button   */}
-        <li onClick={handleAddProduct} className="flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out">
-          <div className="absolute -top-6 p-2 text-white bg-dark-blue shadow-lg rounded-full z-50">
-            <MdAdd className="size-8" />
-          </div>
+        <li>
+          <button onClick={handleAddProduct} className="flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out">
+            <div className="absolute -top-6 p-2 text-white bg-dark-blue shadow-lg rounded-full z-50">
+              <MdAdd className="size-8" />
+            </div>
+          </button>
         </li>
       
         {/* navigate to chat page button */}
-        <li
-          className={`flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ease-in-out ${
-            active === "chats" ? "text-primary" : ""
-          }`}
-          onClick={() =>
-            handleClick({ id: "chats", path: `/store-owner/${userId}/chats` })
-          }
-        >
-          <MdOutlineMarkUnreadChatAlt className="size-6" />
-          <p>الدردشة</p>
+        <li>
+          <button
+            className={`flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ease-in-out ${
+              active === "chats" ? "text-primary" : ""
+            }`}
+            onClick={() =>
+              handleClick({ id: "chats", path: `/store-owner/${userId}/chats` })
+            }
+          >
+            <MdOutlineMarkUnreadChatAlt className="size-6" />
+            <p>الدردشة</p>
+          </button>
         </li>
+
         {/* navigate to profile page button */}
-        <li
-          className={`flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ease-in-out ${
-            active === "profile" ? "text-primary" : ""
-          }`}
-          onClick={() =>
-            handleClick({ id: "profile", path: `/store-owner/${userId}/profile` })
-          }
-        >
-          <BsPerson className="size-6" />
-          <p>حسابي</p>
+        <li>
+          <button
+            className={`flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ease-in-out ${
+              active === "profile" ? "text-primary" : ""
+            }`}
+            onClick={() =>
+              handleClick({ id: "profile", path: `/store-owner/${userId}/profile` })
+            }
+          >
+            <BsPerson className="size-6" />
+            <p>حسابي</p>
+          </button>
         </li>
       </ul>
     </nav>

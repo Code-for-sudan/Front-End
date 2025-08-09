@@ -209,7 +209,7 @@ const ProductModal = ({
             <img
               src={`https://sudamall.ddns.net${formData.picture}`}
               alt="product-image"
-              className="size-18 rounded my-2"
+              className="size-18 rounded my-2 object-cover"
             />
           </div>
         )}

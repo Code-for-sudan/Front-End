@@ -46,5 +46,6 @@ export const createProduct = async (productData) => {
     },
   });
 
+  console.log("create product: ",response)
   return response;
 };
