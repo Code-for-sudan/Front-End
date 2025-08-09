@@ -21,7 +21,7 @@ const Profile = () => {
     activity_type: storeInfo.activity_type,
     store_description: storeInfo.store_description,
     store_location: storeInfo.store_location,
-    store_license: selectedFile,
+    store_license: "",
   });
 
 
@@ -36,13 +36,12 @@ const Profile = () => {
   // handle submit form changes
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData();
+    const data = new FormData();
 
-    if (selectedFile) {
-      formData.append("store_license", selectedFile);
-      formData.append("store_name", formData.store_name);
-    }
-    console.log("form data:", selectedFile)
+      data.append("store_license", formData.store_license);
+      data.append("store_name", formData.store_license);
+
+    console.log("form data:", formData)
   }
 
   return (
@@ -103,7 +102,7 @@ const Profile = () => {
           label="مستندات توثيق المتجر"
           hint="الملفات المسموح بها: pdf, png"
           allowedTypes={["image/png", "image/jpeg"]}
-          defaultFile={typeof formData.store_license !== "object" ? { name: "ملف موجود" } : null}
+          defaultFile={typeof formData.store_license !== "object" ? formData.store_license : null}
           onFileSelect={(file) => setFormData((prev) => ({ ...prev, store_license: file }))}
         />
         <button

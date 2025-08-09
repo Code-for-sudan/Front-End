@@ -17,6 +17,7 @@ import {
   mapProductToFormData, 
   validateProductForm 
 } from "../../../utils";
+import { ConfirmPopUp } from "../../reusableGlobal";
 
 const EditProduct = () => {
   const navigate = useNavigate();
@@ -25,8 +26,8 @@ const EditProduct = () => {
 
   // Hooks
   const { mutate: updateProduct, isPending: isUpdating } = useUpdateProduct();
-  const { mutate: deleteOffer } = useDeleteOffer();
-  const { mutate: deleteSize } = useDeleteProductSize();
+  const { mutate: deleteOffer, isPending: deletingOffer } = useDeleteOffer();
+  const { mutate: deleteSize, isPending: removingSize } = useDeleteProductSize();
   const { data: product, isLoading, isError } = useGetSingleProduct(ProductId);
 
   // Local State
@@ -67,14 +68,18 @@ const EditProduct = () => {
     }
   };
 
-  const handleDeleteOffer = () => {
-    if (window.confirm("هل انت متأكد من أنك تريد حذف العرض؟")) {
+  const handleDeleteOffer = async () => {
+    const confirmed = await ConfirmPopUp("هل انت متأكد من أنك تريد حذف العرض؟");
+    if (confirmed) {
       deleteOffer({ id: ProductId });
     }
   };
 
-  const handleRemoveSize = (SizeId) => {
-    deleteSize({ ProductId, SizeId });
+  const handleRemoveSize = async (SizeId) => {
+    const confirmed = await ConfirmPopUp("هل انت متأكد من أنك تريد حذف المقاس؟")
+    if (confirmed) {
+     deleteSize({ ProductId, SizeId });
+    }
   };
 
   // Loading/Error States
@@ -85,6 +90,11 @@ const EditProduct = () => {
 
   return (
     <div className="bg-white container px-4 py-6 max-w-xl">
+      {/* loaders updating/removing size/ deleting offer*/}
+      {isUpdating && <MainLoading text="تحديث المنتج..." />}
+      {removingSize && <MainLoading text="جاري حذف المقاس..." />}
+      {deletingOffer && <MainLoading text="جاري حذف العرض" />}
+
       {/* Header */}
       <div className="relative flex items-center justify-center w-full mb-6">
         <MdOutlineArrowCircleRight
@@ -93,9 +103,6 @@ const EditProduct = () => {
         />
         <h2 className="text-base font-bold">تعديل المنتج</h2>
       </div>
-
-      {/* Updating Loader */}
-      {isUpdating && <MainLoading text="تحديث المنتج..." />}
 
       {/* Tabs */}
       <div className="flex items-center justify-center gap-6 text-sm px-6 my-8">
@@ -131,7 +138,6 @@ const EditProduct = () => {
           formData={formData}
           handleOfferChange={handleOfferChange}
           handleDeleteOffer={handleDeleteOffer}
-          initialOffer={product.offer}
           has_offer={hasOffer}
         />
       )}

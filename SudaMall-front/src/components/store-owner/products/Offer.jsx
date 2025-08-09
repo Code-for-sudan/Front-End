@@ -1,47 +1,47 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { offerValidations } from "../../../utils/offerValidations";
 
-const Offer = ({ formData, handleOfferChange, onSubmit, handleDeleteOffer, initialOffer, has_offer }) => {
+const { hasChanged, getDateError, isPriceInvalidFn, isComplete } =
+  offerValidations();
+
+const Offer = ({
+  formData,
+  handleOfferChange,
+  onSubmit,
+  handleDeleteOffer,
+  has_offer,
+}) => {
+  const [initialOffer, setInitialOffer] = useState();
+
+  // set initial offer when mount component
+  useEffect(() => {
+    setInitialOffer(formData.offer);
+  }, []);
+
   const { offer_price, start_date, end_date } = formData.offer || {};
 
-  // Check if all offer fields are filled
-  const isOfferComplete = useMemo(() => {
-    return (
-      offer_price !== "" &&
-      offer_price != null &&
-      start_date !== "" &&
-      start_date != null &&
-      end_date !== "" &&
-      end_date != null
-    );
-  }, [offer_price, start_date, end_date]);
+  const offerComplete = useMemo(
+    () => isComplete(offer_price, start_date, end_date),
+    [offer_price, start_date, end_date]
+  );
 
-  // Check if the offer has changed compared to initial
-  const isOfferChanged = useMemo(() => {
-    if (!initialOffer) {
-      // If there's no initial offer, any complete offer counts as changed
-      return isOfferComplete;
-    }
-    return (
-      offer_price !== initialOffer.offer_price ||
-      start_date !== initialOffer.start_date ||
-      end_date !== initialOffer.end_date
-    );
-  }, [offer_price, start_date, end_date, initialOffer, isOfferComplete]);
+  const offerChanged = useMemo(
+    () => hasChanged({ offer_price, start_date, end_date }, initialOffer),
+    [offer_price, start_date, end_date, initialOffer]
+  );
 
-  // Validate date range
-  const isDateInvalid = useMemo(() => {
-    return new Date(end_date) <= new Date(start_date);
-  }, [start_date, end_date]);
+  const dateErrorMessage = useMemo(
+    () => getDateError(start_date, end_date),
+    [start_date, end_date]
+  );
 
-  // Validate offer price
-  const isPriceInvalid = useMemo(() => {
-    if (!offer_price || !formData.price) return false;
-    return Number(offer_price) >= Number(formData.price);
-  }, [offer_price, formData.price]);
+  const priceInvalid = useMemo(
+    () => isPriceInvalidFn(offer_price, formData.price),
+    [offer_price, formData.price]
+  );
 
-  // Enable save only if form changed, complete, and valid
-  const isSaveEnabled =
-    isOfferComplete && isOfferChanged && !isDateInvalid && !isPriceInvalid;
+  const saveEnabled =
+    offerComplete && offerChanged && !dateErrorMessage && !priceInvalid;
 
   return (
     <div className="flex flex-col gap-4 text-gray-800">
@@ -71,13 +71,13 @@ const Offer = ({ formData, handleOfferChange, onSubmit, handleDeleteOffer, initi
           name="offer_price"
           id="offer_price"
           className={`w-full text-xs border rounded-md p-2 focus:outline-none focus:ring ${
-            isPriceInvalid ? "border-red-500" : "border-gray-300"
+            priceInvalid ? "border-red-500" : "border-gray-300"
           }`}
           value={offer_price || ""}
           onChange={handleOfferChange}
           required
         />
-        {isPriceInvalid && (
+        {priceInvalid && (
           <p className="text-red-500 text-xs mt-1">
             يجب أن يكون السعر بعد الخصم أقل من السعر الأساسي
           </p>
@@ -109,15 +109,13 @@ const Offer = ({ formData, handleOfferChange, onSubmit, handleDeleteOffer, initi
           name="end_date"
           id="end_date"
           className={`w-full text-xs border rounded-md p-2 focus:outline-none focus:ring ${
-            isDateInvalid ? "border-red-500" : "border-gray-300"
+            dateErrorMessage ? "border-red-500" : "border-gray-300"
           }`}
           value={end_date || ""}
           onChange={handleOfferChange}
         />
-        {isDateInvalid && (
-          <p className="text-red-500 text-xs mt-1">
-            يجب أن يكون تاريخ نهاية العرض بعد تاريخ البداية
-          </p>
+        {dateErrorMessage && (
+          <p className="text-red-500 text-xs mt-1">{dateErrorMessage}</p>
         )}
       </div>
 
@@ -126,9 +124,9 @@ const Offer = ({ formData, handleOfferChange, onSubmit, handleDeleteOffer, initi
         <button
           type="button"
           onClick={onSubmit}
-          disabled={!isSaveEnabled}
+          disabled={!saveEnabled}
           className={`flex-1 py-2 rounded-md ${
-            isSaveEnabled
+            saveEnabled
               ? "bg-primary text-white hover:bg-opacity-90 cursor-pointer"
               : "bg-gray-300 text-gray-500 cursor-not-allowed"
           }`}
