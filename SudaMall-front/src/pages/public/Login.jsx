@@ -84,16 +84,24 @@ const Login = () => {
 
         let finalMessage = "فشل تسجيل الدخول";
 
-       // Check login error message
+        // Check login error message
         if (
           data.message?.non_field_errors?.[0] === "Invalid email or password."
         ) {
           finalMessage = "الايميل أو كلمة المرور غير صحيحة";
+        } else if (
+          data.message?.non_field_errors?.[0] ===
+          "Email already registered but not verified."
+        ) {
+          finalMessage = "البريد الإلكتروني مسجل بالفعل ولكن لم يتم تفعيله";
+          setShowResendMessage(true); // The message appears temporarily.
+          setShowResendButton(true); // Permanent absence
+          setResendEmail(loginInput.email);
         } else if (typeof data.message === "string") {
           finalMessage = data.message;
         }
 
-       // Verify resending activation link
+        // Verify resending activation link
         if (
           data.resend_verification_link === true ||
           data.resend_verification_link === "True"
