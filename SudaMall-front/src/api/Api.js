@@ -43,9 +43,9 @@ api.interceptors.response.use(
       try {
         // Attempt to refresh access token
         const res = await api.post("/token/refresh/");
-        const { access_token } = res.data;
+        const  access_token  = res.data.access;
 
-        const isRemembered = localStorage.getItem("access_token") !== null;
+         const isRemembered = localStorage.getItem("remember_me") === "true";
         TokenService.setAccessToken(access_token, isRemembered);
 
         // Retry original request with new token
