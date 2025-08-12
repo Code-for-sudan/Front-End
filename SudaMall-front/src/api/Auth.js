@@ -50,10 +50,25 @@ export const login =  async ({ email, password, rememberMe }) => {
  */
 export const resendVerification = async (email) => {
   try {
-    const res = await axios.post("https://sudamall.ddns.net/api/v1/auth/resend-verification/", { email });
-    toast.success(res.data.message || "تم إرسال رابط التفعيل مرة أخرى بنجاح..");
+    const res = await axios.post(
+      "https://sudamall.ddns.net/api/v1/auth/resend-verification/",
+      { email }
+    );
+
+    let successMsg = res.data.message;
+
+    if (successMsg === "A new verification link has been sent to your email address.") {
+      successMsg = "تم إرسال رابط تفعيل جديد إلى بريدك الإلكتروني";
+    } else if (!successMsg) {
+      successMsg = "تم إرسال رابط التفعيل مرة أخرى بنجاح";
+    }
+
+    toast.success(successMsg);
+
   } catch (error) {
-    const msg = error.response?.data?.message || "حدث خطأ أثناء محاولة إعادة إرسال رابط التفعيل.";
+    const msg =
+      error.response?.data?.message ||
+      "حدث خطأ أثناء محاولة إعادة إرسال رابط التفعيل.";
     toast.error(msg);
   }
 };
