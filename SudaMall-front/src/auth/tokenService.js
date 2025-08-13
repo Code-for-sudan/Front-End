@@ -14,15 +14,18 @@ export const TokenService = {
   },
 
   /**
-   *  Remember to access the storage token based on the storage option.
-   * - True: Stores it in localStorage (long session)
-   * - False: Stores it in sessionStorage (short session)
+   * Sets the access token in the appropriate storage.
+   * @param {string} access_token - The token to store
+   * @param {boolean} remember - If true, stores in localStorage (persistent)
+   *                              If false, stores in sessionStorage (clears on tab close)
    */
   setAccessToken(access_token, remember = false) {
     removeAccessTokenFromAll();
-
-    const storage = remember ? localStorage : sessionStorage;
-    storage.setItem(ACCESS_TOKEN_KEY, access_token);
+    
+    if (access_token) {
+      const storage = remember ? localStorage : sessionStorage;
+      storage.setItem(ACCESS_TOKEN_KEY, access_token);
+    }
   },
 
   clearAccessToken() {
