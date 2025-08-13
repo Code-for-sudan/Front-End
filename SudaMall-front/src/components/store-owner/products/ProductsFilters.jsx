@@ -14,8 +14,8 @@ const ProductFilters = ({products, isLoading, isError}) => {
     const matchType = selectedType === 'كل الفئات' || product.category === selectedType;
     const matchStatus =
       selectedStatus === 'كل الحالات' ||
-      (selectedStatus === 'متوفر' && product.available_quantity > 0) ||
-      (selectedStatus === 'غير متوفر' && product.available_quantity === 0);
+      (selectedStatus === 'متوفر' && product.availability === 'available') ||
+      (selectedStatus === 'غير متوفر' && product.availability !== 'available');
     return matchType && matchStatus;
   });
 
@@ -61,12 +61,16 @@ const ProductFilters = ({products, isLoading, isError}) => {
 
       {/* Filtered product results */}
       <div className="flex flex-col gap-2">
-        {filteredProducts?.map((product, index) => (
+        {
+        filteredProducts.length > 0 ?
+        filteredProducts?.map((product, index) => (
           <ProductCard 
             key={index}
             product={product}
             />
-        ))}
+        ))
+        :
+        <p className='text-center text-gray-600 mt-8 text-sm'>لا يوجد منتجات في هذه الفئة أو الحالة.</p>}
       </div>
     </div>
   );

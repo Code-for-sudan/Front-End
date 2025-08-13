@@ -8,6 +8,7 @@ import { useDeleteProduct } from "./useDeleteProduct";
 import { useCreateProduct } from "./useCreateProduct";
 import { useGetSingleProduct } from "./useGetProducts";
 import { useDeleteProductSize } from "./useDeleteProductSize";
+import { useSearchProduct } from "./useSearchProduct"
 
 export {
     useDetectOutside,
@@ -20,4 +21,5 @@ export {
     useUpdateProduct,
     useGetSingleProduct,
     useDeleteProductSize,
+    useSearchProduct,
 }

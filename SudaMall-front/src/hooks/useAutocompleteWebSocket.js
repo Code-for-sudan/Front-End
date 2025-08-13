@@ -1,16 +1,28 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { TokenService } from "../auth/tokenService";
 
 export const useAutocompleteWebSocket = (onSuggestions) => {
   const wsRef = useRef(null);
+  const [isConnected, setIsConnected] = useState(false);
 
   const connect = () => {
     if (wsRef.current) return;
 
-    const ws = new WebSocket("wss://sudamall.ddns.net/ws/autocomplete/");
+    // Get token from your TokenService
+    const token = TokenService.getAccessToken();
+    if (!token) {
+      console.error("No access token available for WebSocket connection.");
+      return;
+    }
+
+    // Append token to WebSocket URL
+    const wsUrl = `wss://sudamall.ddns.net/ws/autocomplete/?token=${encodeURIComponent(token)}`;
+    const ws = new WebSocket(wsUrl);
     wsRef.current = ws;
 
     ws.onopen = () => {
-      console.log("WebSocket connected");
+      console.log("WebSocket connected with token");
+      setIsConnected(true);
     };
 
     ws.onmessage = (event) => {
@@ -18,11 +30,10 @@ export const useAutocompleteWebSocket = (onSuggestions) => {
         const data = JSON.parse(event.data);
 
         if (data.error) {
-          // If backend sends an error message in response
           console.error("WebSocket server error:", data.error);
         } else if (data.suggestions) {
-          onSuggestions(data.suggestions); // Render suggestions
-          console.log(data)
+          onSuggestions(data.suggestions);
+          console.log(data);
         } else {
           console.warn("Unexpected message structure:", data);
         }
@@ -34,11 +45,13 @@ export const useAutocompleteWebSocket = (onSuggestions) => {
     ws.onclose = () => {
       console.log("WebSocket disconnected");
       wsRef.current = null;
+      setIsConnected(false);
     };
 
     ws.onerror = (err) => {
       console.error("WebSocket error:", err);
       ws.close();
+      setIsConnected(false);
     };
   };
 
@@ -46,6 +59,7 @@ export const useAutocompleteWebSocket = (onSuggestions) => {
     if (wsRef.current) {
       wsRef.current.close();
       wsRef.current = null;
+      setIsConnected(false);
     }
   };
 
@@ -59,5 +73,6 @@ export const useAutocompleteWebSocket = (onSuggestions) => {
     connect,
     disconnect,
     sendQuery,
+    isConnected,
   };
 };
