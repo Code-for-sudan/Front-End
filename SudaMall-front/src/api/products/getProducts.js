@@ -9,5 +9,6 @@ export const getAllProducts = async ({ pageParam = 1 }) => {
 // get single Product by id
 export const getProduct = async ({ id }) => {
   const response = await api.get(`/products/${id}/`);
+  console.log(response)
   return response.data;
 };

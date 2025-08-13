@@ -1,7 +1,7 @@
 import { CgTrash } from "react-icons/cg";
 import { PiPencilLineBold } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
-import { useDeleteProduct } from "../../../hooks/useDeleteProduct";
+import { useDeleteProduct } from "../../../hooks/products";
 import { ConfirmPopUp } from "../../reusableGlobal";
 
 const ProductCard = ({product}) => {
@@ -27,7 +27,7 @@ const ProductCard = ({product}) => {
         className="border border-gray-300 bg-gray-50 p-3 rounded-md flex items-center justify-between gap-6 text-xs"
         >
         <div className="flex-1 flex items-center gap-2">
-            <img src={product.picture} alt="product" width={60} height={60} className="rounded" loading="lazy" />
+            <img src={product.picture} alt="product" width={60} height={60} className="rounded size-14 object-contain" loading="lazy" />
             <div className="flex flex-col gap-2">
                 <p>{product.product_name}</p>
                 <p>{product.price}ج</p>

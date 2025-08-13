@@ -11,7 +11,7 @@ import {
   useUpdateProduct,
   useGetSingleProduct,
   useDeleteProductSize,
-} from "../../../hooks";
+} from "../../../hooks/products";
 
 import { 
   mapProductToFormData, 
