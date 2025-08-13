@@ -42,6 +42,8 @@ const CustomeBottomrNavbar = () => {
     return null;
   }
 
+  
+
   return (
     <nav className='w-full relative'>
       {/* the curve in the middle */}

@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { getProductDetails } from '../../api/Product';
 import { FiPlus, FiMinus } from "react-icons/fi";
+import { FiShoppingCart } from "react-icons/fi";
+
 
 function ProductDetails() {
 
@@ -53,9 +55,14 @@ function ProductDetails() {
 
 
   return (
-    <div className="min-h-screen w-full flex flex-col">
-      <NavBar title="تفاصيل المنتج" isFavorite={isFavorite} handleFavoriteToggle={handleFavoriteToggle} />
-      <div className="w-full flex flex-col px-6">
+    <div className="relative min-h-screen w-full flex flex-col">
+      <NavBar 
+        style='fixed top-0 left-0 right-0 z-10 margin-bottom-4 bg-white p-4 max-w-2xl mx-auto'
+        title="تفاصيل المنتج" 
+        isFavorite={isFavorite} 
+        handleFavoriteToggle={handleFavoriteToggle} 
+      />
+      <div className="w-full flex flex-col px-6 mt-18">
         <div className="w-full flex flex-col gap-4 pt-4">
           <div className="w-full flex flex-col items-left gap-4">
             <img 
@@ -153,15 +160,18 @@ function ProductDetails() {
           </div>
         </div>
       </div>
-      <div className='w-full flex flex-col px-6'>
-        <div>
-          <p 
-            className='w-full flex flex-col items-center
-            justify-center text-white text-xl bg-[#FCA311] p-2
-            '>
-           اطلب الان
-         </p>
-        </div>
+      <div className='fixed bottom-0 z-10 margin-bottom-4 bg-white py-4 px-6 max-w-2xl mx-auto w-full flex flex-row items-center gap-2'>
+        <button
+          className='w-7/8 flex flex-row items-center justify-center bg-[#FCA311] text-white py-3 rounded-md'
+          onClick={() => console.log('Buy now', { product, quantity, size })}
+          >
+            <span className='text-md'>شراء الآن</span>
+        </button>
+        <button
+          className='w-1/8 flex flex-row items-center justify-center border-[#FCA311] border-1 text-[#FCA311] py-3 rounded-md'
+          onClick={() => console.log('Add to cart', { product, quantity, size })}>
+            <FiShoppingCart className='size-6'/>
+        </button>
       </div>
 
     </div>

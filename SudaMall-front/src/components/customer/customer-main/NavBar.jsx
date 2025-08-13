@@ -5,7 +5,7 @@ import { MdFavorite } from "react-icons/md";
 import { ArrowCircleRightR } from '../../../assets';
 import { useNavigate } from 'react-router-dom';
 
-function NavBar({ title, isFavorite = false, handleFavoriteToggle }) {
+function NavBar({ title, isFavorite = false, handleFavoriteToggle, style='' }) {
 
 
   const navigate = useNavigate()
@@ -17,7 +17,7 @@ function NavBar({ title, isFavorite = false, handleFavoriteToggle }) {
   }
 
   return (
-    <div className="pt-8 px-6 flex items-center justify-between">
+    <div className={`pt-8 px-6 flex items-center justify-between ${style}`}>
         <img 
           onClick={() => handleBack()}
           src={ArrowCircleRightR}  

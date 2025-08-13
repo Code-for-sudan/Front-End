@@ -60,7 +60,6 @@ const CustomerDashboard = () => {
       setIsLoading(true);
       const { data, error } = await searchProduct(debounceSearchTerm);
       // const data = { results: products.filter(product => product.title.toLowerCase().includes(debounceSearchTerm.toLowerCase())) };
-      console.log(data.results)
       setSearchResults(data.results || []);
       setErrorMessage('');
       if (error) {
@@ -131,9 +130,9 @@ const CustomerDashboard = () => {
                   ))}
                 </div>
               </div>
-            ) : (searchResults.length <= 0 && searchTerm.trim().size < 1) ? (
-                <p className="text-red-500">{'لا توجد نتائج بحث'}</p>
-            ): (
+            ) : (!isLoading && searchResults.length === 0 && searchTerm.trim().length > 0) ? (
+              <p className="text-red-500">{'لا توجد نتائج بحث'}</p>
+            ) : (!isLoading) ? (
               <div className="w-full flex flex-col gap-2">
                 <div className='w-full flex flex-row justify-between items-center'>
                   <h3 className="text-[#FCA311CC] text-xl">احدث المنتجات</h3>
@@ -158,10 +157,8 @@ const CustomerDashboard = () => {
                   )}  
                 </div>
               </div>
-            )
+            ) : null
           }
-
-
         </div>
         
 
