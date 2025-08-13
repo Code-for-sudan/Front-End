@@ -38,6 +38,7 @@ export const login =  async ({ email, password, rememberMe }) => {
   const response = await api.post("/auth/login/", { email, password });
   const { access_token } = response.data;
   TokenService.setAccessToken(access_token, rememberMe);
+  console.log(response)
   return response.data;
 };
 
