@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
-import { getAllProducts, getProduct } from '../api/products/getProducts.js';
+import { getAllProducts, getProduct } from '../../api/products/getProducts.js';
 
 // get all products hook
 export const useGetProducts = () => {

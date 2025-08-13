@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { SearchProduct } from '../api/products/SearchProduct.js';
+import { SearchProduct } from '../../api/products/SearchProduct.js';
 
 export const useSearchProduct = (searchQuery, enabled = false) => {
   return useInfiniteQuery({

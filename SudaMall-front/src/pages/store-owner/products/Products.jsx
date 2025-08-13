@@ -5,7 +5,7 @@ import { MainTitle, SearchBar } from '../../../components/store-owner/reusable';
 import { AddProductBtn, ProductFilters } from '../../../components/store-owner/products';
 import { ProductCardSkeleton } from '../../../components/loadings';
 
-import { useGetProducts, useSearchProduct } from '../../../hooks';
+import { useGetProducts, useSearchProduct } from '../../../hooks/products';
 
 const Products = () => {
   const userId = JSON.parse(localStorage.getItem("user"))?.id;

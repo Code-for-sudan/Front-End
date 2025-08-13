@@ -3,7 +3,7 @@ import { closeAddProduct } from "../../../app/AppStats";
 import { MdOutlineArrowCircleRight } from "react-icons/md";
 import { useState } from "react";
 import ProductModal from "./ProductModal";
-import { useCreateProduct } from "../../../hooks/useCreateProduct";
+import { useCreateProduct } from "../../../hooks/products";
 import { MainLoading } from "../../loadings";
 
 const AddProduct = () => {

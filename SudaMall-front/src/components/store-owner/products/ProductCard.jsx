@@ -1,7 +1,7 @@
 import { CgTrash } from "react-icons/cg";
 import { PiPencilLineBold } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
-import { useDeleteProduct } from "../../../hooks/useDeleteProduct";
+import { useDeleteProduct } from "../../../hooks/products";
 import { ConfirmPopUp } from "../../reusableGlobal";
 
 const ProductCard = ({product}) => {

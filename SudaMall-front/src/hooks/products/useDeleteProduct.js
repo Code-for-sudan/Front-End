@@ -1,20 +1,20 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteProductOffer } from '../api/products/deleteProduct';
+import { deleteProduct } from '../../api/products/deleteProduct';
 import { toast } from 'react-toastify';
 
-export const useDeleteOffer = () => {
+export const useDeleteProduct = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: deleteProductOffer,
+    mutationFn: deleteProduct,
     onSuccess: (_, { id }) => {
       // Invalidate or update cached products
       queryClient.invalidateQueries(['products']);
-      toast.success("تم حذف العرض من المنتج")
+      toast.success("تم حذف المنتج بنجاح")
     },
     onError: (error) => {
       console.error("Failed to delete product:", error);
-      toast.error("فشل حذف العرض")
+      toast.error("فشل حذف المنتج")
     },
   });
 };

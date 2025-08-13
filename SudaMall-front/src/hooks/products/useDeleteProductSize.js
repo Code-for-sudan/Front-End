@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteProductSize } from "../api/products/deleteProduct"; 
+import { deleteProductSize } from "../../api/products/deleteProduct"; 
 
 /**
  * Custom hook for deleting a product size using React Query

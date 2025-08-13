@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateProduct } from '../api/products/updateProduct.js';
+import { updateProduct } from '../../api/products/updateProduct.js';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 

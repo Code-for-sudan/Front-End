@@ -1,6 +1,7 @@
 import { Route } from "react-router-dom";
 import { StoreOwnerLayout } from "../layouts";
-import { Chats, ChatArea, Profile, Store, StoreOwnerDashboard } from "../pages/store-owner";
+import { Profile, Store, StoreOwnerDashboard } from "../pages/store-owner";
+import { Chats, ChatArea } from "../pages/shared-pages/chats";
 import { TotalSales } from "../pages/store-owner/dashboard";
 import { NewClients } from "../pages/store-owner/dashboard/clients";
 import { NewOrders } from "../pages/store-owner/dashboard/orders";
