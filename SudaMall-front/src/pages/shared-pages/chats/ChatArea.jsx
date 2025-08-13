@@ -1,16 +1,23 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { MdOutlineArrowCircleRight } from "react-icons/md";
 import { VscSend } from "react-icons/vsc";
 import { formatMessageTime } from "../../../utils/utilities.js";
 import { ChatHistory } from "../../../data/ChatHistory.js"; // this will be deleted after connecting to the back
+import { useGetChatHistory } from "../../../hooks/chats/useGetChatHistory.js";
 
 const ChatArea = () => {
+  const params = useParams();
+  const receiverId = Number(params?.contactId);
+  const { data: Chat_history, isLoading, isError, error } = useGetChatHistory({receiverId});
+
   const [message, setMessage] = useState("");
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
+
+  console.log(Chat_history, error)
 
   const owner = ChatHistory.chat_between.owner
   const user = ChatHistory.chat_between.customer;
