@@ -2,7 +2,7 @@ import { useState } from "react";
 import Image from "../../assets/reset_password.png";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
 import { GrFormView, GrFormViewHide } from "react-icons/gr";
-import api from "../../api/Api";
+import { noAuthApi } from "../../api/Api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
@@ -20,7 +20,7 @@ const SetNewPassword = () => {
 		e.preventDefault();
 		if( passwordConditionError || passwordEqualError ) return;
 		const email = sessionStorage.getItem("email");
-		api.post("/auth/update-password/", {
+		noAuthApi.post("/auth/update-password/", {
 			email,
 			new_password: password,
 		})

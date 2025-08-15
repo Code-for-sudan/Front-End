@@ -6,6 +6,9 @@ const api = axios.create({
   baseURL: "https://sudamall.ddns.net/api/v1",
   withCredentials: true,
 });
+export const noAuthApi = axios.create({
+  baseURL: "https://sudamall.ddns.net/api/v1",
+})
 
 // Flag and queue to handle refresh logic
 let isRefreshing = false;
@@ -68,12 +71,7 @@ api.interceptors.response.use(
 
       try {
         // Use completely separate instance (no interceptors)
-        const refreshApi = axios.create({
-          baseURL: "https://sudamall.ddns.net/api/v1",
-          withCredentials: true,
-        });
-
-        const res = await refreshApi.post("/token/refresh/");
+        const res = await noAuthApi.post("/token/refresh/");
         const access_token = res.data.access;
         console.log("Token refreshed");
 

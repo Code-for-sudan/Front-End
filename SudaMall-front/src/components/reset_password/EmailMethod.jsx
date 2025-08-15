@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import Image from "../../assets/reset_password.png";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
 import { ComponentsContext } from "../../pages/public/ResetPassword";
-import api from "../../api/Api";
+import { noAuthApi } from "../../api/Api";
 import { toast } from "react-toastify";
 
 // defines a part that let enter your email address
@@ -18,7 +18,7 @@ export const EmailMethod = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		// api code here to send email
-		api.post("/auth/reset-password/request/", {
+		noAuthApi.post("/auth/reset-password/request/", {
 			email,
 		})
 			.then(() => {

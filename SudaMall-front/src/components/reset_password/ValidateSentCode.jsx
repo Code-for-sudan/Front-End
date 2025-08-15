@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import Image from "../../assets/reset_password.png";
 import useKeyboardStatus from "../../hooks/useKeyboardStatus";
 import { ComponentsContext } from "../../pages/public/ResetPassword";
-import api from "../../api/Api";
+import { noAuthApi } from "../../api/Api";
 import { toast } from "react-toastify";
 
 const ValidateSentCode = () => {
@@ -68,7 +68,7 @@ const ValidateSentCode = () => {
 		e.preventDefault();
 		// api code here to validate the sent code
 		const email = sessionStorage.getItem("email");
-		api.post("/auth/verify-password/request/", {
+		noAuthApi.post("/auth/verify-password/request/", {
 			email,
 			otp: code.join(""),
 		})
