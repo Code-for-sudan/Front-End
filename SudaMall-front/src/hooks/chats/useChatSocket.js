@@ -99,7 +99,7 @@ export const useChatSocket = ({ receiverId, onEvent }) => {
     };
 
     ws.onclose = (event) => {
-      console.warn("WebSocket closed:", event.code, event.reason);
+      console.log("WebSocket closed");
       setConnectionStatus("disconnected");
       wsRef.current = null;
       stopHeartbeat();

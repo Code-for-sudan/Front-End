@@ -25,7 +25,6 @@ const ChatArea = () => {
 
   // Connect to chat socket
   const { sendMessage } = useChatSocket({
-    token,
     receiverId,
     onNewMessage: (newMsg) => {
       setMessages((prev) => [...prev, newMsg]);
