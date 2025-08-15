@@ -9,7 +9,7 @@ export const useAutocompleteWebSocket = (onSuggestions) => {
     if (wsRef.current) return;
 
     // Get token from your TokenService
-    const token = TokenService.getAccessToken() || TokenService.getAccessToken();
+    const token = TokenService.getAccessToken() || TokenService.getFreshAccessToken();
     if (!token) {
       console.error("No access token available for WebSocket connection.");
       return;
