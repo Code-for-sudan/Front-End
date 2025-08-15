@@ -19,7 +19,7 @@ const Chats = () => {
         :
         contacts?.chats.length === 0 ?
         <p className='text-center text-gray-600 mt-20'>لا توجد محادثات حتى الان</p>
-        : contactsData.map((contact, i) => 
+        : contacts?.chats.map((contact, i) => 
           <ChatContact 
             key={i}
             contact={contact}
