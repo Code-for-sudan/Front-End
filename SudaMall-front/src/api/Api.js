@@ -89,6 +89,7 @@ api.interceptors.response.use(
         processQueue(_error, null);
         TokenService.clearAccessToken();
         goToLogin();
+        console.log("refresh token error", _error)
         return Promise.reject(_error);
 
       } finally {
