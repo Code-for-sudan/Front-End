@@ -8,7 +8,6 @@ const api = axios.create({
 });
 export const noAuthApi = axios.create({
   baseURL: "https://sudamall.ddns.net/api/v1",
-  withCredentials: true,
 })
 
 // Flag and queue to handle refresh logic
