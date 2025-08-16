@@ -4,6 +4,7 @@ import { useGetContacts } from '../../../hooks/chats/useGetContacts';
 
 const Chats = () => {
   const { data: contacts, isLoading, isError } = useGetContacts();
+  console.log(contacts)
 
   return (
     <>

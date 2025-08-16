@@ -12,7 +12,10 @@ const ChatContact = ({ contact }) => {
       className='flex justify-between border-b border-gray-300 px-4 py-2 cursor-pointer'>
       <div className='flex items-center gap-3'>
         <div className="relative w-16">
-          <img src={contact.contact_img || profile_pic} alt="profile_pic" className='size-16 rounded-full object-cover' />
+          <img 
+              src={contact.contact_img !== null ? `https://sudamall.ddns.net${contact.contact_img}` : profile_pic} 
+              alt="profile_pic" 
+              className='size-16 rounded-full object-cover' />
           {contact.online && <div className='absolute bottom-0 left-2 size-3 bg-dark-green rounded-full border-2 border-white' />}
         </div>
         <div className='flex flex-col gap-2'>

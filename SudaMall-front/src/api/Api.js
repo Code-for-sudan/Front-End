@@ -71,7 +71,7 @@ api.interceptors.response.use(
 
       try {
         // Use completely separate instance (no interceptors)
-        const res = await noAuthApi.post("/token/refresh/");
+        const res = await api.post("/token/refresh/");
         const access_token = res.data.access;
         console.log("Token refreshed");
 

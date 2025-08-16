@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { MdOutlineArrowCircleRight } from "react-icons/md";
-import { VscSend } from "react-icons/vsc";
 import { formatMessageTime } from "../../../utils/utilities.js";
 import { useGetChatHistory, useChatSocket } from "../../../hooks/chats";
 import { TokenService } from "../../../auth/tokenService"; // assuming you have this
 import { profile_pic } from "../../../assets";
+import ChatInput from "../../../components/chats/ChatInput.jsx";
 
 const ChatArea = () => {
   const params = useParams();
@@ -88,7 +88,7 @@ const ChatArea = () => {
   return (
     <div className="flex flex-col overflow-hidden" style={{ height: `${viewportHeight}px` }}>
       {/* Header */}
-      <div className="sticky top-0 bg-white w-full flex items-center gap-4 px-6 py-4 border-b border-gray-300 z-10">
+      <div className="fixed top-0 bg-white w-full flex items-center gap-4 px-6 py-4 border-b border-gray-300 z-10">
         <MdOutlineArrowCircleRight
           onClick={() => navigate(-1)}
           className="w-8 h-8 cursor-pointer"
@@ -110,7 +110,7 @@ const ChatArea = () => {
 
       {/* Messages */}
       <div
-        className="flex-1 overflow-y-auto px-4 pt-8 overscroll-contain "
+        className="flex-1 overflow-y-auto px-4 py-8 overscroll-contain mt-14"
         style={{
           maxHeight: `${viewportHeight - 64}px`,
           touchAction: "manipulation",
@@ -177,23 +177,12 @@ const ChatArea = () => {
       </div>
 
       {/* Input */}
-      <div ref={inputRef} className="sticky bottom-0 w-full bg-white px-4 py-2 z-10">
-        <div className="flex items-center gap-2">
-          <input
-            type="text"
-            placeholder="اكتب رسالتك..."
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            className="flex-1 px-4 py-3 border border-primary rounded-full text-xs placeholder:text-gray-400 outline-none focus:outline-none"
-          />
-          <button
-            onClick={handleSend}
-            className="flex items-center justify-center cursor-pointer p-3 bg-primary rounded-full"
-          >
-            <VscSend className="w-5 h-5 rotate-[180deg] text-white/90" />
-          </button>
-        </div>
-      </div>
+      <ChatInput
+        ref={inputRef}
+        message={message}
+        onChange={setMessage}
+        onSend={handleSend}
+      />
     </div>
   );
 };
